@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 class Book extends Model
 {
     protected $primaryKey = 'book_id';
-    protected $fillable = ['user_id', 'title', 'author', 'category_id', 'price', 'stock', 'isbn', 'description', 'image'];
+    protected $fillable = ['user_id', 'title', 'author', 'category_id', 'price', 'stock', 'isbn', 'description'];
 
     public function user()
     {
@@ -18,6 +18,11 @@ class Book extends Model
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id');
+    }
+
+    public function images()
+    {
+        return $this->hasMany(BookImage::class, 'book_id');
     }
 
     protected static function boot()

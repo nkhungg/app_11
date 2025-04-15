@@ -49,19 +49,30 @@ class BookResource extends Resource {
             Forms\Components\Textarea::make( 'description' )
             ->nullable()
             ->rows( 5 ),
-            Forms\Components\FileUpload::make( 'image' )
-            ->image()
-            ->directory( 'books/covers' )
-            ->maxSize( 1024 )
-            ->nullable(),
+            Forms\Components\Repeater::make( 'images' )
+            ->relationship( 'images' ) // Link to images relationship
+            ->schema( [
+                Forms\Components\FileUpload::make( 'path' )
+                ->image()
+                ->disk( 'public' )
+                ->directory( 'books/covers' )
+                ->nullable()
+            ] )
+            ->columnSpan( 'full' )
+            ->label( 'Book Images' ),
         ] );
     }
 
     public static function table( Table $table ): Table {
         return $table
         ->columns( [
-            Tables\Columns\ImageColumn::make( 'image' )
-            ->disk( 'public' )
+            Tables\Columns\ImageColumn::make('first_image')
+                ->label('Cover')
+                ->getStateUsing(function ($record) {
+                    return $record->images->first()?->path;
+                })
+                ->disk('public')
+
             ->square(),
             Tables\Columns\TextColumn::make( 'title' )->searchable(),
             Tables\Columns\TextColumn::make( 'author' )->searchable(),
