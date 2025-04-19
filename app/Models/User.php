@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use BezhanSalleh\FilamentShield\FilamentShield;
 use BezhanSalleh\FilamentShield\Traits\HasPanelShield;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
@@ -53,5 +54,23 @@ class User extends Authenticatable implements FilamentUser {
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+
+    protected static function booted(): void
+    {
+       if(config( 'filament-shield.normal_user.enabled', false )){
+        FilamentShield::createRole(name: config( 'filament-shield.normal_user.name', 'normal_user' ));
+        static::created(function (User $user) {
+            $user->assignRole(config('filament-shield.normal_user.name', 'normal_user'));
+        });
+        static::deleting(function (User $user) {
+            $user->assignRole(config('filament-shield.normal_user.name', 'normal_user'));
+        });
+       }
+    }
+    public function books()
+    {
+        return $this->hasMany(Book::class);
     }
 }

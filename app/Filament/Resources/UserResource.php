@@ -17,12 +17,14 @@ class UserResource extends Resource {
     protected static ?string $model = User::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static bool $shouldRegisterNavigation = true;
 
     public static function form( Form $form ): Form {
         return $form
         ->schema( [
             Forms\Components\TextInput::make( 'name' )->required(),
             Forms\Components\TextInput::make( 'email' )->email()->unique( ignoreRecord: true ),
+            // Forms\Components\TextInput::make( 'password' )->password()->required(),
             Forms\Components\Select::make( 'roles' )
             ->relationship( 'roles', 'name' )
             ->multiple()
