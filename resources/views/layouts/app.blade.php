@@ -315,7 +315,7 @@
                             <a href="{{ route('home.index') }}" class="navigation__link">Home</a>
                         </li>
                         <li class="navigation__item">
-                            <a href="shop.html" class="navigation__link">Shop</a>
+                            <a href="{{ route('home.shop') }}" class="navigation__link">Shop</a>
                         </li>
                         <li class="navigation__item">
                             <a href="{{ route('cart.index') }}" class="navigation__link">Cart</a>
@@ -405,7 +405,7 @@
                             <a href="{{ route('home.index') }}" class="navigation__link">Home</a>
                         </li>
                         <li class="navigation__item">
-                            <a href="shop.html" class="navigation__link">Shop</a>
+                            <a href="{{ route('home.shop') }}" class="navigation__link">Shop</a>
                         </li>
                         <li class="navigation__item">
                             <a href="{{ route('cart.index') }}" class="navigation__link">Cart</a>
@@ -522,13 +522,20 @@
             <div class="row row-cols-lg-5 row-cols-2">
                 <div class="footer-column footer-store-info col-12 mb-4 mb-lg-0">
                     <div class="logo">
-                        <a href="index.html">
-                            <img src="assets/images/logo.png" alt="SurfsideMedia" class="logo__image d-block" />
+                        <a href="{{ route('home.index') }}">
+                            <img src="{{ asset('assets/images/bookstore.jpg') }}" alt="SurfsideMedia"
+                                class="logo__image d-block" />
                         </a>
                     </div>
-                    <p class="footer-address">123 Beach Avenue, Surfside City, CA 00000</p>
-                    <p class="m-0"><strong class="fw-medium">contact@surfsidemedia.in</strong></p>
-                    <p><strong class="fw-medium">+1 000-000-0000</strong></p>
+                    <p class="footer-address">
+                        123 Beach Avenue, Surfside City, CA 00000
+                    </p>
+                    <p class="m-0">
+                        <strong class="fw-medium">contact@gmail.com</strong>
+                    </p>
+                    <p>
+                        <strong class="fw-medium">+1 000-000-0000</strong>
+                    </p>
 
                     <ul class="social-links list-unstyled d-flex flex-wrap mb-0">
                         <li>
@@ -628,15 +635,20 @@
                 <div class="footer-column footer-menu mb-4 mb-lg-0">
                     <h6 class="sub-menu__title text-uppercase">Thể loại</h6>
                     <ul class="sub-menu__list list-unstyled">
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Giáo dục</a>
+                        <li class="sub-menu__item">
+                            <a href="#" class="menu-link menu-link_us-s">Fiction</a>
                         </li>
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Trinh thám</a>
+                        <li class="sub-menu__item">
+                            <a href="#" class="menu-link menu-link_us-s">Non-Fiction</a>
                         </li>
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Khoa học viễn
-                                tưởng</a></li>
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Văn học giả
-                                tưởng</a></li>
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Shop All</a>
+                        <li class="sub-menu__item">
+                            <a href="#" class="menu-link menu-link_us-s">Self-help & Personal Development</a>
+                        </li>
+                        <li class="sub-menu__item">
+                            <a href="#" class="menu-link menu-link_us-s">Children's Books</a>
+                        </li>
+                        <li class="sub-menu__item">
+                            <a href="#" class="menu-link menu-link_us-s">Shop All</a>
                         </li>
                     </ul>
                 </div>

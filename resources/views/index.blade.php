@@ -17,12 +17,7 @@
                             <img loading="lazy" src="{{ asset('assets/images/slideshow-book1.png') }}" width="542"
                                 height="733" alt="Slideshow Book1"
                                 class="slideshow-character__img animate animate_fade animate_btt animate_delay-9 w-auto h-auto" />
-                            {{-- <div class="character_markup type2">
-                            <p
-                                class="text-uppercase font-sofia mark-grey-color animate animate_fade animate_btt animate_delay-10 mb-0">
-                                Dresses
-                            </p>
-                        </div> --}}
+
                         </div>
                         <div class="slideshow-text container position-absolute start-50 top-50 translate-middle">
                             <h6
@@ -76,7 +71,7 @@
                 <div class="swiper-slide">
                     <div class="overflow-hidden position-relative h-100">
                         <div class="slideshow-character position-absolute bottom-0 pos_right-center">
-                            <img loading="lazy" src="{{ asset('assets/images/slideshow-book3.jpg') }}" width="400"
+                            <img loading="lazy" src="{{ asset('assets/images/slideshow-book4.jpg') }}" width="400"
                                 height="600" alt="Slideshow Book 3"
                                 class="slideshow-character__img animate animate_fade animate_rtl animate_delay-10 w-auto h-auto" />
                         </div>

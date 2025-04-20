@@ -69,4 +69,8 @@ require __DIR__.'/auth.php';
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home.index');
+Route::get('/aboutus', [HomeController::class, 'aboutus'])->name('home.aboutus');
+Route::get('/contact', [HomeController::class, 'contact'])->name('home.contact');
+Route::get('/shop', [HomeController::class, 'shop'])->name('home.shop');
