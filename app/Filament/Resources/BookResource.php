@@ -38,8 +38,11 @@ class BookResource extends Resource {
             ->searchable()
             ->preload(),
             Forms\Components\TextInput::make( 'price' )
-            ->numeric()
-            ->required(),
+            ->label('Price (VND)')
+                ->numeric()
+                ->suffix('₫')
+                ->minValue(1000)
+                ->required(),
             Forms\Components\TextInput::make( 'stock' )
             ->numeric()
             ->required(),
@@ -77,7 +80,8 @@ class BookResource extends Resource {
             Tables\Columns\TextColumn::make( 'title' )->searchable(),
             Tables\Columns\TextColumn::make( 'author' )->searchable(),
             Tables\Columns\TextColumn::make( 'category.category_name' ),
-            Tables\Columns\TextColumn::make( 'price' )->money( 'usd' ),
+            Tables\Columns\TextColumn::make( 'price' )->label('Price')
+            ->formatStateUsing(fn ($state) => number_format($state, 0, ',', '.') . ' ₫'),
             Tables\Columns\TextColumn::make( 'stock' ),
             Tables\Columns\TextColumn::make( 'isbn' ),
         ] )
