@@ -20,4 +20,14 @@ class HomeController extends Controller {
     public function shop(){
         return view('shop');
     }
+    public function account(){
+        return view('account');
+    }
+    public function accountWishlist(){
+        return view('account-wishlist');
+    }
+
+    public function accountOrder(){
+        return view('account-order');
+    }
 }

@@ -74,3 +74,6 @@ Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/aboutus', [HomeController::class, 'aboutus'])->name('home.aboutus');
 Route::get('/contact', [HomeController::class, 'contact'])->name('home.contact');
 Route::get('/shop', [HomeController::class, 'shop'])->name('home.shop');
+Route::get('/account', [HomeController::class, 'account'])->name('home.account');
+Route::get('/account-wishlist', [HomeController::class, 'accountWishlist'])->name('home.accountWishlist');
+Route::get('/account-order', [HomeController::class, 'accountOrder'])->name('home.accountOrder');
