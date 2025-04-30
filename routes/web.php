@@ -35,6 +35,12 @@ Route::middleware(['auth'])->group(function()
 Route::middleware(['auth', AuthAdmin::class])->group(function()
 {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('/admin/publishers', [AdminController::class, 'publishers'])->name('admin.publishers');
+    Route::get('/admin/publisher/add', [AdminController::class, 'add_publisher'])->name('admin.publisher.add');
+    Route::post('/admin/publisher/store', [AdminController::class, 'publisher_store'])->name('admin.publisher.store');
+    Route::get('/admin/publisher/edit/{id}', [AdminController::class, 'publisher_edit'])->name('admin.publisher.edit');
+    Route::put('/admin/publisher/update', [AdminController::class, 'publisher_update'])->name('admin.publisher.update');
+    Route::delete('/admin/publisher/{id}/delete', [AdminController::class, 'publisher_delete'])->name('admin.publisher.delete');
 });
 
 // Route::get('/{product_slug}', [ShopController::class, 'product_details'])->name('product.details');
