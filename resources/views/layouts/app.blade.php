@@ -472,7 +472,7 @@
                     @else
                     <div class="header-tools__item hover-container">
                         <a href="{{Auth::user()->usertype==='ADM'?route('admin.index'):route('user.index')}}" class="header-tools__item">
-                        <span class="pr-6px">{{Auth::user()->name}}</span>    
+                        <span class="pr-6px">{{Auth::user()->name}}</span>
                         <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <use href="#icon_user" />
@@ -492,9 +492,9 @@
                             xmlns="http://www.w3.org/2000/svg">
                             <use href="#icon_cart" />
                         </svg>
-                        @if(Cart::instance('cart')->content()->count()>0)
+                        {{-- @if(Cart::instance('cart')->content()->count()>0)
                         <span class="cart-amount d-block position-absolute js-cart-items-count">{{Cart::instance('cart')->content()->count()}}</span>
-                        @endif
+                        @endif --}}
                     </a>
                 </div>
             </div>
