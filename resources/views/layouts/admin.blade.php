@@ -12,30 +12,23 @@
     <!-- Roboto hỗ trợ tiếng Việt -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap&subset=vietnamese" rel="stylesheet">
 
+    <link rel="stylesheet" type="text/css" href={{ asset('css/animate.min.css') }}>
+    <link rel="stylesheet" type="text/css" href={{ asset('css/animation.css') }}>
+    <link rel="stylesheet" type="text/css" href={{ asset('css/bootstrap.css') }}>
+    <link rel="stylesheet" type="text/css" href={{ asset('css/bootstrap-select.min.css') }}>
+    <link rel="stylesheet" type="text/css" href={{ asset('css/style.css') }}>
+    <link rel="stylesheet" href={{ asset('font/fonts.css') }}>
+    <link rel="stylesheet" href={{ asset('icon/style.css') }}>
+    <link rel="shortcut icon" href={{ asset('images/favicon.ico') }}>
+    <link rel="apple-touch-icon-precomposed" href={{ asset('images/favicon.ico') }}>
+    <link rel="stylesheet" type="text/css" href={{ asset('css/sweetalert.min.css') }}>
+    <link rel="stylesheet" type="text/css" href={{ asset('css/custom.css') }}>
     <style>
         body {
             font-family: 'Roboto', sans-serif;
         }
     </style>
 
-    <link rel="stylesheet" href="assets/css/plugins/swiper.min.css" type="text/css" />
-    <link rel="stylesheet" href="assets/css/style.css" type="text/css" />
-    <link rel="stylesheet" href="assets/css/custom.css" type="text/css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer">
-
-    <link rel="stylesheet" type="text/css" href="{{asset('css/animate.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('css/animation.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap-select.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}">
-    <link rel="stylesheet" href="{{asset('font/fonts.css')}}">
-    <link rel="stylesheet" href="{{asset('icon/style.css')}}">
-    <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}">
-    <link rel="apple-touch-icon-precomposed" href="{{asset('images/favicon.ico')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('css/sweetalert.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('css/custom.css')}}">
-
-    @stack("styles")
 </head>
 
 <body class="body">
@@ -51,9 +44,11 @@
 
                 <div class="section-menu-left">
                     <div class="box-logo">
-                        <a href="{{route('admin.index')}}" id="site-logo-inner">
-                            <img class="" id="logo_header_1" alt="" src="{{asset('images/logo/logo.png')}}"
-                                data-light="{{asset('images/logo/logo.png')}}" data-dark="{{asset('images/logo/logo.png')}}">
+                        <a href={{ route('admin.index') }} id="site-logo-inner">
+                            <img class="" id="logo_header_1" alt=""
+                                src="{{ asset('images/logo/logo.png') }}"
+                                data-light="{{ asset('images/logo/logo.png') }}"
+                                data-dark="{{ asset('images/logo/logo.png') }}">
                         </a>
                         <div class="button-show-hide">
                             <i class="icon-menu-left"></i>
@@ -64,7 +59,7 @@
                             <div class="center-heading">Main Home</div>
                             <ul class="menu-list">
                                 <li class="menu-item">
-                                    <a href="{{route('admin.index')}}" class="">
+                                    <a href={{ route('admin.index') }} class="">
                                         <div class="icon"><i class="icon-grid"></i></div>
                                         <div class="text">Dashboard</div>
                                     </a>
@@ -80,12 +75,12 @@
                                     </a>
                                     <ul class="sub-menu">
                                         <li class="sub-menu-item">
-                                            <a href="add-product.html" class="">
+                                            <a href="{{ route('admin.product.add') }}" class="">
                                                 <div class="text">Add Product</div>
                                             </a>
                                         </li>
                                         <li class="sub-menu-item">
-                                            <a href="products.html" class="">
+                                            <a href="{{ route('admin.products') }}" class="">
                                                 <div class="text">Products</div>
                                             </a>
                                         </li>
@@ -94,17 +89,17 @@
                                 <li class="menu-item has-children">
                                     <a href="javascript:void(0);" class="menu-item-button">
                                         <div class="icon"><i class="icon-layers"></i></div>
-                                        <div class="text">Publisher</div>
+                                        <div class="text">Brand</div>
                                     </a>
                                     <ul class="sub-menu">
                                         <li class="sub-menu-item">
-                                            <a href="{{route('admin.publisher.add')}}" class="">
-                                                <div class="text">New Publisher</div>
+                                            <a href="add-brand.html" class="">
+                                                <div class="text">New Brand</div>
                                             </a>
                                         </li>
                                         <li class="sub-menu-item">
-                                            <a href="{{route('admin.publishers')}}" class="">
-                                                <div class="text">Publishers</div>
+                                            <a href="brands.html" class="">
+                                                <div class="text">Brands</div>
                                             </a>
                                         </li>
                                     </ul>
@@ -116,12 +111,12 @@
                                     </a>
                                     <ul class="sub-menu">
                                         <li class="sub-menu-item">
-                                            <a href="add-category.html" class="">
+                                            <a href="{{ route('admin.category.add') }}" class="">
                                                 <div class="text">New Category</div>
                                             </a>
                                         </li>
                                         <li class="sub-menu-item">
-                                            <a href="categories.html" class="">
+                                            <a href="{{ route('admin.categories') }}" class="">
                                                 <div class="text">Categories</div>
                                             </a>
                                         </li>
@@ -172,14 +167,15 @@
                                         <div class="text">Settings</div>
                                     </a>
                                 </li>
-                                
+
                                 <li class="menu-item">
-                                    <form method="POST" action="{{route('logout')}}" id="logout-form">
-                                    @csrf
-                                    <a href="{{route('logout')}}" class="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                        <div class="icon"><i class="fas fa-sign-out"></i></div>
-                                        <div class="text">Logout</div>
-                                    </a>
+                                    <form method="POST" id="logout-form" action="{{ route('logout') }} ">
+                                        @csrf
+                                        <a href="{{ route('logout') }}" class=""
+                                            onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                            <div class="icon"><i class="icon-settings"></i></div>
+                                            <div class="text">Logout</div>
+                                        </a>
                                     </form>
                                 </li>
                             </ul>
@@ -192,9 +188,10 @@
                         <div class="wrap">
                             <div class="header-left">
                                 <a href="index-2.html">
-                                    <img class="" id="logo_header_mobile" alt="" src="{{asset('images/logo/logo.png')}}"
-                                        data-light="{{asset('images/logo/logo.png')}}" data-dark="{{asset('images/logo/logo.png')}}"
-                                        data-width="154px" data-height="52px" data-retina="{{asset('images/logo/logo.png')}}">
+                                    <img class="" id="logo_header_mobile" alt=""
+                                        src="images/logo/logo.png" data-light="images/logo/logo.png"
+                                        data-dark="images/logo/logo.png" data-width="154px" data-height="52px"
+                                        data-retina="images/logo/logo.png">
                                 </a>
                                 <div class="button-show-hide">
                                     <i class="icon-menu-left"></i>
@@ -203,8 +200,9 @@
 
                                 <form class="form-search flex-grow">
                                     <fieldset class="name">
-                                        <input type="text" placeholder="Search here..." class="show-search" name="name"
-                                            tabindex="2" value="" aria-required="true" required="">
+                                        <input type="text" placeholder="Search here..." class="show-search"
+                                            name="name" tabindex="2" value="" aria-required="true"
+                                            required="">
                                     </fieldset>
                                     <div class="button-submit">
                                         <button class="" type="submit"><i class="icon-search"></i></button>
@@ -390,7 +388,8 @@
                                                     <div>
                                                         <div class="body-title-2">Order pending: <span>ID 305830</span>
                                                         </div>
-                                                        <div class="text-tiny">Ultricies at rhoncus at ullamcorper</div>
+                                                        <div class="text-tiny">Ultricies at rhoncus at ullamcorper
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </li>
@@ -408,7 +407,8 @@
                                             id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">
                                             <span class="header-user wg-user">
                                                 <span class="image">
-                                                    <img src="images/avatar/user-1.png" alt="">
+                                                    <img src="{{ asset('images/avatar/user-1.png') }}"
+                                                        alt="">
                                                 </span>
                                                 <span class="flex flex-column">
                                                     <span class="body-title mb-2">Kristin Watson</span>
@@ -471,7 +471,6 @@
 
 
 
-
                         <div class="bottom-page">
                             <div class="body-text">Copyright © 2024 SurfsideMedia</div>
                         </div>
@@ -482,12 +481,12 @@
         </div>
     </div>
 
-    <script src="{{asset('js/jquery.min.js')}}"></script>
-    <script src="{{asset('js/bootstrap.min.js')}}"></script>
-    <script src="{{asset('js/bootstrap-select.min.js')}}"></script>
-    <script src="{{asset('js/sweetalert.min.js')}}"></script>
-    <script src="{{asset('js/apexcharts/apexcharts.js')}}"></script>
-    <script src="{{asset('js/main.js')}}"></script>
+    <script src={{ asset('js/jquery.min.js') }}></script>
+    <script src={{ asset('js/bootstrap.min.js') }}></script>
+    <script src={{ asset('js/bootstrap-select.min.js') }}></script>
+    <script src={{ asset('js/sweetalert.min.js') }}></script>
+    <script src={{ asset('js/apexcharts/apexcharts.js') }}></script>
+    <script src={{ asset('js/main.js') }}></script>
     <script>
         (function($) {
 
@@ -498,17 +497,25 @@
                     var options = {
                         series: [{
                                 name: 'Total',
-                                data: [0.00, 0.00, 0.00, 0.00, 0.00, 273.22, 208.12, 0.00, 0.00, 0.00, 0.00, 0.00]
+                                data: [0.00, 0.00, 0.00, 0.00, 0.00, 273.22, 208.12, 0.00, 0.00,
+                                    0.00, 0.00, 0.00
+                                ]
                             }, {
                                 name: 'Pending',
-                                data: [0.00, 0.00, 0.00, 0.00, 0.00, 273.22, 208.12, 0.00, 0.00, 0.00, 0.00, 0.00]
+                                data: [0.00, 0.00, 0.00, 0.00, 0.00, 273.22, 208.12, 0.00, 0.00,
+                                    0.00, 0.00, 0.00
+                                ]
                             },
                             {
                                 name: 'Delivered',
-                                data: [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00]
+                                data: [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,
+                                    0.00, 0.00
+                                ]
                             }, {
                                 name: 'Canceled',
-                                data: [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00]
+                                data: [0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,
+                                    0.00, 0.00
+                                ]
                             }
                         ],
                         chart: {
@@ -541,7 +548,9 @@
                                     colors: '#212529',
                                 },
                             },
-                            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep',
+                                'Oct', 'Nov', 'Dec'
+                            ],
                         },
                         yaxis: {
                             show: false,
@@ -587,8 +596,9 @@
             jQuery(window).on("resize", function() {});
         })(jQuery);
     </script>
-    @stack("scripts")
+    @stack('scripts')
 </body>
+
 
 
 </html>
