@@ -2,26 +2,28 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-  <title>Surfside Media</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-  <meta name="author" content="surfside media" />
-  <meta charset="UTF-8">
-  <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
-  <link rel="preconnect" href="https://fonts.gstatic.com/">
-  <!-- Roboto hỗ trợ tiếng Việt -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap&subset=vietnamese" rel="stylesheet">
+    <title>Surfside Media</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="author" content="surfside media" />
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.gstatic.com/">
+    <!-- Roboto hỗ trợ tiếng Việt -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap&subset=vietnamese" rel="stylesheet">
 
-  <style>
-    body {
-      font-family: 'Roboto', sans-serif;
-    }
-  </style>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
 
-  <link rel="stylesheet" href="assets/css/plugins/swiper.min.css" type="text/css" />
-  <link rel="stylesheet" href="assets/css/style.css" type="text/css" />
-  <link rel="stylesheet" href="assets/css/custom.css" type="text/css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="assets/css/plugins/swiper.min.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/custom.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 
 <body class="gradient-bg">
@@ -181,7 +183,8 @@
         </symbol>
         <symbol id="icon_close" viewBox="0 0 12 12">
             <path d="M0.311322 10.6261L10.9374 0L12 1.06261L1.37393 11.6887L0.311322 10.6261Z" fill="currentColor" />
-            <path d="M1.06261 0.106781L11.6887 10.7329L10.6261 11.7955L0 1.16939L1.06261 0.106781Z" fill="currentColor" />
+            <path d="M1.06261 0.106781L11.6887 10.7329L10.6261 11.7955L0 1.16939L1.06261 0.106781Z"
+                fill="currentColor" />
         </symbol>
         <symbol id="icon_view" viewBox="0 0 18 18">
             <path
@@ -261,20 +264,22 @@
     <div class="header-mobile header_sticky">
         <div class="container d-flex align-items-center h-100">
             <a class="mobile-nav-activator d-block position-relative" href="#">
-                <svg class="nav-icon" width="25" height="18" viewBox="0 0 25 18" xmlns="http://www.w3.org/2000/svg">
+                <svg class="nav-icon" width="25" height="18" viewBox="0 0 25 18"
+                    xmlns="http://www.w3.org/2000/svg">
                     <use href="#icon_nav" />
                 </svg>
                 <button class="btn-close-lg position-absolute top-0 start-0 w-100"></button>
             </a>
 
             <div class="logo">
-                <a href="{{route('home.index')}}">
+                <a href="{{ route('home.index') }}">
                     <img src="{{ asset('assets/images/logo.png') }}" alt="Uomo" class="logo__image d-block" />
                 </a>
             </div>
 
             <a href="#" class="header-tools__item header-tools__cart js-open-aside" data-aside="cartDrawer">
-                <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
                     <use href="#icon_cart" />
                 </svg>
                 <span class="cart-amount d-block position-absolute js-cart-items-count">3</span>
@@ -286,8 +291,8 @@
             <div class="container">
                 <form action="#" method="GET" class="search-field position-relative mt-4 mb-3">
                     <div class="position-relative">
-                        <input class="search-field__input w-100 border rounded-1" type="text" name="search-keyword"
-                            placeholder="Search products" />
+                        <input class="search-field__input w-100 border rounded-1" type="text"
+                            name="search-keyword" placeholder="Search products" />
                         <button class="btn-icon search-popup__submit pb-0 me-2" type="submit">
                             <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -307,19 +312,19 @@
                 <div class="overflow-hidden">
                     <ul class="navigation__list list-unstyled position-relative">
                         <li class="navigation__item">
-                            <a href="{{route('home.index')}}" class="navigation__link">Home</a>
+                            <a href="{{ route('home.index') }}" class="navigation__link">Home</a>
                         </li>
                         <li class="navigation__item">
-                            <a href="shop.html" class="navigation__link">Shop</a>
+                            <a href="{{ route('home.shop') }}" class="navigation__link">Shop</a>
                         </li>
                         <li class="navigation__item">
-                            <a href="{{route('cart.index')}}" class="navigation__link">Cart</a>
+                            <a href="{{ route('cart.index') }}" class="navigation__link">Cart</a>
                         </li>
                         <li class="navigation__item">
-                            <a href="about.html" class="navigation__link">About</a>
+                            <a href="{{ route('home.aboutus') }}" class="navigation__link">About</a>
                         </li>
                         <li class="navigation__item">
-                            <a href="contact.html" class="navigation__link">Contact</a>
+                            <a href="{{ route('home.contact') }}" class="navigation__link">Contact</a>
                         </li>
                     </ul>
                 </div>
@@ -327,8 +332,8 @@
 
             <div class="border-top mt-auto pb-2">
                 <div class="customer-links container mt-4 mb-2 pb-1">
-                    <svg class="d-inline-block align-middle" width="20" height="20" viewBox="0 0 20 20" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
+                    <svg class="d-inline-block align-middle" width="20" height="20" viewBox="0 0 20 20"
+                        fill="none" xmlns="http://www.w3.org/2000/svg">
                         <use href="#icon_user" />
                     </svg>
                     <span class="d-inline-block ms-2 text-uppercase align-middle fw-medium">My Account</span>
@@ -355,8 +360,8 @@
                     </li>
                     <li>
                         <a href="#" class="footer__social-link d-block">
-                            <svg class="svg-icon svg-icon_instagram" width="14" height="13" viewBox="0 0 14 13"
-                                xmlns="http://www.w3.org/2000/svg">
+                            <svg class="svg-icon svg-icon_instagram" width="14" height="13"
+                                viewBox="0 0 14 13" xmlns="http://www.w3.org/2000/svg">
                                 <use href="#icon_instagram" />
                             </svg>
                         </a>
@@ -372,8 +377,8 @@
                     </li>
                     <li>
                         <a href="#" class="footer__social-link d-block">
-                            <svg class="svg-icon svg-icon_pinterest" width="14" height="15" viewBox="0 0 14 15"
-                                xmlns="http://www.w3.org/2000/svg">
+                            <svg class="svg-icon svg-icon_pinterest" width="14" height="15"
+                                viewBox="0 0 14 15" xmlns="http://www.w3.org/2000/svg">
                                 <use href="#icon_pinterest" />
                             </svg>
                         </a>
@@ -388,27 +393,28 @@
         <div class="container">
             <div class="header-desk header-desk_type_1">
                 <div class="logo">
-                    <a href="{{route('home.index')}}">
-                        <img src="{{ asset('assets/images/logo.png') }}" alt="Uomo" class="logo__image d-block" />
+                    <a href="{{ route('home.index') }}">
+                        <img src="{{ asset('assets/images/logo.png') }}" alt="Uomo"
+                            class="logo__image d-block" />
                     </a>
                 </div>
 
                 <nav class="navigation">
                     <ul class="navigation__list list-unstyled d-flex">
                         <li class="navigation__item">
-                            <a href="{{route('home.index')}}" class="navigation__link">Home</a>
+                            <a href="{{ route('home.index') }}" class="navigation__link">Home</a>
                         </li>
                         <li class="navigation__item">
-                            <a href="shop.html" class="navigation__link">Shop</a>
+                            <a href="{{ route('home.shop') }}" class="navigation__link">Shop</a>
                         </li>
                         <li class="navigation__item">
-                            <a href="{{route('cart.index')}}" class="navigation__link">Cart</a>
+                            <a href="{{ route('cart.index') }}" class="navigation__link">Cart</a>
                         </li>
                         <li class="navigation__item">
-                            <a href="about.html" class="navigation__link">About</a>
+                            <a href="{{ route('home.aboutus') }}" class="navigation__link">About</a>
                         </li>
                         <li class="navigation__item">
-                            <a href="contact.html" class="navigation__link">Contact</a>
+                            <a href="{{ route('home.contact') }}" class="navigation__link">Contact</a>
                         </li>
                     </ul>
                 </nav>
@@ -417,8 +423,8 @@
                     <div class="header-tools__item hover-container">
                         <div class="js-hover__open position-relative">
                             <a class="js-search-popup search-field__actor" href="#">
-                                <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
+                                <svg class="d-block" width="20" height="20" viewBox="0 0 20 20"
+                                    fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <use href="#icon_search" />
                                 </svg>
                                 <i class="btn-icon btn-close-lg"></i>
@@ -429,11 +435,11 @@
                             <form action="#" method="GET" class="search-field container">
                                 <p class="text-uppercase text-secondary fw-medium mb-4">What are you looking for?</p>
                                 <div class="position-relative">
-                                    <input class="search-field__input search-popup__input w-100 fw-medium" type="text"
-                                        name="search-keyword" placeholder="Search products" />
+                                    <input class="search-field__input search-popup__input w-100 fw-medium"
+                                        type="text" name="search-keyword" placeholder="Search products" />
                                     <button class="btn-icon search-popup__submit" type="submit">
-                                        <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
+                                        <svg class="d-block" width="20" height="20" viewBox="0 0 20 20"
+                                            fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <use href="#icon_search" />
                                         </svg>
                                     </button>
@@ -444,13 +450,18 @@
                                     <div class="sub-menu search-suggestion">
                                         <h6 class="sub-menu__title fs-base">Quicklinks</h6>
                                         <ul class="sub-menu__list list-unstyled">
-                                            <li class="sub-menu__item"><a href="shop2.html" class="menu-link menu-link_us-s">New Arrivals</a>
+                                            <li class="sub-menu__item"><a href="shop2.html"
+                                                    class="menu-link menu-link_us-s">New Arrivals</a>
                                             </li>
-                                            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Dresses</a></li>
-                                            <li class="sub-menu__item"><a href="shop3.html" class="menu-link menu-link_us-s">Accessories</a>
+                                            <li class="sub-menu__item"><a href="#"
+                                                    class="menu-link menu-link_us-s">Dresses</a></li>
+                                            <li class="sub-menu__item"><a href="shop3.html"
+                                                    class="menu-link menu-link_us-s">Accessories</a>
                                             </li>
-                                            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Footwear</a></li>
-                                            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Sweatshirt</a></li>
+                                            <li class="sub-menu__item"><a href="#"
+                                                    class="menu-link menu-link_us-s">Footwear</a></li>
+                                            <li class="sub-menu__item"><a href="#"
+                                                    class="menu-link menu-link_us-s">Sweatshirt</a></li>
                                         </ul>
                                     </div>
 
@@ -461,14 +472,14 @@
                     </div>
 
                     @guest
-                    <div class="header-tools__item hover-container">
-                        <a href="{{route('login')}}" class="header-tools__item">
-                            <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <use href="#icon_user" />
-                            </svg>
-                        </a>
-                    </div>
+                        <div class="header-tools__item hover-container">
+                            <a href="{{ route('login') }}" class="header-tools__item">
+                                <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <use href="#icon_user" />
+                                </svg>
+                            </a>
+                        </div>
                     @else
                     <div class="header-tools__item hover-container">
                         <a href="{{Auth::user()->usertype==='ADM'?route('admin.index'):route('user.index')}}" class="header-tools__item">
@@ -481,18 +492,19 @@
                     </div>
                     @endguest
 
-                    <a href="wishlist.html" class="header-tools__item">
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <a href="{{ route('home.accountWishlist') }}" class="header-tools__item">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
                             <use href="#icon_heart" />
                         </svg>
                     </a>
 
-                    <a href="{{route('cart.index')}}" class="header-tools__item header-tools__cart">
+                    <a href="{{ route('cart.index') }}" class="header-tools__item header-tools__cart">
                         <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <use href="#icon_cart" />
                         </svg>
-                        {{-- @if(Cart::instance('cart')->content()->count()>0)
+                        {{-- @if (Cart::instance('cart')->content()->count() > 0)
                         <span class="cart-amount d-block position-absolute js-cart-items-count">{{Cart::instance('cart')->content()->count()}}</span>
                         @endif --}}
                     </a>
@@ -501,131 +513,165 @@
         </div>
     </header>
 
-    @yield("content")
+    @yield('content')
 
     <hr class="mt-5 text-secondary" />
     <footer class="footer footer_type_2">
-    <div class="footer-middle container">
-      <div class="row row-cols-lg-5 row-cols-2">
-        <div class="footer-column footer-store-info col-12 mb-4 mb-lg-0">
-          <div class="logo">
-            <a href="index.html">
-              <img src="assets/images/logo.png" alt="SurfsideMedia" class="logo__image d-block" />
-            </a>
-          </div>
-          <p class="footer-address">123 Beach Avenue, Surfside City, CA 00000</p>
-          <p class="m-0"><strong class="fw-medium">contact@surfsidemedia.in</strong></p>
-          <p><strong class="fw-medium">+1 000-000-0000</strong></p>
+        <div class="footer-middle container">
+            <div class="row row-cols-lg-5 row-cols-2">
+                <div class="footer-column footer-store-info col-12 mb-4 mb-lg-0">
+                    <div class="logo">
+                        <a href="{{ route('home.index') }}">
+                            <img src="{{ asset('assets/images/bookstore.jpg') }}" alt="SurfsideMedia"
+                                class="logo__image d-block" />
+                        </a>
+                    </div>
+                    <p class="footer-address">
+                        123 Beach Avenue, Surfside City, CA 00000
+                    </p>
+                    <p class="m-0">
+                        <strong class="fw-medium">contact@gmail.com</strong>
+                    </p>
+                    <p>
+                        <strong class="fw-medium">+1 000-000-0000</strong>
+                    </p>
 
-          <ul class="social-links list-unstyled d-flex flex-wrap mb-0">
-            <li>
-              <a href="#" class="footer__social-link d-block">
-                <svg class="svg-icon svg-icon_facebook" width="9" height="15" viewBox="0 0 9 15"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <use href="#icon_facebook" />
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="footer__social-link d-block">
-                <svg class="svg-icon svg-icon_twitter" width="14" height="13" viewBox="0 0 14 13"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <use href="#icon_twitter" />
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="footer__social-link d-block">
-                <svg class="svg-icon svg-icon_instagram" width="14" height="13" viewBox="0 0 14 13"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <use href="#icon_instagram" />
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="footer__social-link d-block">
-                <svg class="svg-icon svg-icon_youtube" width="16" height="11" viewBox="0 0 16 11"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M15.0117 1.8584C14.8477 1.20215 14.3281 0.682617 13.6992 0.518555C12.5234 0.19043 7.875 0.19043 7.875 0.19043C7.875 0.19043 3.19922 0.19043 2.02344 0.518555C1.39453 0.682617 0.875 1.20215 0.710938 1.8584C0.382812 3.00684 0.382812 5.46777 0.382812 5.46777C0.382812 5.46777 0.382812 7.90137 0.710938 9.07715C0.875 9.7334 1.39453 10.2256 2.02344 10.3896C3.19922 10.6904 7.875 10.6904 7.875 10.6904C7.875 10.6904 12.5234 10.6904 13.6992 10.3896C14.3281 10.2256 14.8477 9.7334 15.0117 9.07715C15.3398 7.90137 15.3398 5.46777 15.3398 5.46777C15.3398 5.46777 15.3398 3.00684 15.0117 1.8584ZM6.34375 7.68262V3.25293L10.2266 5.46777L6.34375 7.68262Z" />
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="footer__social-link d-block">
-                <svg class="svg-icon svg-icon_pinterest" width="14" height="15" viewBox="0 0 14 15"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <use href="#icon_pinterest" />
-                </svg>
-              </a>
-            </li>
-          </ul>
+                    <ul class="social-links list-unstyled d-flex flex-wrap mb-0">
+                        <li>
+                            <a href="#" class="footer__social-link d-block">
+                                <svg class="svg-icon svg-icon_facebook" width="9" height="15"
+                                    viewBox="0 0 9 15" xmlns="http://www.w3.org/2000/svg">
+                                    <use href="#icon_facebook" />
+                                </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="footer__social-link d-block">
+                                <svg class="svg-icon svg-icon_twitter" width="14" height="13"
+                                    viewBox="0 0 14 13" xmlns="http://www.w3.org/2000/svg">
+                                    <use href="#icon_twitter" />
+                                </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="footer__social-link d-block">
+                                <svg class="svg-icon svg-icon_instagram" width="14" height="13"
+                                    viewBox="0 0 14 13" xmlns="http://www.w3.org/2000/svg">
+                                    <use href="#icon_instagram" />
+                                </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="footer__social-link d-block">
+                                <svg class="svg-icon svg-icon_youtube" width="16" height="11"
+                                    viewBox="0 0 16 11" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M15.0117 1.8584C14.8477 1.20215 14.3281 0.682617 13.6992 0.518555C12.5234 0.19043 7.875 0.19043 7.875 0.19043C7.875 0.19043 3.19922 0.19043 2.02344 0.518555C1.39453 0.682617 0.875 1.20215 0.710938 1.8584C0.382812 3.00684 0.382812 5.46777 0.382812 5.46777C0.382812 5.46777 0.382812 7.90137 0.710938 9.07715C0.875 9.7334 1.39453 10.2256 2.02344 10.3896C3.19922 10.6904 7.875 10.6904 7.875 10.6904C7.875 10.6904 12.5234 10.6904 13.6992 10.3896C14.3281 10.2256 14.8477 9.7334 15.0117 9.07715C15.3398 7.90137 15.3398 5.46777 15.3398 5.46777C15.3398 5.46777 15.3398 3.00684 15.0117 1.8584ZM6.34375 7.68262V3.25293L10.2266 5.46777L6.34375 7.68262Z" />
+                                </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="footer__social-link d-block">
+                                <svg class="svg-icon svg-icon_pinterest" width="14" height="15"
+                                    viewBox="0 0 14 15" xmlns="http://www.w3.org/2000/svg">
+                                    <use href="#icon_pinterest" />
+                                </svg>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="footer-column footer-menu mb-4 mb-lg-0">
+                    <h6 class="sub-menu__title text-uppercase">Company</h6>
+                    <ul class="sub-menu__list list-unstyled">
+                        <li class="sub-menu__item"><a href="about-2.html" class="menu-link menu-link_us-s">About
+                                Us</a></li>
+                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Careers</a>
+                        </li>
+                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Affiliates</a>
+                        </li>
+                        <li class="sub-menu__item"><a href="blog_list1.html"
+                                class="menu-link menu-link_us-s">Blog</a></li>
+                        <li class="sub-menu__item"><a href="contact-2.html" class="menu-link menu-link_us-s">Contact
+                                Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column footer-menu mb-4 mb-lg-0">
+                    <h6 class="sub-menu__title text-uppercase">Nhà xuất bản</h6>
+                    <ul class="sub-menu__list list-unstyled">
+                        <li class="sub-menu__item"><a href="shop2.html" class="menu-link menu-link_us-s">Nhà Xuât Bản
+                                Trẻ</a></li>
+                        <li class="sub-menu__item"><a href="shop3.html" class="menu-link menu-link_us-s">Nhà Xuất Bản
+                                Kim Đồng</a></li>
+                        <li class="sub-menu__item"><a href="shop4.html" class="menu-link menu-link_us-s">Nhã Nam</a>
+                        </li>
+                        <li class="sub-menu__item"><a href="shop5.html" class="menu-link menu-link_us-s">Nhà Xuất Bản
+                                Giáo dục Việt Nam</a></li>
+                        <li class="sub-menu__item"><a href="shop1.html" class="menu-link menu-link_us-s">Shop All</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="footer-column footer-menu mb-4 mb-lg-0">
+                    <h6 class="sub-menu__title text-uppercase">Help</h6>
+                    <ul class="sub-menu__list list-unstyled">
+                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Customer
+                                Service</a></li>
+                        <li class="sub-menu__item"><a href="account_dashboard.html"
+                                class="menu-link menu-link_us-s">My Account</a>
+                        </li>
+                        <li class="sub-menu__item"><a href="store_location.html"
+                                class="menu-link menu-link_us-s">Find a Store</a>
+                        </li>
+                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Legal &
+                                Privacy</a></li>
+                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Gift Card</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="footer-column footer-menu mb-4 mb-lg-0">
+                    <h6 class="sub-menu__title text-uppercase">Thể loại</h6>
+                    <ul class="sub-menu__list list-unstyled">
+                        <li class="sub-menu__item">
+                            <a href="#" class="menu-link menu-link_us-s">Fiction</a>
+                        </li>
+                        <li class="sub-menu__item">
+                            <a href="#" class="menu-link menu-link_us-s">Non-Fiction</a>
+                        </li>
+                        <li class="sub-menu__item">
+                            <a href="#" class="menu-link menu-link_us-s">Self-help & Personal Development</a>
+                        </li>
+                        <li class="sub-menu__item">
+                            <a href="#" class="menu-link menu-link_us-s">Children's Books</a>
+                        </li>
+                        <li class="sub-menu__item">
+                            <a href="#" class="menu-link menu-link_us-s">Shop All</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
 
-        <div class="footer-column footer-menu mb-4 mb-lg-0">
-          <h6 class="sub-menu__title text-uppercase">Company</h6>
-          <ul class="sub-menu__list list-unstyled">
-            <li class="sub-menu__item"><a href="about-2.html" class="menu-link menu-link_us-s">About Us</a></li>
-            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Careers</a></li>
-            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Affiliates</a></li>
-            <li class="sub-menu__item"><a href="blog_list1.html" class="menu-link menu-link_us-s">Blog</a></li>
-            <li class="sub-menu__item"><a href="contact-2.html" class="menu-link menu-link_us-s">Contact Us</a></li>
-          </ul>
+        <div class="footer-bottom">
+            <div class="container d-md-flex align-items-center">
+                <span class="footer-copyright me-auto">©2024 Surfside Media</span>
+                <div class="footer-settings d-md-flex align-items-center">
+                    <a href="privacy-policy.html">Privacy Policy</a> &nbsp;|&nbsp; <a
+                        href="terms-conditions.html">Terms &amp;
+                        Conditions</a>
+                </div>
+            </div>
         </div>
-
-        <div class="footer-column footer-menu mb-4 mb-lg-0">
-          <h6 class="sub-menu__title text-uppercase">Nhà xuất bản</h6>
-          <ul class="sub-menu__list list-unstyled">
-            <li class="sub-menu__item"><a href="shop2.html" class="menu-link menu-link_us-s">Nhà Xuât Bản Trẻ</a></li>
-            <li class="sub-menu__item"><a href="shop3.html" class="menu-link menu-link_us-s">Nhà Xuất Bản Kim Đồng</a></li>
-            <li class="sub-menu__item"><a href="shop4.html" class="menu-link menu-link_us-s">Nhã Nam</a></li>
-            <li class="sub-menu__item"><a href="shop5.html" class="menu-link menu-link_us-s">Nhà Xuất Bản Giáo dục Việt Nam</a></li>
-            <li class="sub-menu__item"><a href="shop1.html" class="menu-link menu-link_us-s">Shop All</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-column footer-menu mb-4 mb-lg-0">
-          <h6 class="sub-menu__title text-uppercase">Help</h6>
-          <ul class="sub-menu__list list-unstyled">
-            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Customer Service</a></li>
-            <li class="sub-menu__item"><a href="account_dashboard.html" class="menu-link menu-link_us-s">My Account</a>
-            </li>
-            <li class="sub-menu__item"><a href="store_location.html" class="menu-link menu-link_us-s">Find a Store</a>
-            </li>
-            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Legal & Privacy</a></li>
-            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Gift Card</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-column footer-menu mb-4 mb-lg-0">
-          <h6 class="sub-menu__title text-uppercase">Thể loại</h6>
-          <ul class="sub-menu__list list-unstyled">
-            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Giáo dục</a></li>
-            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Trinh thám</a></li>
-            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Khoa học viễn tưởng</a></li>
-            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Văn học giả tưởng</a></li>
-            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Shop All</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      <div class="container d-md-flex align-items-center">
-        <span class="footer-copyright me-auto">©2024 Surfside Media</span>
-        <div class="footer-settings d-md-flex align-items-center">
-          <a href="privacy-policy.html">Privacy Policy</a> &nbsp;|&nbsp; <a href="terms-conditions.html">Terms &amp;
-            Conditions</a>
-        </div>
-      </div>
-    </div>
-  </footer>
+    </footer>
 
 
     <footer class="footer-mobile container w-100 px-5 d-md-none bg-body">
         <div class="row text-center">
             <div class="col-4">
-                <a href="{{route('home.index')}}" class="footer-mobile__link d-flex flex-column align-items-center">
+                <a href="{{ route('home.index') }}"
+                    class="footer-mobile__link d-flex flex-column align-items-center">
                     <svg class="d-block" width="18" height="18" viewBox="0 0 18 18" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <use href="#icon_home" />
@@ -635,7 +681,8 @@
             </div>
 
             <div class="col-4">
-                <a href="{{route('home.index')}}" class="footer-mobile__link d-flex flex-column align-items-center">
+                <a href="{{ route('home.index') }}"
+                    class="footer-mobile__link d-flex flex-column align-items-center">
                     <svg class="d-block" width="18" height="18" viewBox="0 0 18 18" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <use href="#icon_hanger" />
@@ -645,7 +692,8 @@
             </div>
 
             <div class="col-4">
-                <a href="{{route('home.index')}}" class="footer-mobile__link d-flex flex-column align-items-center">
+                <a href="{{ route('home.index') }}"
+                    class="footer-mobile__link d-flex flex-column align-items-center">
                     <div class="position-relative">
                         <svg class="d-block" width="18" height="18" viewBox="0 0 20 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -668,7 +716,7 @@
     <script src="{{ asset('assets/js/plugins/swiper.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/countdown.js') }}"></script>
     <script src="{{ asset('assets/js/theme.js') }}"></script>
-    @stack("scripts")
+    @stack('scripts')
 </body>
 
 </html>

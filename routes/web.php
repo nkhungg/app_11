@@ -35,6 +35,12 @@ Route::middleware(['auth'])->group(function()
 Route::middleware(['auth', AuthAdmin::class])->group(function()
 {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('/admin/publishers', [AdminController::class, 'publishers'])->name('admin.publishers');
+    Route::get('/admin/publisher/add', [AdminController::class, 'add_publisher'])->name('admin.publisher.add');
+    Route::post('/admin/publisher/store', [AdminController::class, 'publisher_store'])->name('admin.publisher.store');
+    Route::get('/admin/publisher/edit/{id}', [AdminController::class, 'publisher_edit'])->name('admin.publisher.edit');
+    Route::put('/admin/publisher/update', [AdminController::class, 'publisher_update'])->name('admin.publisher.update');
+    Route::delete('/admin/publisher/{id}/delete', [AdminController::class, 'publisher_delete'])->name('admin.publisher.delete');
 
     Route::get('/admin/categories', [AdminController::class, 'categories'])->name('admin.categories');
     Route::get('/admin/category/add', [AdminController::class, 'category_add'])->name('admin.category.add');
@@ -66,6 +72,21 @@ Route::get('/product_1', function()
 // });
 
 require __DIR__.'/auth.php';
+
+Auth::routes();
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home.index');
+Route::get('/aboutus', [HomeController::class, 'aboutus'])->name('home.aboutus');
+Route::get('/contact', [HomeController::class, 'contact'])->name('home.contact');
+Route::get('/shop', [HomeController::class, 'shop'])->name('home.shop');
+Route::get('/account', [HomeController::class, 'account'])->name('home.account');
+Route::get('/account-wishlist', [HomeController::class, 'accountWishlist'])->name('home.accountWishlist');
+Route::get('/account-order', [HomeController::class, 'accountOrder'])->name('home.accountOrder');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes();
 
