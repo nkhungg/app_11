@@ -344,6 +344,7 @@
             </div>
 
             <div class="products-grid row row-cols-2 row-cols-md-3" id="products-grid">
+                @foreach ($products as $product)
                 <div class="product-card-wrapper">
                     <div class="product-card mb-3 mb-md-4 mb-xxl-5">
                         <div class="pc__img-wrapper">
@@ -351,32 +352,29 @@
                                 data-settings='{"resizeObserver": true}'>
                                 <div class="swiper-wrapper">
                                     <div class="swiper-slide">
-                                        <a href="details.html">
+                                        <a href="{{route('shop.product.details',['product_slug'=>$product->slug])}}">
                                             <img loading="lazy"
-                                                src="{{asset('assets/images/products/book-product-01.jpg')}}"
-                                                width="310" height="400" alt="" class="pc__img" />
-                                            <img loading="lazy"
-                                                src="{{asset('assets/images/products/book-product-00.jpg')}}"
-                                                width="310" height="400" alt="" class="pc__img pc__img-second" />
+                                                src="{{asset('uploads/products')}}/{{$product->image}}"
+                                                width="310" height="400" alt="{{$product->name}}" class="pc__img" />
                                         </a>
                                     </div>
                                     <div class="swiper-slide">
-                                        <a href="details.html"><img loading="lazy"
-                                                src="{{asset('assets/images/products/book-product-100.jpg')}}"
-                                                width="310" height="400" alt="" class="pc__img" />
-                                            <img loading="lazy"
-                                                src="{{asset('assets/images/products/book-product-11.jpg')}}"
-                                                width="310" height="400" alt="" class="pc__img pc__img-second" /></a>
+                                        @foreach (explode(",", $product->images) as $gallery_image)
+                                        <a href="{{route('shop.product.details',['product_slug'=>$product->slug])}}"><img loading="lazy"
+                                                src="{{asset('uploads/products')}}/{{$gallery_image}}"
+                                                width="310" height="400" alt="{{$product->name}}" class="pc__img" />
+                                        </a>
+                                        @endforeach
                                     </div>
                                 </div>
-                                {{-- <span class="pc__img-prev"><svg width="7" height="11" viewBox="0 0 7 11"
+                                <span class="pc__img-prev"><svg width="7" height="11" viewBox="0 0 7 11"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <use href="#icon_prev_sm" />
                                     </svg></span>
                                 <span class="pc__img-next"><svg width="7" height="11" viewBox="0 0 7 11"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <use href="#icon_next_sm" />
-                                    </svg></span> --}}
+                                    </svg></span>
                             </div>
                             <button
                                 class="pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium js-add-cart js-open-aside"
@@ -384,10 +382,16 @@
                         </div>
 
                         <div class="pc__info position-relative">
-                            <p class="pc__category">Self-help</p>
-                            <h6 class="pc__title"><a href="details.html">Lặng</a></h6>
+                            <p class="pc__category">{{$product->category->name}}</p>
+                            <h6 class="pc__title"><a href="{{route('shop.product.details',['product_slug'=>$product->slug])}}">{{$product->name}}</a></h6>
                             <div class="product-card__price d-flex">
-                                <span class="money price">120.000đ</span>
+                                <span class="money price">
+                                    @if ($product->sale_price)
+                                    <s>{{$product->regular_price}}đ</s>{{$product->sale_price}}đ
+                                    @else
+                                    {{$product->regular_price}}đ
+                                    @endif
+                                </span>
                             </div>
                             <div class="product-card__review d-flex align-items-center">
                                 <div class="reviews-group d-flex">
@@ -421,519 +425,14 @@
                         </div>
                     </div>
                 </div>
+                @endforeach
 
-                <div class="product-card-wrapper">
-                    <div class="product-card mb-3 mb-md-4 mb-xxl-5">
-                        <div class="pc__img-wrapper">
-                            <div class="swiper-container background-img js-swiper-slider"
-                                data-settings='{"resizeObserver": true}'>
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                        <a href="details.html">
-                                            <img loading="lazy"
-                                                src="{{asset('assets/images/products/book-product-100.jpg')}}"
-                                                width="310" height="400" alt="" class="pc__img" />
-                                            <img loading="lazy"
-                                                src="{{asset('assets/images/products/book-product-11.jpg')}}"
-                                                width="310" height="400" alt="" class="pc__img pc__img-second" />
-                                        </a>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <a href="details.html"><img loading="lazy"
-                                                src="{{asset('assets/images/products/book-product-100.jpg')}}"
-                                                width="310" height="400" alt="" class="pc__img" />
-                                            <img loading="lazy"
-                                                src="{{asset('assets/images/products/book-product-11.jpg')}}"
-                                                width="310" height="400" alt="" class="pc__img pc__img-second" /></a>
-                                    </div>
-                                </div>
-                                {{-- <span class="pc__img-prev"><svg width="7" height="11" viewBox="0 0 7 11"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <use href="#icon_prev_sm" />
-                                    </svg></span>
-                                <span class="pc__img-next"><svg width="7" height="11" viewBox="0 0 7 11"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <use href="#icon_next_sm" />
-                                    </svg></span> --}}
-                            </div>
-                            <button
-                                class="pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium js-add-cart js-open-aside"
-                                data-aside="cartDrawer" title="Add To Cart">Add To Cart</button>
-                        </div>
-
-                        <div class="pc__info position-relative">
-                            <p class="pc__category">Self-help</p>
-                            <h6 class="pc__title"><a href="details.html">Gieo trồng hạnh phúc</a></h6>
-                            <div class="product-card__price d-flex">
-                                <span class="money price">$90.000đ</span>
-                            </div>
-
-                            {{-- <div class="d-flex align-items-center mt-1">
-                                <a href="#" class="swatch-color pc__swatch-color" style="color: #222222"></a>
-                                <a href="#" class="swatch-color swatch_active pc__swatch-color"
-                                    style="color: #b9a16b"></a>
-                                <a href="#" class="swatch-color pc__swatch-color" style="color: #f5e6e0"></a>
-                            </div> --}}
-
-                            <button
-                                class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist"
-                                title="Add To Wishlist">
-                                <svg width="16" height="16" viewBox="0 0 20 20" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <use href="#icon_heart" />
-                                </svg>
-                            </button>
-                        </div>
-
-                        <div class="pc-labels position-absolute top-0 start-0 w-100 d-flex justify-content-between">
-                            <div class="pc-labels__right ms-auto">
-                                <span class="pc-label pc-label_sale d-block text-white">-67%</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card-wrapper">
-                    <div class="product-card mb-3 mb-md-4 mb-xxl-5">
-                        <div class="pc__img-wrapper">
-                            <div class="swiper-container background-img js-swiper-slider"
-                                data-settings='{"resizeObserver": true}'>
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                        <a href="details.html"><img loading="lazy"
-                                                src="{{asset('assets/images/products/book-product-100.jpg')}}"
-                                                width="310" height="400" alt="" class="pc__img" />
-                                            <img loading="lazy"
-                                                src="{{asset('assets/images/products/book-product-11.jpg')}}"
-                                                width="310" height="400" alt="" class="pc__img pc__img-second" /></a>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <a href="details.html"><img loading="lazy"
-                                                src="{{asset('assets/images/products/book-product-100.jpg')}}"
-                                                width="310" height="400" alt="" class="pc__img" />
-                                            <img loading="lazy"
-                                                src="{{asset('assets/images/products/book-product-11.jpg')}}"
-                                                width="310" height="400" alt="" class="pc__img pc__img-second" /></a>
-                                    </div>
-                                </div>
-                                {{-- <span class="pc__img-prev"><svg width="7" height="11" viewBox="0 0 7 11"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <use href="#icon_prev_sm" />
-                                    </svg></span>
-                                <span class="pc__img-next"><svg width="7" height="11" viewBox="0 0 7 11"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <use href="#icon_next_sm" />
-                                    </svg></span> --}}
-                            </div>
-                            <button
-                                class="pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium js-add-cart js-open-aside"
-                                data-aside="cartDrawer" title="Add To Cart">Add To Cart</button>
-                        </div>
-
-                        <div class="pc__info position-relative">
-                            <p class="pc__category">Self-help</p>
-                            <h6 class="pc__title"><a href="details.html">Gieo trồng hạnh phúc</a></h6>
-                            <div class="product-card__price d-flex">
-                                <span class="money price">90.000đ</span>
-                            </div>
-
-                            <button
-                                class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist"
-                                title="Add To Wishlist">
-                                <svg width="16" height="16" viewBox="0 0 20 20" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <use href="#icon_heart" />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card-wrapper">
-                    <div class="product-card mb-3 mb-md-4 mb-xxl-5">
-                        <div class="pc__img-wrapper">
-                            <div class="swiper-container background-img js-swiper-slider"
-                                data-settings='{"resizeObserver": true}'>
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                        <a href="details.html"><img loading="lazy"
-                                                src="{{asset('assets/images/products/book-product-100.jpg')}}"
-                                                width="310" height="400" alt="" class="pc__img" />
-                                            <img loading="lazy"
-                                                src="{{asset('assets/images/products/book-product-11.jpg')}}"
-                                                width="310" height="400" alt="" class="pc__img pc__img-second" /></a>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <a href="details.html"><img loading="lazy"
-                                                src="{{asset('assets/images/products/book-product-100.jpg')}}"
-                                                width="310" height="400" alt="" class="pc__img" />
-                                            <img loading="lazy"
-                                                src="{{asset('assets/images/products/book-product-11.jpg')}}"
-                                                width="310" height="400" alt="" class="pc__img pc__img-second" /></a>
-                                    </div>
-                                </div>
-                                {{-- <span class="pc__img-prev"><svg width="7" height="11" viewBox="0 0 7 11"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <use href="#icon_prev_sm" />
-                                    </svg></span>
-                                <span class="pc__img-next"><svg width="7" height="11" viewBox="0 0 7 11"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <use href="#icon_next_sm" />
-                                    </svg></span> --}}
-                            </div>
-                            <button
-                                class="pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium js-add-cart js-open-aside"
-                                data-aside="cartDrawer" title="Add To Cart">Add To Cart</button>
-                        </div>
-
-                        <div class="pc__info position-relative">
-                            <p class="pc__category">Self-help</p>
-                            <h6 class="pc__title"><a href="details.html">Gieo trồng hạnh phúc</a></h6>
-                            <div class="product-card__price d-flex">
-                                <span class="money price price-old">120.000đ</span>
-                                <span class="money price price-sale">90.000đ</span>
-                            </div>
-
-                            <button
-                                class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist"
-                                title="Add To Wishlist">
-                                <svg width="16" height="16" viewBox="0 0 20 20" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <use href="#icon_heart" />
-                                </svg>
-                            </button>
-                        </div>
-
-                        <div class="pc-labels position-absolute top-0 start-0 w-100 d-flex justify-content-between">
-                            <div class="pc-labels__left">
-                                <span class="pc-label pc-label_new d-block bg-white">NEW</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card-wrapper">
-                    <div class="product-card mb-3 mb-md-4 mb-xxl-5">
-                        <div class="pc__img-wrapper">
-                            <div class="swiper-container background-img js-swiper-slider"
-                                data-settings='{"resizeObserver": true}'>
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                        <a href="details.html"><img loading="lazy"
-                                                src="{{asset('assets/images/products/book-product-100.jpg')}}"
-                                                width="310" height="400" alt="" class="pc__img" />
-                                            <img loading="lazy"
-                                                src="{{asset('assets/images/products/book-product-11.jpg')}}"
-                                                width="310" height="400" alt="" class="pc__img pc__img-second" /></a>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <a href="details.html"><img loading="lazy"
-                                                src="{{asset('assets/images/products/book-product-100.jpg')}}"
-                                                width="310" height="400" alt="" class="pc__img" />
-                                            <img loading="lazy"
-                                                src="{{asset('assets/images/products/book-product-11.jpg')}}"
-                                                width="310" height="400" alt="" class="pc__img pc__img-second" /></a>
-                                    </div>
-                                </div>
-                                {{-- <span class="pc__img-prev"><svg width="7" height="11" viewBox="0 0 7 11"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <use href="#icon_prev_sm" />
-                                    </svg></span>
-                                <span class="pc__img-next"><svg width="7" height="11" viewBox="0 0 7 11"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <use href="#icon_next_sm" />
-                                    </svg></span> --}}
-                            </div>
-                            <button
-                                class="pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium js-add-cart js-open-aside"
-                                data-aside="cartDrawer" title="Add To Cart">Add To Cart</button>
-                        </div>
-
-                        <div class="pc__info position-relative">
-                            <p class="pc__category">Self-help</p>
-                            <h6 class="pc__title"><a href="details.html">Gieo trồng hạnh phúc</a></h6>
-                            <div class="product-card__price d-flex">
-                                <span class="money price">90.000đ</span>
-                            </div>
-
-                            <button
-                                class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist"
-                                title="Add To Wishlist">
-                                <svg width="16" height="16" viewBox="0 0 20 20" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <use href="#icon_heart" />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card-wrapper">
-                    <div class="product-card mb-3 mb-md-4 mb-xxl-5">
-                        <div class="pc__img-wrapper">
-                            <div class="swiper-container background-img js-swiper-slider"
-                                data-settings='{"resizeObserver": true}'>
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                        <a href="details.html"><img loading="lazy"
-                                                src="{{asset('assets/images/products/book-product-100.jpg')}}"
-                                                width="310" height="400" alt="" class="pc__img" />
-                                            <img loading="lazy"
-                                                src="{{asset('assets/images/products/book-product-11.jpg')}}"
-                                                width="310" height="400" alt="" class="pc__img pc__img-second" /></a>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <a href="details.html"><img loading="lazy"
-                                                src="{{asset('assets/images/products/book-product-100.jpg')}}"
-                                                width="310" height="400" alt="" class="pc__img" />
-                                            <img loading="lazy"
-                                                src="{{asset('assets/images/products/book-product-11.jpg')}}"
-                                                width="310" height="400" alt="" class="pc__img pc__img-second" /></a>
-                                    </div>
-                                </div>
-                                {{-- <span class="pc__img-prev"><svg width="7" height="11" viewBox="0 0 7 11"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <use href="#icon_prev_sm" />
-                                    </svg></span>
-                                <span class="pc__img-next"><svg width="7" height="11" viewBox="0 0 7 11"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <use href="#icon_next_sm" />
-                                    </svg></span> --}}
-                            </div>
-                            <button
-                                class="pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium js-add-cart js-open-aside"
-                                data-aside="cartDrawer" title="Add To Cart">Add To Cart</button>
-                        </div>
-
-                        <div class="pc__info position-relative">
-                            <p class="pc__category">Self-help</p>
-                            <h6 class="pc__title"><a href="details.html">Gieo trồng hạnh phúc</a></h6>
-                            <div class="product-card__price d-flex">
-                                <span class="money price">90.000đ</span>
-                            </div>
-
-                            <button
-                                class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist"
-                                title="Add To Wishlist">
-                                <svg width="16" height="16" viewBox="0 0 20 20" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <use href="#icon_heart" />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card-wrapper">
-                    <div class="product-card mb-3 mb-md-4 mb-xxl-5">
-                        <div class="pc__img-wrapper">
-                            <div class="swiper-container background-img js-swiper-slider"
-                                data-settings='{"resizeObserver": true}'>
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                        <a href="details.html"><img loading="lazy"
-                                                src="{{asset('assets/images/products/book-product-100.jpg')}}"
-                                                width="310" height="400" alt="" class="pc__img" />
-                                            <img loading="lazy"
-                                                src="{{asset('assets/images/products/book-product-11.jpg')}}"
-                                                width="310" height="400" alt="" class="pc__img pc__img-second" /></a>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <a href="details.html"><img loading="lazy"
-                                                src="{{asset('assets/images/products/book-product-100.jpg')}}"
-                                                width="310" height="400" alt="" class="pc__img" />
-                                            <img loading="lazy"
-                                                src="{{asset('assets/images/products/book-product-11.jpg')}}"
-                                                width="310" height="400" alt="" class="pc__img pc__img-second" /></a>
-                                    </div>
-                                </div>
-                                {{-- <span class="pc__img-prev"><svg width="7" height="11" viewBox="0 0 7 11"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <use href="#icon_prev_sm" />
-                                    </svg></span>
-                                <span class="pc__img-next"><svg width="7" height="11" viewBox="0 0 7 11"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <use href="#icon_next_sm" />
-                                    </svg></span> --}}
-                            </div>
-                            <button
-                                class="pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium js-add-cart js-open-aside"
-                                data-aside="cartDrawer" title="Add To Cart">Add To Cart</button>
-                        </div>
-
-                        <div class="pc__info position-relative">
-                            <p class="pc__category">Self-help</p>
-                            <h6 class="pc__title"><a href="details.html">Gieo trồng hạnh phúc</a></h6>
-                            <div class="product-card__price d-flex">
-                                <span class="money price">90.000đ</span>
-                            </div>
-
-                            <button
-                                class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist"
-                                title="Add To Wishlist">
-                                <svg width="16" height="16" viewBox="0 0 20 20" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <use href="#icon_heart" />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card-wrapper">
-                    <div class="product-card mb-3 mb-md-4 mb-xxl-5">
-                        <div class="pc__img-wrapper">
-                            <div class="swiper-container background-img js-swiper-slider"
-                                data-settings='{"resizeObserver": true}'>
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                        <a href="details.html"><img loading="lazy"
-                                                src="{{asset('assets/images/products/book-product-100.jpg')}}"
-                                                width="310" height="400" alt="" class="pc__img" />
-                                            <img loading="lazy"
-                                                src="{{asset('assets/images/products/book-product-11.jpg')}}"
-                                                width="310" height="400" alt="" class="pc__img pc__img-second" /></a>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <a href="details.html"><img loading="lazy"
-                                                src="{{asset('assets/images/products/book-product-100.jpg')}}"
-                                                width="310" height="400" alt="" class="pc__img" />
-                                            <img loading="lazy"
-                                                src="{{asset('assets/images/products/book-product-11.jpg')}}"
-                                                width="310" height="400" alt="" class="pc__img pc__img-second" /></a>
-                                    </div>
-                                </div>
-                                {{-- <span class="pc__img-prev"><svg width="7" height="11" viewBox="0 0 7 11"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <use href="#icon_prev_sm" />
-                                    </svg></span>
-                                <span class="pc__img-next"><svg width="7" height="11" viewBox="0 0 7 11"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <use href="#icon_next_sm" />
-                                    </svg></span> --}}
-                            </div>
-                            <button
-                                class="pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium js-add-cart js-open-aside"
-                                data-aside="cartDrawer" title="Add To Cart">Add To Cart</button>
-                        </div>
-
-                        <div class="pc__info position-relative">
-                            <p class="pc__category">Self-help</p>
-                            <h6 class="pc__title"><a href="details.html">Gieo trồng hạnh phúcZessi</a></h6>
-                            <div class="product-card__price d-flex">
-                                <span class="money price price-old">120.000đ</span>
-                                <span class="money price price-sale">90.000đ</span>
-                            </div>
-
-                            <button
-                                class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist"
-                                title="Add To Wishlist">
-                                <svg width="16" height="16" viewBox="0 0 20 20" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <use href="#icon_heart" />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card-wrapper">
-                    <div class="product-card mb-3 mb-md-4 mb-xxl-5">
-                        <div class="pc__img-wrapper">
-                            <div class="swiper-container background-img js-swiper-slider"
-                                data-settings='{"resizeObserver": true}'>
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                        <a href="details.html"><img loading="lazy"
-                                                src="{{asset('assets/images/products/book-product-100.jpg')}}"
-                                                width="310" height="400" alt="" class="pc__img" />
-                                            <img loading="lazy"
-                                                src="{{asset('assets/images/products/book-product-11.jpg')}}"
-                                                width="310" height="400" alt="" class="pc__img pc__img-second" /></a>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <a href="details.html"><img loading="lazy"
-                                                src="{{asset('assets/images/products/book-product-100.jpg')}}"
-                                                width="310" height="400" alt="" class="pc__img" />
-                                            <img loading="lazy"
-                                                src="{{asset('assets/images/products/book-product-11.jpg')}}"
-                                                width="310" height="400" alt="" class="pc__img pc__img-second" /></a>
-                                    </div>
-                                </div>
-                                {{-- <span class="pc__img-prev"><svg width="7" height="11" viewBox="0 0 7 11"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <use href="#icon_prev_sm" />
-                                    </svg></span>
-                                <span class="pc__img-next"><svg width="7" height="11" viewBox="0 0 7 11"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <use href="#icon_next_sm" />
-                                    </svg></span> --}}
-                            </div>
-                            <button
-                                class="pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium js-add-cart js-open-aside"
-                                data-aside="cartDrawer" title="Add To Cart">Add To Cart</button>
-                        </div>
-
-                        <div class="pc__info position-relative">
-                            <p class="pc__category">Self-help</p>
-                            <h6 class="pc__title"><a href="details.html">Gieo trồng hạnh phúc</a></h6>
-                            <div class="product-card__price d-flex">
-                                <span class="money price">90.000đ</span>
-                            </div>
-                            <div class="product-card__review d-flex align-items-center">
-                                <div class="reviews-group d-flex">
-                                    <svg class="review-star" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg">
-                                        <use href="#icon_star" />
-                                    </svg>
-                                    <svg class="review-star" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg">
-                                        <use href="#icon_star" />
-                                    </svg>
-                                    <svg class="review-star" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg">
-                                        <use href="#icon_star" />
-                                    </svg>
-                                    <svg class="review-star" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg">
-                                        <use href="#icon_star" />
-                                    </svg>
-                                    <svg class="review-star" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg">
-                                        <use href="#icon_star" />
-                                    </svg>
-                                </div>
-                                <span class="reviews-note text-lowercase text-secondary ms-1">8k+ reviews</span>
-                            </div>
-
-                            <button
-                                class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist"
-                                title="Add To Wishlist">
-                                <svg width="16" height="16" viewBox="0 0 20 20" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <use href="#icon_heart" />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
             </div>
 
-            <nav class="shop-pages d-flex justify-content-between mt-3" aria-label="Page navigation">
-                <a href="#" class="btn-link d-inline-flex align-items-center">
-                    <svg class="me-1" width="7" height="11" viewBox="0 0 7 11" xmlns="http://www.w3.org/2000/svg">
-                        <use href="#icon_prev_sm" />
-                    </svg>
-                    <span class="fw-medium">PREV</span>
-                </a>
-                <ul class="pagination mb-0">
-                    <li class="page-item"><a class="btn-link px-1 mx-2 btn-link_active" href="#">1</a></li>
-                    <li class="page-item"><a class="btn-link px-1 mx-2" href="#">2</a></li>
-                    <li class="page-item"><a class="btn-link px-1 mx-2" href="#">3</a></li>
-                    <li class="page-item"><a class="btn-link px-1 mx-2" href="#">4</a></li>
-                </ul>
-                <a href="#" class="btn-link d-inline-flex align-items-center">
-                    <span class="fw-medium me-1">NEXT</span>
-                    <svg width="7" height="11" viewBox="0 0 7 11" xmlns="http://www.w3.org/2000/svg">
-                        <use href="#icon_next_sm" />
-                    </svg>
-                </a>
-            </nav>
+            <div class="divider"></div>
+            <div class="flex items-center justify-between flex-wrap gap10 wgp-pagination">
+                {{$products->links('pagination::bootstrap-5')}}
+            </div>
         </div>
     </section>
 </main>

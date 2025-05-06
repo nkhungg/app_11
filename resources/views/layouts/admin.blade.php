@@ -2,10 +2,10 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <title>Surfside Media</title>
+    <title>Bookstore</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="author" content="surfside media" />
+    <meta name="author" content="bookstore" />
     <meta charset="UTF-8">
     <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.gstatic.com/">
@@ -46,9 +46,9 @@
                     <div class="box-logo">
                         <a href={{ route('admin.index') }} id="site-logo-inner">
                             <img class="" id="logo_header_1" alt=""
-                                src="{{ asset('images/logo/logo.png') }}"
-                                data-light="{{ asset('images/logo/logo.png') }}"
-                                data-dark="{{ asset('images/logo/logo.png') }}">
+                                src="{{ asset('images/logo/bookstore.jpg') }}"
+                                data-light="{{ asset('images/logo/bookstore.jpg') }}"
+                                data-dark="{{ asset('images/logo/bookstore.jpg') }}">
                         </a>
                         <div class="button-show-hide">
                             <i class="icon-menu-left"></i>
@@ -189,9 +189,9 @@
                             <div class="header-left">
                                 <a href="index-2.html">
                                     <img class="" id="logo_header_mobile" alt=""
-                                        src="images/logo/logo.png" data-light="images/logo/logo.png"
-                                        data-dark="images/logo/logo.png" data-width="154px" data-height="52px"
-                                        data-retina="images/logo/logo.png">
+                                        src="images/logo/bookstore.jpg" data-light="images/logo/bookstore.jpg"
+                                        data-dark="images/logo/bookstore.jpg" data-width="154px" data-height="52px"
+                                        data-retina="images/logo/bookstore.jpg">
                                 </a>
                                 <div class="button-show-hide">
                                     <i class="icon-menu-left"></i>
