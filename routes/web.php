@@ -59,7 +59,11 @@ Route::middleware(['auth', AuthAdmin::class])->group(function()
 
 // Route::get('/{product_slug}', [ShopController::class, 'product_details'])->name('product.details');
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-
+Route::post('/cart/add', [CartController::class, 'add_to_cart'])->name('cart.add');
+Route::put('/cart/increase-quantity/{rowId}', [CartController::class, 'increase_cart_quantity'])->name('cart.quantity.increase');
+Route::put('/cart/decrease-quantity/{rowId}', [CartController::class, 'decrease_cart_quantity'])->name('cart.quantity.decrease');
+Route::delete('.cart/remove/{rowId}', [CartController::class, 'remove_item'])->name('cart.item.remove');
+Route::delete('.cart/clear', [CartController::class, 'clear_cart'])->name('cart.clear');
 
 require __DIR__.'/auth.php';
 

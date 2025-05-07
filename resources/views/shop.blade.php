@@ -375,10 +375,21 @@
                                         xmlns="http://www.w3.org/2000/svg">
                                         <use href="#icon_next_sm" />
                                     </svg></span>
-                            </div>
+                            </div>                            
+                            @if (Cart::instance('cart')->content()->where('id', $product->id)->count()>0)
+                            <a href = "{{route('cart.index')}}" class = "pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium btn-warning mb-3">Go to cart </a>
+                            @else
+                            <form name = "addtocart-form" method = "post" action = "{{route('cart.add')}}">
+                                @csrf
+                                <input type="hidden" name="id" value="{{$product->id}}" />
+                                <input type="hidden" name="quantity" value="1" />
+                                <input type="hidden" name="name" value="{{$product->name}}" />
+                                <input type="hidden" name="price" value="{{$product->sale_price == ''? $product->regular_price:$product->sale_price}}" />
                             <button
-                                class="pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium js-add-cart js-open-aside"
+                                class="pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium"
                                 data-aside="cartDrawer" title="Add To Cart">Add To Cart</button>
+                            </form>
+                            @endif
                         </div>
 
                         <div class="pc__info position-relative">
