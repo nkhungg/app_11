@@ -72,16 +72,14 @@
                             <span class="alert alert-danger text-center">{{ $message }}</span>
                         @enderror
                         <fieldset class="brand">
-                            <div class="body-title mb-10">Brand <span class="tf-color-1">*</span>
+                            <div class="body-title mb-10">Author <span class="tf-color-1">*</span>
                             </div>
                             <div class="select">
-                                <select class="" name="brand_id">
-                                    <option>Choose Brand</option>
-                                    <option value="1">Brand1</option>
-                                    <option value="2">Brand2</option>
-                                    <option value="3">Brand3</option>
-                                    <option value="4">Brand4</option>
-
+                                <select class="" name="author_id">
+                                    <option>Choose author</option>
+                                    @foreach ($authors as $author)
+                                        <option value="{{ $author->id }}">{{ $author->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </fieldset>

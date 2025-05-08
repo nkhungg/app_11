@@ -106,7 +106,8 @@ class AdminController extends Controller {
     public function product_add()
     {
         $categories = Category::select('id', 'name')->orderBy('name')->get();
-        return view('admin.product-add', compact('categories'));
+        $authors = Author::select('id', 'name')->orderBy('name')->get();
+        return view('admin.product-add', compact('categories', 'authors'));
     }
 
     public function product_store(Request $request)
@@ -123,6 +124,7 @@ class AdminController extends Controller {
             'quantity' => 'required',
             'image' => 'required|mimes:png,jpg,jpeg|max:2048',
             'category_id' => 'required',
+            'author_id' => 'required'
         ]);
         $product = new Product();
         $product->name = $request->name;
@@ -137,6 +139,7 @@ class AdminController extends Controller {
         $product->quantity = $request->quantity;
         $product->image = $request->image;
         $product->category_id = $request->category_id;
+        $product->author_id = $request->author_id;
 
         $current_timestamp = Carbon::now()->timestamp;
 
@@ -191,7 +194,8 @@ class AdminController extends Controller {
     {
         $product = Product::find($id);
         $categories = Category::select('id', 'name')->orderBy('name')->get();
-        return view('admin.product-edit', compact('product', 'categories'));
+        $authors = Author::select('id', 'name')->orderBy('name')->get();
+        return view('admin.product-edit', compact('product', 'categories', 'authors'));
     }
 
     public function product_update(Request $request)
@@ -208,6 +212,7 @@ class AdminController extends Controller {
             'quantity' => 'required',
             'image' => 'mimes:png,jpg,jpeg|max:2048',
             'category_id' => 'required',
+            'author_id' => 'required'
         ]);
         $product = Product::find($request->id);
         $product->name = $request->name;
@@ -220,6 +225,7 @@ class AdminController extends Controller {
         $product->featured = $request->featured;
         $product->quantity = $request->quantity;
         $product->category_id = $request->category_id;
+        $product->author_id = $request->author_id;
         $current_timestamp = Carbon::now()->timestamp;
 
         if($request->hasFile('image')){
