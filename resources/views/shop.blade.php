@@ -304,18 +304,13 @@
                     <a href="#" class="menu-link menu-link_us-s text-uppercase fw-medium">The Shop</a>
                 </div>
 
-                <div
-                    class="shop-acs d-flex align-items-center justify-content-between justify-content-md-end flex-grow-1">
+                <div class="shop-acs d-flex align-items-center justify-content-between justify-content-md-end flex-grow-1">
                     <select class="shop-acs__select form-select w-auto border-0 py-0 order-1 order-md-0"
-                        aria-label="Sort Items" name="total-number">
-                        <option selected>Default Sorting</option>
-                        <option value="2">Best selling</option>
-                        <option value="3">Alphabetically, A-Z</option>
-                        <option value="3">Alphabetically, Z-A</option>
-                        <option value="3">Price, low to high</option>
-                        <option value="3">Price, high to low</option>
-                        <option value="3">Date, old to new</option>
-                        <option value="3">Date, new to old</option>
+                        aria-label="Sort Items" name="orderby" id="orderby">
+                        <option value="-1" {{$order == -1 ? 'selected':''}}>Name (A-Z)</option>
+                        <option value="1" {{$order == 1 ? 'selected':''}}>Name (Z-A)</option>
+                        <option value="2" {{$order == 2 ? 'selected':''}}>Price (Low-High)</option>
+                        <option value="3" {{$order == 3 ? 'selected':''}}>Price (High-Low)</option>
                     </select>
 
                     <div class="shop-asc__seprator mx-3 bg-light d-none d-md-block order-md-0"></div>
@@ -442,9 +437,28 @@
 
             <div class="divider"></div>
             <div class="flex items-center justify-between flex-wrap gap10 wgp-pagination">
-                {{$products->links('pagination::bootstrap-5')}}
+                {{$products->withQueryString()->links('pagination::bootstrap-5')}}
             </div>
         </div>
     </section>
 </main>
+
+<form id="frmfilter" method="GET" action="{{route('shop.index')}}">
+    <input type="hidden" name="page" value="{{$products->currentPage()}}"/>
+    <input type="hidden" name="order" id="order" value="{{$order}}"/>
+</form>
+
 @endsection
+
+@push('scripts')
+<script>
+    $(function()
+    {
+        $("#orderby").on("change", function()
+        {
+            $("#order").val($("#orderby option:selected").val());
+            $("#frmfilter").submit();
+        });
+    });
+</script>
+@endpush

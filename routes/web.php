@@ -41,6 +41,13 @@ Route::middleware(['auth', AuthAdmin::class])->group(function()
     Route::put('/admin/publisher/update', [AdminController::class, 'publisher_update'])->name('admin.publisher.update');
     Route::delete('/admin/publisher/{id}/delete', [AdminController::class, 'publisher_delete'])->name('admin.publisher.delete');
 
+    Route::get('/admin/authors', [AdminController::class, 'authors'])->name('admin.authors');
+    Route::get('/admin/author/add', [AdminController::class, 'add_author'])->name('admin.author.add');
+    Route::post('/admin/author/store', [AdminController::class, 'author_store'])->name('admin.author.store');
+    Route::get('/admin/author/edit/{id}', [AdminController::class, 'author_edit'])->name('admin.author.edit');
+    Route::put('/admin/author/update', [AdminController::class, 'author_update'])->name('admin.author.update');
+    Route::delete('/admin/author/{id}/delete', [AdminController::class, 'author_delete'])->name('admin.author.delete');
+
     Route::get('/admin/categories', [AdminController::class, 'categories'])->name('admin.categories');
     Route::get('/admin/category/add', [AdminController::class, 'category_add'])->name('admin.category.add');
     Route::post('/admin/category/store', [AdminController::class, 'category_store'])->name('admin.category.store');
