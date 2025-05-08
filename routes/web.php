@@ -29,6 +29,8 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth'])->group(function()
 {
     Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');
+    Route::get('/account-detail', [UserController::class, 'account_detail'])->name('user.account.detail');
+    Route::put('/account/update', [UserController::class, 'account_update'])->name('user.account.update');
 });
 
 Route::middleware(['auth', AuthAdmin::class])->group(function()
@@ -61,6 +63,9 @@ Route::middleware(['auth', AuthAdmin::class])->group(function()
     Route::get('/admin/product/{id}/edit', [AdminController::class, 'product_edit'])->name('admin.product.edit');
     Route::put('/admin/product/update', [AdminController::class, 'product_update'])->name('admin.product.update');
     Route::delete('/admin/product/{id}/delete', [AdminController::class, 'product_delete'])->name('admin.product.delete');
+
+    Route::get('/admin/settings', [AdminController::class, 'settings'])->name('admin.settings');
+    Route::put('/admin/settings/update', [AdminController::class, 'account_update'])->name('admin.account.update');
 
 });
 

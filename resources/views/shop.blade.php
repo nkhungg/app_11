@@ -117,56 +117,18 @@
                     <div id="accordion-filter-brand" class="accordion-collapse collapse show border-0"
                         aria-labelledby="accordion-heading-brand" data-bs-parent="#brand-filters">
                         <div class="search-field multi-select accordion-body px-0 pb-0">
-                            <select class="d-none" multiple name="total-numbers-list">
-                                <option value="1">William Shakespear</option>
-                                <option value="2">George Orwell</option>
-                                <option value="3">Charles Dickens</option>
-                                <option value="4">Virginia Woolf</option>
-                                <option value="5">J.K. Rowling</option>
-                                <option value="6">William Faulkner</option>
-                                <option value="7">Ernest Hemingway</option>
-                            </select>
-                            <div class="search-field__input-wrapper mb-3">
-                                <input type="text" name="search_text"
-                                    class="search-field__input form-control form-control-sm border-light border-2"
-                                    placeholder="Search" />
-                            </div>
-                            <ul class="multi-select__list list-unstyled">
-                                <li
-                                    class="search-suggestion__item multi-select__item text-primary js-search-select js-multi-select">
-                                    <span class="me-auto">William Shakespear</span>
-                                    <span class="text-secondary">2</span>
-                                </li>
-                                <li
-                                    class="search-suggestion__item multi-select__item text-primary js-search-select js-multi-select">
-                                    <span class="me-auto">George Orwell</span>
-                                    <span class="text-secondary">7</span>
-                                </li>
-                                <li
-                                    class="search-suggestion__item multi-select__item text-primary js-search-select js-multi-select">
-                                    <span class="me-auto">Charles Dickens</span>
-                                    <span class="text-secondary">10</span>
-                                </li>
-                                <li
-                                    class="search-suggestion__item multi-select__item text-primary js-search-select js-multi-select">
-                                    <span class="me-auto">Virginia Woolf</span>
-                                    <span class="text-secondary">39</span>
-                                </li>
-                                <li
-                                    class="search-suggestion__item multi-select__item text-primary js-search-select js-multi-select">
-                                    <span class="me-auto">J.K. Rowling</span>
-                                    <span class="text-secondary">95</span>
-                                </li>
-                                <li
-                                    class="search-suggestion__item multi-select__item text-primary js-search-select js-multi-select">
-                                    <span class="me-auto">William Faulkner</span>
-                                    <span class="text-secondary">1092</span>
-                                </li>
-                                <li
-                                    class="search-suggestion__item multi-select__item text-primary js-search-select js-multi-select">
-                                    <span class="me-auto">Ernest Hemingway</span>
-                                    <span class="text-secondary">48</span>
-                                </li>
+                            <ul class="list list-inline mb-0 author-list">
+                                @foreach ($authors as $author)
+                                <li class="list-item">
+                                    <span class="menu-link py-1">
+                                        <input type="checkbox" name="authors" value="{{$author->id}}" class="chk-author">
+                                        {{$author->name}}
+                                    </span>
+                                    <span class="text-right float-end">
+                                        {{$author->products->count()}}
+                                    </span>
+                                </li>    
+                                @endforeach
                             </ul>
                         </div>
                     </div>

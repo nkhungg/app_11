@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Author;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -31,8 +32,9 @@ class ShopController extends Controller
                 $o_order='ASC';
                 break;
         }
+        $authors = Author::orderBy('name', 'ASC')->get();
         $products = Product::orderBy($o_column, $o_order)->paginate(12);
-        return view('shop', compact('products', 'order'));
+        return view('shop', compact('products', 'order', 'authors'));
     }
 
     public function product_details($product_slug)

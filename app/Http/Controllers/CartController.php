@@ -46,4 +46,9 @@ class CartController extends Controller
         Cart::instance('cart')->destroy();
         return redirect()->back();
     }
+
+    public function checkout()
+    {
+        
+    }
 }

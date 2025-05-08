@@ -46,6 +46,8 @@
                                 <th>#</th>
                                 <th>Name</th>
                                 <th>Slug</th>
+                                <th>Nationality</th>
+                                <th>Biography</th>
                                 <th>Products</th>
                                 <th>Action</th>
                             </tr>
@@ -63,7 +65,9 @@
                                     </div>
                                 </td>
                                 <td>{{$author->slug}}</td>
-                                <td><a href="#" target="_blank">1</a></td>
+                                <td>{{$author->nationality}}</td>
+                                <td>{{$author->biography}}</td>
+                                <td><a href="#" target="_blank">{{$author->products->count()}}</a></td>
                                 <td>
                                     <div class="list-icon-function">
                                         <a href="{{route('admin.author.edit', ['id'=>$author->id])}}">
