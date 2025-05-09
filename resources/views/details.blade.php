@@ -114,6 +114,9 @@
           @if (Cart::instance('cart')->content()->where('id', $product->id)->count()>0)
           <a href = "{{route('cart.index')}}" class = "btn btn-warning mb-3">Go to cart </a>
           @else
+          @guest
+          <a href="{{'login'}}" class="btn btn-primary btn-addtocart">Add to Cart</a>
+          @else
           <form name="addtocart-form" method="post" action="{{route('cart.add')}}">
             @csrf
             <div class="product-single__addtocart">
@@ -128,6 +131,7 @@
               <button type="submit" class="btn btn-primary btn-addtocart" data-aside="cartDrawer">Add to Cart</button>
             </div>
           </form>
+          @endguest
           @endif
           <div class="product-single__addtolinks">
             <a href="#" class="menu-link menu-link_us-s add-to-wishlist"><svg width="16" height="16" viewBox="0 0 20 20"
@@ -430,7 +434,8 @@
                 <div class="product-card__price d-flex">
                   <span class="money price">
                     @if ($related_product->sale_price)
-                      <s>{{$related_product->regular_price}}đ</s>{{$related_product->sale_price}}đ
+                      <s>{{$related_product->regular_price}}đ</s>
+                      {{$related_product->sale_price}}đ
                     @else
                       {{$related_product->regular_price}}đ
                     @endif

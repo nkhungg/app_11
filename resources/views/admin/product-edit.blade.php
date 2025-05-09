@@ -72,7 +72,21 @@
                                 </select>
                             </div>
                         </fieldset>
-                        @error('category_id')
+                        <fieldset class="author">
+                            <div class="body-title mb-10">Author <span class="tf-color-1">*</span>
+                            </div>
+                            <div class="select">
+                                <select class="" name="author_id">
+                                    <option>Choose author</option>
+                                    @foreach ($authors as $author)
+                                        <option value="{{ $author->id }}"
+                                            {{ $product->author_id == $author->id ? 'selected' : '' }}>
+                                            {{ $author->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </fieldset>
+                        @error('author_id')
                             <span class="alert alert-danger text-center">{{ $message }}</span>
                         @enderror
                         {{-- <fieldset class="brand">

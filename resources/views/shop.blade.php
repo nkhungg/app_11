@@ -332,7 +332,10 @@
                                         xmlns="http://www.w3.org/2000/svg">
                                         <use href="#icon_next_sm" />
                                     </svg></span>
-                            </div>                            
+                            </div>
+                            @guest
+                            <a href = "{{route('login')}}" class = "pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium">Add to cart </a>
+                            @else                     
                             @if (Cart::instance('cart')->content()->where('id', $product->id)->count()>0)
                             <a href = "{{route('cart.index')}}" class = "pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium btn-warning mb-3">Go to cart </a>
                             @else
@@ -347,11 +350,13 @@
                                 data-aside="cartDrawer" title="Add To Cart">Add To Cart</button>
                             </form>
                             @endif
+                            @endguest
                         </div>
 
                         <div class="pc__info position-relative">
                             <p class="pc__category">{{$product->category->name}}</p>
                             <h6 class="pc__title"><a href="{{route('shop.product.details',['product_slug'=>$product->slug])}}">{{$product->name}}</a></h6>
+                            <span class="text-secondary">by {{$product->author->name}}</span>
                             <div class="product-card__price d-flex">
                                 <span class="money price">
                                     @if ($product->sale_price)
