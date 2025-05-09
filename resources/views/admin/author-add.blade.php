@@ -3,7 +3,7 @@
 <div class="main-content-inner">
     <div class="main-content-wrap">
         <div class="flex items-center flex-wrap justify-between gap20 mb-27">
-            <h3>Publisher information</h3>
+            <h3>Author information</h3>
             <ul class="breadcrumbs flex items-center flex-wrap justify-start gap10">
                 <li>
                     <a href="{{route('admin.index')}}">
@@ -14,46 +14,61 @@
                     <i class="icon-chevron-right"></i>
                 </li>
                 <li>
-                    <a href="{{route('admin.publisher.add')}}">
-                        <div class="text-tiny">Publishers</div>
+                    <a href="{{route('admin.author.add')}}">
+                        <div class="text-tiny">Authors</div>
                     </a>
                 </li>
                 <li>
                     <i class="icon-chevron-right"></i>
                 </li>
                 <li>
-                    <div class="text-tiny">Edit Publisher</div>
+                    <div class="text-tiny">New Author</div>
                 </li>
             </ul>
         </div>
         <!-- new-category -->
         <div class="wg-box">
-            <form class="form-new-product form-style-1" action="{{route('admin.publisher.update')}}" method="POST"
+            <form class="form-new-product form-style-1" action="{{route('admin.author.store')}}" method="POST"
                 enctype="multipart/form-data">
                 @csrf
-                @method('PUT')
-                <input type="hidden" name="id" value={{$publisher->id}}/>
                 <fieldset class="name">
-                    <div class="body-title">Publisher Name <span class="tf-color-1">*</span></div>
-                    <input class="flex-grow" type="text" placeholder="Publisher name" name="name"
-                        tabindex="0" value="{{$publisher->name}}" aria-required="true" required="">
+                    <div class="body-title">Author Name <span class="tf-color-1">*</span></div>
+                    <input class="flex-grow" type="text" placeholder="Author name" name="name"
+                        tabindex="0" value="{{old('name')}}" aria-required="true" required="">
                 </fieldset>
                 @error('name') <span class="alert alert-danger text-center">{{$message}}</span> @enderror
                 <fieldset class="name">
-                    <div class="body-title">Publisher Slug <span class="tf-color-1">*</span></div>
-                    <input class="flex-grow" type="text" placeholder="Publisher Slug" name="slug"
-                        tabindex="0" value="{{$publisher->slug}}" aria-required="true" required="">
+                    <div class="body-title">Author Slug <span class="tf-color-1">*</span></div>
+                    <input class="flex-grow" type="text" placeholder="Author Slug" name="slug"
+                        tabindex="0" value="{{old('slug')}}" aria-required="true" required="">
                 </fieldset>
                 @error('slug') <span class="alert alert-danger text-center">{{$message}}</span> @enderror
+                <fieldset class="nationality">
+                    <div class="body-title">Author Nationality <span class="tf-color-1">*</span></div>
+                    <select class="flex-grow" name="nationality" required>
+                        <option value="" disabled selected>Select Nationality</option>
+                        @foreach(\Dinushchathurya\NationalityList\Nationality::getNationalities() as $nationality)
+                            <option value="{{ $nationality }}" {{ old('nationality') == $nationality ? 'selected' : '' }}>
+                                {{ $nationality }}
+                            </option>
+                        @endforeach
+                    </select>
+                </fieldset>
+                @error('nationality') <span class="alert alert-danger text-center">{{$message}}</span> @enderror
+                @error('nationality') <span class="alert alert-danger text-center">{{$message}}</span> @enderror
+                <fieldset class="biography">
+                    <div class="body-title">Author Biography <span class="tf-color-1">*</span></div>
+                    <input class="flex-grow" type="text" placeholder="Author Biography" name="biography"
+                        tabindex="0" value="{{old('biography')}}" aria-required="true" required="">
+                </fieldset>
+                @error('biography') <span class="alert alert-danger text-center">{{$message}}</span> @enderror
                 <fieldset>
                     <div class="body-title">Upload images <span class="tf-color-1">*</span>
                     </div>
                     <div class="upload-image flex-grow">
-                        @if ($publisher->image)
-                        <div class="item" id="imgpreview">
-                            <img src="{{asset('uploads/publishers')}}/{{$publisher->image}}" class="effect8" alt="">
+                        <div class="item" id="imgpreview" style="display:none">
+                            <img src="upload-1.html" class="effect8" alt="">
                         </div>
-                        @endif
                         <div id="upload-file" class="item up-load">
                             <label class="uploadfile" for="myFile">
                                 <span class="icon">

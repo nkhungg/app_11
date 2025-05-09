@@ -48,7 +48,7 @@
                                 <th>SalePrice</th>
                                 <th>SKU</th>
                                 <th>Category</th>
-                                {{-- <th>Brand</th> --}}
+                                <th>Author</th>
                                 <th>Featured</th>
                                 <th>Stock</th>
                                 <th>Quantity</th>
@@ -73,7 +73,7 @@
                                     <td>{{ $product->sale_price }}</td>
                                     <td>{{ $product->SKU }}</td>
                                     <td>{{ $product->category->name }}</td>
-                                    {{-- <td>Brand2</td> --}}
+                                    <td>{{ $product->author->name }}</td>
                                     <td>{{ $product->featured == 0 ? 'No' : 'Yes' }}</td>
                                     <td>{{ $product->stock_status }}</td>
                                     <td>{{ $product->quantity }}</td>

@@ -111,17 +111,28 @@
           <div class="product-single__short-desc">
             <p>{{$product->short_description}}</p>
           </div>
-          <form name="addtocart-form" method="post">
+          @if (Cart::instance('cart')->content()->where('id', $product->id)->count()>0)
+          <a href = "{{route('cart.index')}}" class = "btn btn-warning mb-3">Go to cart </a>
+          @else
+          @guest
+          <a href="{{'login'}}" class="btn btn-primary btn-addtocart">Add to Cart</a>
+          @else
+          <form name="addtocart-form" method="post" action="{{route('cart.add')}}">
+            @csrf
             <div class="product-single__addtocart">
               <div class="qty-control position-relative">
                 <input type="number" name="quantity" value="1" min="1" class="qty-control__number text-center">
                 <div class="qty-control__reduce">-</div>
                 <div class="qty-control__increase">+</div>
               </div><!-- .qty-control -->
-              <button type="submit" class="btn btn-primary btn-addtocart js-open-aside" data-aside="cartDrawer">Add to
-                Cart</button>
+              <input type="hidden" name="id" value="{{$product->id}}" />
+              <input type="hidden" name="name" value="{{$product->name}}" />
+              <input type="hidden" name="price" value="{{$product->sale_price == ''? $product->regular_price:$product->sale_price}}" />
+              <button type="submit" class="btn btn-primary btn-addtocart" data-aside="cartDrawer">Add to Cart</button>
             </div>
           </form>
+          @endguest
+          @endif
           <div class="product-single__addtolinks">
             <a href="#" class="menu-link menu-link_us-s add-to-wishlist"><svg width="16" height="16" viewBox="0 0 20 20"
                 fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -400,10 +411,21 @@
                   <img loading="lazy" src="{{asset('uploads/products')}}/{{$gallery_image}}" width="330" height="400"
                     alt="{{$related_product->name}}" class="pc__img pc__img-second">
                   @endforeach
-                </a>
+                </a>                       
+                @if (Cart::instance('cart')->content()->where('id', $related_product->id)->count()>0)
+                <a href = "{{route('cart.index')}}" class = "pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium btn-warning mb-3">Go to cart </a>
+                @else
+                <form name = "addtocart-form" method = "post" action = "{{route('cart.add')}}">
+                    @csrf
+                    <input type="hidden" name="id" value="{{$related_product->id}}" />
+                    <input type="hidden" name="quantity" value="1" />
+                    <input type="hidden" name="name" value="{{$related_product->name}}" />
+                    <input type="hidden" name="price" value="{{$related_product->sale_price == ''? $related_product->regular_price:$related_product->sale_price}}" />
                 <button
-                  class="pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium js-add-cart js-open-aside"
-                  data-aside="cartDrawer" title="Add To Cart">Add To Cart</button>
+                    class="pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium"
+                    data-aside="cartDrawer" title="Add To Cart">Add To Cart</button>
+                </form>
+                @endif
               </div>
 
               <div class="pc__info position-relative">
@@ -412,7 +434,8 @@
                 <div class="product-card__price d-flex">
                   <span class="money price">
                     @if ($related_product->sale_price)
-                      <s>{{$related_product->regular_price}}đ</s>{{$related_product->sale_price}}đ
+                      <s>{{$related_product->regular_price}}đ</s>
+                      {{$related_product->sale_price}}đ
                     @else
                       {{$related_product->regular_price}}đ
                     @endif

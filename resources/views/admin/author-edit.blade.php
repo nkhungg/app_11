@@ -3,7 +3,7 @@
 <div class="main-content-inner">
     <div class="main-content-wrap">
         <div class="flex items-center flex-wrap justify-between gap20 mb-27">
-            <h3>Publisher information</h3>
+            <h3>Author information</h3>
             <ul class="breadcrumbs flex items-center flex-wrap justify-start gap10">
                 <li>
                     <a href="{{route('admin.index')}}">
@@ -14,42 +14,46 @@
                     <i class="icon-chevron-right"></i>
                 </li>
                 <li>
-                    <a href="{{route('admin.publisher.add')}}">
-                        <div class="text-tiny">Publishers</div>
+                    <a href="{{route('admin.author.add')}}">
+                        <div class="text-tiny">Authors</div>
                     </a>
                 </li>
                 <li>
                     <i class="icon-chevron-right"></i>
                 </li>
                 <li>
-                    <div class="text-tiny">New Publisher</div>
+                    <div class="text-tiny">Edit Author</div>
                 </li>
             </ul>
         </div>
         <!-- new-category -->
         <div class="wg-box">
-            <form class="form-new-product form-style-1" action="{{route('admin.publisher.store')}}" method="POST"
+            <form class="form-new-product form-style-1" action="{{route('admin.author.update')}}" method="POST"
                 enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
+                <input type="hidden" name="id" value={{$author->id}}/>
                 <fieldset class="name">
-                    <div class="body-title">Publisher Name <span class="tf-color-1">*</span></div>
-                    <input class="flex-grow" type="text" placeholder="Publisher name" name="name"
-                        tabindex="0" value="{{old('name')}}" aria-required="true" required="">
+                    <div class="body-title">Author Name <span class="tf-color-1">*</span></div>
+                    <input class="flex-grow" type="text" placeholder="Author name" name="name"
+                        tabindex="0" value="{{$author->name}}" aria-required="true" required="">
                 </fieldset>
                 @error('name') <span class="alert alert-danger text-center">{{$message}}</span> @enderror
                 <fieldset class="name">
-                    <div class="body-title">Publisher Slug <span class="tf-color-1">*</span></div>
-                    <input class="flex-grow" type="text" placeholder="Publisher Slug" name="slug"
-                        tabindex="0" value="{{old('slug')}}" aria-required="true" required="">
+                    <div class="body-title">Author Slug <span class="tf-color-1">*</span></div>
+                    <input class="flex-grow" type="text" placeholder="Author Slug" name="slug"
+                        tabindex="0" value="{{$author->slug}}" aria-required="true" required="">
                 </fieldset>
                 @error('slug') <span class="alert alert-danger text-center">{{$message}}</span> @enderror
                 <fieldset>
                     <div class="body-title">Upload images <span class="tf-color-1">*</span>
                     </div>
                     <div class="upload-image flex-grow">
-                        <div class="item" id="imgpreview" style="display:none">
-                            <img src="upload-1.html" class="effect8" alt="">
+                        @if ($author->image)
+                        <div class="item" id="imgpreview">
+                            <img src="{{asset('uploads/authors')}}/{{$author->image}}" class="effect8" alt="">
                         </div>
+                        @endif
                         <div id="upload-file" class="item up-load">
                             <label class="uploadfile" for="myFile">
                                 <span class="icon">

@@ -3,7 +3,7 @@
 <div class="main-content-inner">
     <div class="main-content-wrap">
         <div class="flex items-center flex-wrap justify-between gap20 mb-27">
-            <h3>Publishers</h3>
+            <h3>Authors</h3>
             <ul class="breadcrumbs flex items-center flex-wrap justify-start gap10">
                 <li>
                     <a href="{{route('admin.index')}}">
@@ -14,7 +14,7 @@
                     <i class="icon-chevron-right"></i>
                 </li>
                 <li>
-                    <div class="text-tiny">Publishers</div>
+                    <div class="text-tiny">Authors</div>
                 </li>
             </ul>
         </div>
@@ -32,7 +32,7 @@
                         </div>
                     </form>
                 </div>
-                <a class="tf-button style-1 w208" href="{{route('admin.publisher.add')}}"><i
+                <a class="tf-button style-1 w208" href="{{route('admin.author.add')}}"><i
                         class="icon-plus"></i>Add new</a>
             </div>
             <div class="wg-table table-all-user">
@@ -46,32 +46,36 @@
                                 <th>#</th>
                                 <th>Name</th>
                                 <th>Slug</th>
+                                <th>Nationality</th>
+                                <th>Biography</th>
                                 <th>Products</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($publishers as $publisher)
+                            @foreach ($authors as $author)
                             <tr>
-                                <td>{{$publisher->id}}</td>
+                                <td>{{$author->id}}</td>
                                 <td class="pname">
                                     <div class="image">
-                                        <img src="{{asset('uploads/publishers')}}/{{$publisher->image}}" alt="{{$publisher->name}}" class="image">
+                                        <img src="{{asset('uploads/authors')}}/{{$author->image}}" alt="{{$author->name}}" class="image">
                                     </div>
                                     <div class="name">
-                                        <a href="#" class="body-title-2">{{$publisher->name}}</a>
+                                        <a href="#" class="body-title-2">{{$author->name}}</a>
                                     </div>
                                 </td>
-                                <td>{{$publisher->slug}}</td>
-                                <td><a href="#" target="_blank">1</a></td>
+                                <td>{{$author->slug}}</td>
+                                <td>{{$author->nationality}}</td>
+                                <td>{{$author->biography}}</td>
+                                <td><a href="#" target="_blank">{{$author->products->count()}}</a></td>
                                 <td>
                                     <div class="list-icon-function">
-                                        <a href="{{route('admin.publisher.edit', ['id'=>$publisher->id])}}">
+                                        <a href="{{route('admin.author.edit', ['id'=>$author->id])}}">
                                             <div class="item edit">
                                                 <i class="icon-edit-3"></i>
                                             </div>
                                         </a>
-                                        <form action="{{route('admin.publisher.delete', ['id'=>$publisher->id])}}" method="POST">
+                                        <form action="{{route('admin.author.delete', ['id'=>$author->id])}}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <div class="item text-danger delete">
@@ -87,7 +91,7 @@
                 </div>
                 <div class="divider"></div>
                 <div class="flex items-center justify-between flex-wrap gap10 wgp-pagination">
-                    {{ $publishers->links('pagination::bootstrap-5') }}
+                    {{ $authors->links('pagination::bootstrap-5') }}
                 </div>
             </div>
         </div>

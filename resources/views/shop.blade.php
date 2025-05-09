@@ -117,56 +117,18 @@
                     <div id="accordion-filter-brand" class="accordion-collapse collapse show border-0"
                         aria-labelledby="accordion-heading-brand" data-bs-parent="#brand-filters">
                         <div class="search-field multi-select accordion-body px-0 pb-0">
-                            <select class="d-none" multiple name="total-numbers-list">
-                                <option value="1">William Shakespear</option>
-                                <option value="2">George Orwell</option>
-                                <option value="3">Charles Dickens</option>
-                                <option value="4">Virginia Woolf</option>
-                                <option value="5">J.K. Rowling</option>
-                                <option value="6">William Faulkner</option>
-                                <option value="7">Ernest Hemingway</option>
-                            </select>
-                            <div class="search-field__input-wrapper mb-3">
-                                <input type="text" name="search_text"
-                                    class="search-field__input form-control form-control-sm border-light border-2"
-                                    placeholder="Search" />
-                            </div>
-                            <ul class="multi-select__list list-unstyled">
-                                <li
-                                    class="search-suggestion__item multi-select__item text-primary js-search-select js-multi-select">
-                                    <span class="me-auto">William Shakespear</span>
-                                    <span class="text-secondary">2</span>
-                                </li>
-                                <li
-                                    class="search-suggestion__item multi-select__item text-primary js-search-select js-multi-select">
-                                    <span class="me-auto">George Orwell</span>
-                                    <span class="text-secondary">7</span>
-                                </li>
-                                <li
-                                    class="search-suggestion__item multi-select__item text-primary js-search-select js-multi-select">
-                                    <span class="me-auto">Charles Dickens</span>
-                                    <span class="text-secondary">10</span>
-                                </li>
-                                <li
-                                    class="search-suggestion__item multi-select__item text-primary js-search-select js-multi-select">
-                                    <span class="me-auto">Virginia Woolf</span>
-                                    <span class="text-secondary">39</span>
-                                </li>
-                                <li
-                                    class="search-suggestion__item multi-select__item text-primary js-search-select js-multi-select">
-                                    <span class="me-auto">J.K. Rowling</span>
-                                    <span class="text-secondary">95</span>
-                                </li>
-                                <li
-                                    class="search-suggestion__item multi-select__item text-primary js-search-select js-multi-select">
-                                    <span class="me-auto">William Faulkner</span>
-                                    <span class="text-secondary">1092</span>
-                                </li>
-                                <li
-                                    class="search-suggestion__item multi-select__item text-primary js-search-select js-multi-select">
-                                    <span class="me-auto">Ernest Hemingway</span>
-                                    <span class="text-secondary">48</span>
-                                </li>
+                            <ul class="list list-inline mb-0 author-list">
+                                @foreach ($authors as $author)
+                                <li class="list-item">
+                                    <span class="menu-link py-1">
+                                        <input type="checkbox" name="authors" value="{{$author->id}}" class="chk-author">
+                                        {{$author->name}}
+                                    </span>
+                                    <span class="text-right float-end">
+                                        {{$author->products->count()}}
+                                    </span>
+                                </li>    
+                                @endforeach
                             </ul>
                         </div>
                     </div>
@@ -304,18 +266,13 @@
                     <a href="#" class="menu-link menu-link_us-s text-uppercase fw-medium">The Shop</a>
                 </div>
 
-                <div
-                    class="shop-acs d-flex align-items-center justify-content-between justify-content-md-end flex-grow-1">
+                <div class="shop-acs d-flex align-items-center justify-content-between justify-content-md-end flex-grow-1">
                     <select class="shop-acs__select form-select w-auto border-0 py-0 order-1 order-md-0"
-                        aria-label="Sort Items" name="total-number">
-                        <option selected>Default Sorting</option>
-                        <option value="2">Best selling</option>
-                        <option value="3">Alphabetically, A-Z</option>
-                        <option value="3">Alphabetically, Z-A</option>
-                        <option value="3">Price, low to high</option>
-                        <option value="3">Price, high to low</option>
-                        <option value="3">Date, old to new</option>
-                        <option value="3">Date, new to old</option>
+                        aria-label="Sort Items" name="orderby" id="orderby">
+                        <option value="-1" {{$order == -1 ? 'selected':''}}>Name (A-Z)</option>
+                        <option value="1" {{$order == 1 ? 'selected':''}}>Name (Z-A)</option>
+                        <option value="2" {{$order == 2 ? 'selected':''}}>Price (Low-High)</option>
+                        <option value="3" {{$order == 3 ? 'selected':''}}>Price (High-Low)</option>
                     </select>
 
                     <div class="shop-asc__seprator mx-3 bg-light d-none d-md-block order-md-0"></div>
@@ -376,14 +333,30 @@
                                         <use href="#icon_next_sm" />
                                     </svg></span>
                             </div>
+                            @guest
+                            <a href = "{{route('login')}}" class = "pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium">Add to cart </a>
+                            @else                     
+                            @if (Cart::instance('cart')->content()->where('id', $product->id)->count()>0)
+                            <a href = "{{route('cart.index')}}" class = "pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium btn-warning mb-3">Go to cart </a>
+                            @else
+                            <form name = "addtocart-form" method = "post" action = "{{route('cart.add')}}">
+                                @csrf
+                                <input type="hidden" name="id" value="{{$product->id}}" />
+                                <input type="hidden" name="quantity" value="1" />
+                                <input type="hidden" name="name" value="{{$product->name}}" />
+                                <input type="hidden" name="price" value="{{$product->sale_price == ''? $product->regular_price:$product->sale_price}}" />
                             <button
-                                class="pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium js-add-cart js-open-aside"
+                                class="pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium"
                                 data-aside="cartDrawer" title="Add To Cart">Add To Cart</button>
+                            </form>
+                            @endif
+                            @endguest
                         </div>
 
                         <div class="pc__info position-relative">
                             <p class="pc__category">{{$product->category->name}}</p>
                             <h6 class="pc__title"><a href="{{route('shop.product.details',['product_slug'=>$product->slug])}}">{{$product->name}}</a></h6>
+                            <span class="text-secondary">by {{$product->author->name}}</span>
                             <div class="product-card__price d-flex">
                                 <span class="money price">
                                     @if ($product->sale_price)
@@ -431,9 +404,28 @@
 
             <div class="divider"></div>
             <div class="flex items-center justify-between flex-wrap gap10 wgp-pagination">
-                {{$products->links('pagination::bootstrap-5')}}
+                {{$products->withQueryString()->links('pagination::bootstrap-5')}}
             </div>
         </div>
     </section>
 </main>
+
+<form id="frmfilter" method="GET" action="{{route('shop.index')}}">
+    <input type="hidden" name="page" value="{{$products->currentPage()}}"/>
+    <input type="hidden" name="order" id="order" value="{{$order}}"/>
+</form>
+
 @endsection
+
+@push('scripts')
+<script>
+    $(function()
+    {
+        $("#orderby").on("change", function()
+        {
+            $("#order").val($("#orderby option:selected").val());
+            $("#frmfilter").submit();
+        });
+    });
+</script>
+@endpush

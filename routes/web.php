@@ -43,6 +43,13 @@ Route::middleware(['auth', AuthAdmin::class])->group(function()
     Route::put('/admin/publisher/update', [AdminController::class, 'publisher_update'])->name('admin.publisher.update');
     Route::delete('/admin/publisher/{id}/delete', [AdminController::class, 'publisher_delete'])->name('admin.publisher.delete');
 
+    Route::get('/admin/authors', [AdminController::class, 'authors'])->name('admin.authors');
+    Route::get('/admin/author/add', [AdminController::class, 'add_author'])->name('admin.author.add');
+    Route::post('/admin/author/store', [AdminController::class, 'author_store'])->name('admin.author.store');
+    Route::get('/admin/author/edit/{id}', [AdminController::class, 'author_edit'])->name('admin.author.edit');
+    Route::put('/admin/author/update', [AdminController::class, 'author_update'])->name('admin.author.update');
+    Route::delete('/admin/author/{id}/delete', [AdminController::class, 'author_delete'])->name('admin.author.delete');
+
     Route::get('/admin/categories', [AdminController::class, 'categories'])->name('admin.categories');
     Route::get('/admin/category/add', [AdminController::class, 'category_add'])->name('admin.category.add');
     Route::post('/admin/category/store', [AdminController::class, 'category_store'])->name('admin.category.store');
@@ -64,7 +71,11 @@ Route::middleware(['auth', AuthAdmin::class])->group(function()
 
 // Route::get('/{product_slug}', [ShopController::class, 'product_details'])->name('product.details');
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-
+Route::post('/cart/add', [CartController::class, 'add_to_cart'])->name('cart.add');
+Route::put('/cart/increase-quantity/{rowId}', [CartController::class, 'increase_cart_quantity'])->name('cart.quantity.increase');
+Route::put('/cart/decrease-quantity/{rowId}', [CartController::class, 'decrease_cart_quantity'])->name('cart.quantity.decrease');
+Route::delete('.cart/remove/{rowId}', [CartController::class, 'remove_item'])->name('cart.item.remove');
+Route::delete('.cart/clear', [CartController::class, 'clear_cart'])->name('cart.clear');
 
 require __DIR__.'/auth.php';
 

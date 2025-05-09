@@ -1,4 +1,4 @@
-@extends('layouts.app');
+@extends('layouts.app')
 @section('content')
 
 <main class="pt-90">
@@ -43,117 +43,57 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($items as $item)                            
                         <tr>
                             <td>
                                 <div class="shopping-cart__product-item">
-                                    <img loading="lazy" src="assets/images/cart-item-1.jpg" width="120" height="120" alt="" />
+                                    <img loading="lazy" src="{{asset('uploads/products/thumbnails')}}/{{$item->model->image}}" width="120" height="120" alt="{{$item->name}}" />
                                 </div>
                             </td>
                             <td>
                                 <div class="shopping-cart__product-item__detail">
-                                    <h4>Zessi Dresses</h4>
-                                    <ul class="shopping-cart__product-item__options">
+                                    <h4>{{$item->name}}</h4>
+                                    {{-- <ul class="shopping-cart__product-item__options">
                                         <li>Color: Yellow</li>
                                         <li>Size: L</li>
-                                    </ul>
+                                    </ul> --}}
                                 </div>
                             </td>
                             <td>
-                                <span class="shopping-cart__product-price">$99</span>
+                                <span class="shopping-cart__product-price">{{$item->price}}đ</span>
                             </td>
                             <td>
                                 <div class="qty-control position-relative">
-                                    <input type="number" name="quantity" value="3" min="1" class="qty-control__number text-center">
+                                    <input type="number" name="quantity" value="{{$item->qty}}" min="1" class="qty-control__number text-center">
+                                    <form method="post" action="{{route('cart.quantity.decrease', ['rowId'=>$item->rowId])}}">
+                                        @csrf
+                                        @method('PUT')
                                     <div class="qty-control__reduce">-</div>
+                                    </form>
+                                    <form method="post" action="{{route('cart.quantity.increase', ['rowId'=>$item->rowId])}}">
+                                        @csrf
+                                        @method('PUT')
                                     <div class="qty-control__increase">+</div>
+                                    </form>
                                 </div>
                             </td>
                             <td>
-                                <span class="shopping-cart__subtotal">$297</span>
+                                <span class="shopping-cart__subtotal">{{$item->subTotal()}}đ</span>
                             </td>
                             <td>
-                                <a href="#" class="remove-cart">
-                                    <svg width="10" height="10" viewBox="0 0 10 10" fill="#767676" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M0.259435 8.85506L9.11449 0L10 0.885506L1.14494 9.74056L0.259435 8.85506Z" />
-                                        <path d="M0.885506 0.0889838L9.74057 8.94404L8.85506 9.82955L0 0.97449L0.885506 0.0889838Z" />
-                                    </svg>
-                                </a>
+                                <form method = "post" action = "{{route('cart.item.remove', ['rowId'=>$item->rowId])}}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <a href="javascript:void(0)" class="remove-cart">
+                                        <svg width="10" height="10" viewBox="0 0 10 10" fill="#767676" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M0.259435 8.85506L9.11449 0L10 0.885506L1.14494 9.74056L0.259435 8.85506Z" />
+                                            <path d="M0.885506 0.0889838L9.74057 8.94404L8.85506 9.82955L0 0.97449L0.885506 0.0889838Z" />
+                                        </svg>
+                                    </a>
+                                </form>
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                <div class="shopping-cart__product-item">
-                                    <img loading="lazy" src="assets/images/cart-item-2.jpg" width="120" height="120" alt="" />
-                                </div>
-                            </td>
-                            <td>
-                                <div class="shopping-cart__product-item__detail">
-                                    <h4>Kirby T-Shirt</h4>
-                                    <ul class="shopping-cart__product-item__options">
-                                        <li>Color: Yellow</li>
-                                        <li>Size: L</li>
-                                    </ul>
-                                </div>
-                            </td>
-                            <td>
-                                <span class="shopping-cart__product-price">$99</span>
-                            </td>
-                            <td>
-                                <div class="qty-control position-relative">
-                                    <input type="number" name="quantity" value="3" min="1" class="qty-control__number text-center">
-                                    <div class="qty-control__reduce">-</div>
-                                    <div class="qty-control__increase">+</div>
-                                </div>
-                            </td>
-                            <td>
-                                <span class="shopping-cart__subtotal">$297</span>
-                            </td>
-                            <td>
-                                <a href="#" class="remove-cart">
-                                    <svg width="10" height="10" viewBox="0 0 10 10" fill="#767676" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M0.259435 8.85506L9.11449 0L10 0.885506L1.14494 9.74056L0.259435 8.85506Z" />
-                                        <path d="M0.885506 0.0889838L9.74057 8.94404L8.85506 9.82955L0 0.97449L0.885506 0.0889838Z" />
-                                    </svg>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="shopping-cart__product-item">
-                                    <img loading="lazy" src="assets/images/cart-item-3.jpg" width="120" height="120" alt="" />
-                                </div>
-                            </td>
-                            <td>
-                                <div class="shopping-cart__product-item__detail">
-                                    <h4>Cobleknit Shawl</h4>
-                                    <ul class="shopping-cart__product-item__options">
-                                        <li>Color: Yellow</li>
-                                        <li>Size: L</li>
-                                    </ul>
-                                </div>
-                            </td>
-                            <td>
-                                <span class="shopping-cart__product-price">$99</span>
-                            </td>
-                            <td>
-                                <div class="qty-control position-relative">
-                                    <input type="number" name="quantity" value="3" min="1" class="qty-control__number text-center">
-                                    <div class="qty-control__reduce">-</div>
-                                    <div class="qty-control__increase">+</div>
-                                </div>
-                            </td>
-                            <td>
-                                <span class="shopping-cart__subtotal">$297</span>
-                            </td>
-                            <td>
-                                <a href="#" class="remove-cart">
-                                    <svg width="10" height="10" viewBox="0 0 10 10" fill="#767676" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M0.259435 8.85506L9.11449 0L10 0.885506L1.14494 9.74056L0.259435 8.85506Z" />
-                                        <path d="M0.885506 0.0889838L9.74057 8.94404L8.85506 9.82955L0 0.97449L0.885506 0.0889838Z" />
-                                    </svg>
-                                </a>
-                            </td>
-                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
                 <div class="cart-table-footer">
@@ -162,7 +102,11 @@
                         <input class="btn-link fw-medium position-absolute top-0 end-0 h-100 px-4" type="submit"
                             value="APPLY COUPON">
                     </form>
-                    <button class="btn btn-light">UPDATE CART</button>
+                    <form method = "post" action = "{{route('cart.clear')}}">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-light">CLEAR CART</button>
+                    </form>
                 </div>
             </div>
             <div class="shopping-cart__totals-wrapper">
@@ -173,9 +117,9 @@
                             <tbody>
                                 <tr>
                                     <th>Subtotal</th>
-                                    <td>$1300</td>
+                                    <td>{{Cart::instance('cart')->subtotal()}}đ</td>
                                 </tr>
-                                <tr>
+                                {{-- <tr>
                                     <th>Shipping</th>
                                     <td>
                                         <div class="form-check">
@@ -197,14 +141,14 @@
                                             <a href="#" class="menu-link menu-link_us-s">CHANGE ADDRESS</a>
                                         </div>
                                     </td>
-                                </tr>
+                                </tr> --}}
                                 <tr>
                                     <th>VAT</th>
-                                    <td>$19</td>
+                                    <td>{{Cart::instance('cart')->tax()}}đ</td>
                                 </tr>
                                 <tr>
                                     <th>Total</th>
-                                    <td>$1319</td>
+                                    <td>{{Cart::instance('cart')->total()}}đ</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -220,12 +164,33 @@
                 <div class="row">
                     <div class="col-md-12 text-center pt-5 bp-5">
                         <p>Chưa có sản phẩm nào được thêm vào giỏ hàng!</p>
-                        <a href="shop.html" class = "btn btn-info">Đến mua hàng!</a>
+                        <a href="{{route('shop.index')}}" class = "btn btn-info">Đến mua hàng!</a>
                     </div>
                 </div>
             @endif
         </div>
     </section>
 </main>
-
 @endsection
+
+@push('scripts')
+<script>
+    $(function()
+    {
+        $(".qty-control__reduce").on("click", function()
+        {
+            $(this).closest('form').submit();
+        });
+        
+        $(".qty-control__increase").on("click", function()
+        {
+            $(this).closest('form').submit();
+        });
+        
+        $(".remove-cart").on("click", function()
+        {
+            $(this).closest('form').submit();
+        });
+    })
+</script>
+@endpush

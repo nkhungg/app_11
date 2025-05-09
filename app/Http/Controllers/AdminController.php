@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Author;
 use App\Models\Category;
-use App\Models\Publisher;
 use App\Models\Product;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -106,7 +106,8 @@ class AdminController extends Controller {
     public function product_add()
     {
         $categories = Category::select('id', 'name')->orderBy('name')->get();
-        return view('admin.product-add', compact('categories'));
+        $authors = Author::select('id', 'name')->orderBy('name')->get();
+        return view('admin.product-add', compact('categories', 'authors'));
     }
 
     public function product_store(Request $request)
@@ -123,6 +124,7 @@ class AdminController extends Controller {
             'quantity' => 'required',
             'image' => 'required|mimes:png,jpg,jpeg|max:2048',
             'category_id' => 'required',
+            'author_id' => 'required'
         ]);
         $product = new Product();
         $product->name = $request->name;
@@ -137,6 +139,7 @@ class AdminController extends Controller {
         $product->quantity = $request->quantity;
         $product->image = $request->image;
         $product->category_id = $request->category_id;
+        $product->author_id = $request->author_id;
 
         $current_timestamp = Carbon::now()->timestamp;
 
@@ -191,7 +194,8 @@ class AdminController extends Controller {
     {
         $product = Product::find($id);
         $categories = Category::select('id', 'name')->orderBy('name')->get();
-        return view('admin.product-edit', compact('product', 'categories'));
+        $authors = Author::select('id', 'name')->orderBy('name')->get();
+        return view('admin.product-edit', compact('product', 'categories', 'authors'));
     }
 
     public function product_update(Request $request)
@@ -208,6 +212,7 @@ class AdminController extends Controller {
             'quantity' => 'required',
             'image' => 'mimes:png,jpg,jpeg|max:2048',
             'category_id' => 'required',
+            'author_id' => 'required'
         ]);
         $product = Product::find($request->id);
         $product->name = $request->name;
@@ -220,6 +225,7 @@ class AdminController extends Controller {
         $product->featured = $request->featured;
         $product->quantity = $request->quantity;
         $product->category_id = $request->category_id;
+        $product->author_id = $request->author_id;
         $current_timestamp = Carbon::now()->timestamp;
 
         if($request->hasFile('image')){
@@ -291,79 +297,81 @@ class AdminController extends Controller {
         return redirect()->route('admin.products')->with('status', 'Product has been deleted successfully.');
     }
 
-    public function publishers()
+    public function authors()
     {
-        $publishers = Publisher::orderBy('id', 'DESC')->paginate(10);
-        return view('admin.publishers', compact('publishers'));
+        $authors = Author::orderBy('id', 'DESC')->paginate(10);
+        return view('admin.authors', compact('authors'));
     }
 
-    public function add_publisher()
+    public function add_author()
     {
-        return view('admin.publisher-add');
+        return view('admin.author-add');
     }
 
-    public function publisher_store(Request $request)
+    public function author_store(Request $request)
     {
         $request->validate([
             'name'=>'required',
-            'slug'=>'required|unique:publishers,slug',
+            'slug'=>'required|unique:authors,slug',
+            'nationality',
+            'biography',
             'image'=>'mimes:png,jpg,jpeg|max:2048'
         ]);
-        $publisher = new Publisher();
-        $publisher->name=$request->name;
-        $publisher->slug=Str::slug($request->name);
+        $author = new Author();
+        $author->name=$request->name;
+        $author->slug=Str::slug($request->name);
+        $author->nationality = $request->nationality;
+        $author->biography = $request->biography;
         $image = $request->file('image');
         $file_extension = $request->file('image')->extension();
         $file_name = Carbon::now()->timestamp.'.'.$file_extension;
-        $this->GeneratePublisherThumbnailsImage($image, $file_name);
-        $publisher->image = $file_name;
-        $publisher->save();
-        return redirect()->route('admin.publishers')->with('status', 'Publisher has been add successfully!');
+        $this->GenerateAuthorThumbnailsImage($image, $file_name);
+        $author->image = $file_name;
+        $author->save();
+        return redirect()->route('admin.authors')->with('status', 'Author has been add successfully!');
     }
 
-    // not good
-
-    public function publisher_edit($id)
+    public function author_edit($id)
     {
-        $publisher = Publisher::find($id);
-        return view('admin.publisher-edit', compact('publisher'));
+        $author = Author::find($id);
+        return view('admin.author-edit', compact('author'));
     }
 
-    public function publisher_update(Request $request)
+    public function author_update(Request $request)
     {
         $request->validate([
             'name'=>'required',
-            'slug'=>'required|unique:publishers,slug,'.$request->id,
+            'slug'=>'required|unique:authors,slug,'.$request->id,
+            'nationality',
+            'biography',
             'image'=>'mimes:png,jpg,jpeg|max:2048'
         ]);
-        $publisher=Publisher::find($request->id);
-        $publisher->name=$request->name;
-        $publisher->slug=Str::slug($request->name);
+        $author=Author::find($request->id);
+        $author->name=$request->name;
+        $author->slug=Str::slug($request->name);
 
         if ($request->hasFile('image'))
         {
-            if (File::exists(public_path('uploads/publishers').'/'.$publisher->image))
+            if (File::exists(public_path('uploads/authors').'/'.$author->image))
             {
-                File::delete(public_path('uploads/publishers').'/'.$publisher->image);
+                File::delete(public_path('uploads/authors').'/'.$author->image);
             }
             $image = $request->file('image');
             $file_extension = $request->file('image')->extension();
             $file_name = Carbon::now()->timestamp.'.'.$file_extension;
-            $this->GeneratePublisherThumbnailsImage($image, $file_name);
-            $publisher->image = $file_name;
+            $this->GenerateAuthorThumbnailsImage($image, $file_name);
+            $author->image = $file_name;
         }
-        // $publisher->save();
-        // return redirect()->route('admin.publishers')->with('status', 'Publisher has been updated successfully!');
-        if ($publisher->save()) {
-            return redirect()->route('admin.publishers')->with('status', 'Publisher has been updated successfully!');
+        if ($author->save()) {
+            return redirect()->route('admin.authors')->with('status', 'Author has been updated successfully!');
         } else {
-            return redirect()->route('admin.publishers')->with('error', 'Failed to update publisher!');
+            return redirect()->route('admin.authors')->with('error', 'Failed to update author!');
         }
     }
 
-    public function GeneratePublisherThumbnailsImage($image, $imageName)
+    public function GenerateAuthorThumbnailsImage($image, $imageName)
     {
-        $destinationPath = public_path('uploads/publishers');
+        $destinationPath = public_path('uploads/authors');
         $img = Image::read($image->path());
         $img->cover(124, 124, "top");
         $img->resize(124, 124, function($constraint)
@@ -372,15 +380,15 @@ class AdminController extends Controller {
         })->save($destinationPath.'/'.$imageName);
     }
 
-    public function publisher_delete($id)
+    public function author_delete($id)
     {
-        $publisher=Publisher::find($id);
-        if (File::exists(public_path('uploads/publishers').'/'.$publisher->image))
+        $author=Author::find($id);
+        if (File::exists(public_path('uploads/authors').'/'.$author->image))
         {
-            File::delete(public_path('uploads/publishers').'/'.$publisher->image);
+            File::delete(public_path('uploads/authors').'/'.$author->image);
         }
-        $publisher->delete();
-        return redirect()->route('admin.publishers')->with('status', "Publisher has been deleted successfully!");
+        $author->delete();
+        return redirect()->route('admin.authors')->with('status', "Author has been deleted successfully!");
     }
 
     public function settings()

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "21f63a1b0fb976dc172de79af5115a77",
+    "content-hash": "104dd5e18750b023960c7b3231135eb0",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -617,6 +617,42 @@
                 "source": "https://github.com/dflydev/dflydev-dot-access-data/tree/v3.0.3"
             },
             "time": "2024-07-08T12:26:09+00:00"
+        },
+        {
+            "name": "dinushchathurya/nationality-list",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dinushchathurya/nationality-list.git",
+                "reference": "582eea9ca5ae25435105652c40b4202da0ab6faa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dinushchathurya/nationality-list/zipball/582eea9ca5ae25435105652c40b4202da0ab6faa",
+                "reference": "582eea9ca5ae25435105652c40b4202da0ab6faa",
+                "shasum": ""
+            },
+            "type": "package",
+            "autoload": {
+                "psr-4": {
+                    "Dinushchathurya\\NationalityList\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "dinushchathurya",
+                    "email": "dinushchathurya21@gmail.com"
+                }
+            ],
+            "support": {
+                "issues": "https://github.com/dinushchathurya/nationality-list/issues",
+                "source": "https://github.com/dinushchathurya/nationality-list/tree/1.0.0"
+            },
+            "time": "2022-03-10T15:54:07+00:00"
         },
         {
             "name": "doctrine/dbal",

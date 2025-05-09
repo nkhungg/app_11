@@ -89,17 +89,17 @@
                                 <li class="menu-item has-children">
                                     <a href="javascript:void(0);" class="menu-item-button">
                                         <div class="icon"><i class="icon-layers"></i></div>
-                                        <div class="text">Brand</div>
+                                        <div class="text">Authors</div>
                                     </a>
                                     <ul class="sub-menu">
                                         <li class="sub-menu-item">
-                                            <a href="add-brand.html" class="">
-                                                <div class="text">New Brand</div>
+                                            <a href="{{route('admin.author.add')}}" class="">
+                                                <div class="text">New Author</div>
                                             </a>
                                         </li>
                                         <li class="sub-menu-item">
-                                            <a href="brands.html" class="">
-                                                <div class="text">Brands</div>
+                                            <a href="{{route('admin.authors')}}" class="">
+                                                <div class="text">Authors</div>
                                             </a>
                                         </li>
                                     </ul>
