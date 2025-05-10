@@ -468,12 +468,6 @@
                     </div>
                     <div class="main-content">
                         @yield('content')
-
-
-
-                        <div class="bottom-page">
-                            <div class="body-text">Copyright © 2024 SurfsideMedia</div>
-                        </div>
                     </div>
 
                 </div>

@@ -85,12 +85,17 @@ Route::put('/cart/decrease-quantity/{rowId}', [CartController::class, 'decrease_
 Route::delete('/cart/remove/{rowId}', [CartController::class, 'remove_item'])->name('cart.item.remove');
 Route::delete('/cart/clear', [CartController::class, 'clear_cart'])->name('cart.clear');
 Route::post('/cart/apply-coupon', [CartController::class, 'apply_coupon'])->name('cart.coupon.apply');
+Route::delete('/cart/remove-coupon', [CartController::class, 'remove_coupon'])->name('cart.coupon.remove');
 
 Route::post('/wishlist/add', [WishlistController::class, 'add_to_wishlist'])->name('wishlist.add');
 Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
 Route::delete('/wishlist/item/remove/{rowId}', [WishlistController::class, 'remove_item'])->name('wishlist.item.remove');
 Route::delete('/wishlist/clear', [WishlistController::class, 'clear_wishlist'])->name('wishlist.clear');
 Route::post('/wishlist/add-to-cart/{rowId}', [WishlistController::class, 'add_to_cart'])->name('wishlist.addtocart');
+
+Route::get('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+Route::post('/place-order', [CartController::class, 'place_order'])->name('cart.place.order');
+Route::get('/order-confirm',[CartController::class,'order_confirm'])->name('cart.order.confirm');
 
 require __DIR__.'/auth.php';
 
