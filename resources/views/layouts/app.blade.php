@@ -4,18 +4,20 @@
 <head>
     <title>Bookstore</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-  <meta name="author" content="surfside media" />
-  <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}" type="image/x-icon">
-  <link rel="preconnect" href="https://fonts.gstatic.com/">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
-    rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Allura&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{asset('assets/css/plugins/swiper.min.css')}}" type="text/css" />
-  <link rel="stylesheet" href="{{asset('assets/css/style.css')}}" type="text/css" />
-  <link rel="stylesheet" href="{{asset('assets/css/custom.css')}}" type="text/css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="author" content="surfside media" />
+    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.gstatic.com/">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Allura&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/css/plugins/swiper.min.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 
 <body class="gradient-bg">
@@ -265,7 +267,8 @@
 
             <div class="logo">
                 <a href="{{ route('home.index') }}">
-                    <img src="{{ asset('assets/images/bookstore.jpg') }}" alt="Uomo" class="logo__image d-block" />
+                    <img src="{{ asset('assets/images/bookstore.jpg') }}" alt="Uomo"
+                        class="logo__image d-block" />
                 </a>
             </div>
 
@@ -473,15 +476,16 @@
                             </a>
                         </div>
                     @else
-                    <div class="header-tools__item hover-container">
-                        <a href="{{Auth::user()->usertype==='ADM'?route('admin.index'):route('user.index')}}" class="header-tools__item">
-                        <span class="pr-6px">{{Auth::user()->name}}</span>
-                        <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <use href="#icon_user" />
-                            </svg>
-                        </a>
-                    </div>
+                        <div class="header-tools__item hover-container">
+                            <a href="{{ Auth::user()->usertype === 'ADM' ? route('admin.index') : route('user.index') }}"
+                                class="header-tools__item">
+                                <span class="pr-6px">{{ Auth::user()->name }}</span>
+                                <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <use href="#icon_user" />
+                                </svg>
+                            </a>
+                        </div>
                     @endguest
 
                     <a href="{{ route('wishlist.index') }}" class="header-tools__item header-tools__cart">
@@ -490,7 +494,8 @@
                             <use href="#icon_heart" />
                         </svg>
                         @if (Cart::instance('wishlist')->content()->count() > 0)
-                        <span class="cart-amount d-block position-absolute js-cart-items-count">{{Cart::instance('wishlist')->content()->count()}}</span>
+                            <span
+                                class="cart-amount d-block position-absolute js-cart-items-count">{{ Cart::instance('wishlist')->content()->count() }}</span>
                         @endif
                     </a>
 
@@ -500,7 +505,8 @@
                             <use href="#icon_cart" />
                         </svg>
                         @if (Cart::instance('cart')->content()->count() > 0)
-                        <span class="cart-amount d-block position-absolute js-cart-items-count">{{Cart::instance('cart')->content()->count()}}</span>
+                            <span
+                                class="cart-amount d-block position-absolute js-cart-items-count">{{ Cart::instance('cart')->content()->count() }}</span>
                         @endif
                     </a>
                 </div>
@@ -579,7 +585,8 @@
                 <div class="footer-column footer-menu mb-4 mb-lg-0">
                     <h6 class="sub-menu__title text-uppercase">Company</h6>
                     <ul class="sub-menu__list list-unstyled">
-                        <li class="sub-menu__item"><a href="about-2.html" class="menu-link menu-link_us-s">About
+                        <li class="sub-menu__item"><a href="{{ route('home.aboutus') }}"
+                                class="menu-link menu-link_us-s">About
                                 Us</a></li>
                         <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Careers</a>
                         </li>
@@ -587,12 +594,13 @@
                         </li>
                         <li class="sub-menu__item"><a href="blog_list1.html"
                                 class="menu-link menu-link_us-s">Blog</a></li>
-                        <li class="sub-menu__item"><a href="contact-2.html" class="menu-link menu-link_us-s">Contact
+                        <li class="sub-menu__item"><a href="{{ route('home.contact') }}"
+                                class="menu-link menu-link_us-s">Contact
                                 Us</a></li>
                     </ul>
                 </div>
 
-                <div class="footer-column footer-menu mb-4 mb-lg-0">
+                {{-- <div class="footer-column footer-menu mb-4 mb-lg-0">
                     <h6 class="sub-menu__title text-uppercase">Nhà xuất bản</h6>
                     <ul class="sub-menu__list list-unstyled">
                         <li class="sub-menu__item"><a href="shop2.html" class="menu-link menu-link_us-s">Nhà Xuât Bản
@@ -606,14 +614,14 @@
                         <li class="sub-menu__item"><a href="shop1.html" class="menu-link menu-link_us-s">Shop All</a>
                         </li>
                     </ul>
-                </div>
+                </div> --}}
 
                 <div class="footer-column footer-menu mb-4 mb-lg-0">
                     <h6 class="sub-menu__title text-uppercase">Help</h6>
                     <ul class="sub-menu__list list-unstyled">
                         <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Customer
                                 Service</a></li>
-                        <li class="sub-menu__item"><a href="account_dashboard.html"
+                        <li class="sub-menu__item"><a href="{{ route('user.account.detail') }}"
                                 class="menu-link menu-link_us-s">My Account</a>
                         </li>
                         <li class="sub-menu__item"><a href="store_location.html"
@@ -627,12 +635,16 @@
                 </div>
 
                 <div class="footer-column footer-menu mb-4 mb-lg-0">
-                    <h6 class="sub-menu__title text-uppercase">Thể loại</h6>
+                    <h6 class="sub-menu__title text-uppercase">Categories</h6>
                     <ul class="sub-menu__list list-unstyled">
-                        <li class="sub-menu__item">
-                            <a href="#" class="menu-link menu-link_us-s">Fiction</a>
-                        </li>
-                        <li class="sub-menu__item">
+                        @foreach ($categories as $category)
+                            <li class="sub-menu__item">
+                                <a href="{{ url('/shop?categories=' . $category->id) }}"
+                                    class="menu-link menu-link_us-s">{{ $category->name }}</a>
+                            </li>
+                        @endforeach
+
+                        {{-- <li class="sub-menu__item">
                             <a href="#" class="menu-link menu-link_us-s">Non-Fiction</a>
                         </li>
                         <li class="sub-menu__item">
@@ -643,7 +655,7 @@
                         </li>
                         <li class="sub-menu__item">
                             <a href="#" class="menu-link menu-link_us-s">Shop All</a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </div>
             </div>
@@ -695,7 +707,8 @@
                             <use href="#icon_heart" />
                         </svg>
                         @if (Cart::instance('wishlist')->content()->count() > 0)
-                        <span class="cart-amount d-block position-absolute js-cart-items-count">{{Cart::instance('wishlist')->content()->count()}}</span>
+                            <span
+                                class="cart-amount d-block position-absolute js-cart-items-count">{{ Cart::instance('wishlist')->content()->count() }}</span>
                         @endif
                         <span class="wishlist-amount d-block position-absolute js-wishlist-count">3</span>
                     </div>
