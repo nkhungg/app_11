@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Author;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -13,6 +14,10 @@ class ShopController extends Controller
         $order = $request->query('order') ? $request->query('order') : -1;
         $o_column = "";
         $o_order = "";
+        $f_authors = $request->query('authors');
+        $f_categories = $request->query('categories');
+        $min_price = $request->query('min')?$request->query('min'):1;
+        $max_price = $request->query('max')?$request->query('max'):1000000;
         switch($order)
         {
             case 1:
@@ -32,9 +37,21 @@ class ShopController extends Controller
                 $o_order='ASC';
                 break;
         }
+        $categories = Category::orderBy('name', 'ASC')->get();
         $authors = Author::orderBy('name', 'ASC')->get();
-        $products = Product::orderBy($o_column, $o_order)->paginate(12);
-        return view('shop', compact('products', 'order', 'authors'));
+        $products = Product::when($f_authors, function ($query) use ($f_authors) {
+            $author_ids = explode(',', $f_authors);
+            return $query->whereIn('author_id', $author_ids);
+        })
+        ->when($f_categories, function ($query) use ($f_categories) {
+            $category_ids = explode(',', $f_categories);
+            return $query->whereIn('author_id', $category_ids);
+        })
+        ->where(function ($query) use ($min_price, $max_price) {
+            $query->whereBetween('regular_price', [$min_price, $max_price])
+            ->orWhereBetween('sale_price', [$min_price, $max_price]);
+        })->orderBy($o_column, $o_order)->paginate(12);
+        return view('shop', compact('products', 'order', 'authors', 'f_authors', 'categories', 'f_categories', 'min_price', 'max_price'));
     }
 
     public function product_details($product_slug)
