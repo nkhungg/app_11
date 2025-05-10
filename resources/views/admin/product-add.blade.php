@@ -140,8 +140,8 @@
                         <div class="body-title mb-10">Upload Gallery Images</div>
                         <div class="upload-image mb-16">
                             <!-- <div class="item">
-                                                                                                                                                                <img src="images/upload/upload-1.png" alt="">
-                                                                                                                                                            </div>                                                 -->
+                                                                                                                                                                        <img src="images/upload/upload-1.png" alt="">
+                                                                                                                                                                    </div>                                                 -->
                             <div id="galUpload" class="item up-load">
                                 <label class="uploadfile" for="gFile">
                                     <span class="icon">
@@ -170,7 +170,7 @@
                         <fieldset class="name">
                             <div class="body-title mb-10">Sale Price <span class="tf-color-1">*</span></div>
                             <input class="mb-10" type="text" placeholder="Enter sale price" name="sale_price"
-                                tabindex="0" value="{{ old('sale_price') }}" aria-required="true" required="">
+                                tabindex="0" value="{{ old('sale_price') }}">
                         </fieldset>
                         @error('sale_price')
                             <span class="alert alert-danger text-center">{{ $message }}</span>

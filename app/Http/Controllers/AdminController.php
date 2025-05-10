@@ -206,7 +206,7 @@ class AdminController extends Controller {
             'slug' => 'required|unique:products,slug,'.$request->id,
             'short_description' => 'required',
             'regular_price' => 'required',
-            'sale_price' => 'required',
+            'sale_price' => 'nullable',
             'SKU' => 'required',
             'stock_status' => 'required',
             'featured' => 'required',
