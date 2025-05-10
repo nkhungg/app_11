@@ -45,7 +45,7 @@ class ShopController extends Controller
         })
         ->when($f_categories, function ($query) use ($f_categories) {
             $category_ids = explode(',', $f_categories);
-            return $query->whereIn('author_id', $category_ids);
+            return $query->whereIn('category_id', $category_ids);
         })
         ->where(function ($query) use ($min_price, $max_price) {
             $query->whereBetween('regular_price', [$min_price, $max_price])
