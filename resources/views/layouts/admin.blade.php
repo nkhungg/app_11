@@ -19,7 +19,7 @@
     <link rel="stylesheet" type="text/css" href={{ asset('css/style.css') }}>
     <link rel="stylesheet" href={{ asset('font/fonts.css') }}>
     <link rel="stylesheet" href={{ asset('icon/style.css') }}>
-    <link rel="shortcut icon" href={{ asset('images/favicon.ico') }}>
+    <link rel="shortcut icon" href={{ asset('assets/images/favicon.ico') }}>
     <link rel="apple-touch-icon-precomposed" href={{ asset('images/favicon.ico') }}>
     <link rel="stylesheet" type="text/css" href={{ asset('css/sweetalert.min.css') }}>
     <link rel="stylesheet" type="text/css" href={{ asset('css/custom.css') }}>
@@ -411,7 +411,7 @@
                                                         alt="">
                                                 </span>
                                                 <span class="flex flex-column">
-                                                    <span class="body-title mb-2">Kristin Watson</span>
+                                                    <span class="body-title mb-2">Khanh Hung</span>
                                                     <span class="text-tiny">Admin</span>
                                                 </span>
                                             </span>

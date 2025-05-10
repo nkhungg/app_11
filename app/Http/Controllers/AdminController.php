@@ -21,7 +21,7 @@ class AdminController extends Controller {
     }
 
     public function categories() {
-        $categories = Category::orderBy( 'id', 'DESC' )->paginate( 10 );
+        $categories = Category::orderBy( 'id', 'ASC' )->paginate( 10 );
         return view( 'admin.categories', compact( 'categories' ) );
     }
 
@@ -100,7 +100,7 @@ class AdminController extends Controller {
 
     public function products()
     {
-        $products = Product::orderBy('created_at', 'DESC')->paginate(10);
+        $products = Product::orderBy('id', 'ASC')->paginate(10);
         return view('admin.products', compact('products'));
     }
 
@@ -118,7 +118,7 @@ class AdminController extends Controller {
             'slug' => 'required|unique:products,slug',
             'short_description' => 'required',
             'regular_price' => 'required',
-            'sale_price' => 'required',
+            'sale_price',
             'SKU' => 'required',
             'stock_status' => 'required',
             'featured' => 'required',
@@ -300,7 +300,7 @@ class AdminController extends Controller {
 
     public function authors()
     {
-        $authors = Author::orderBy('id', 'DESC')->paginate(10);
+        $authors = Author::orderBy('id', 'ASC')->paginate(10);
         return view('admin.authors', compact('authors'));
     }
 
