@@ -28,35 +28,18 @@
                     </h5>
                     <div id="accordion-filter-1" class="accordion-collapse collapse show border-0"
                         aria-labelledby="accordion-heading-1" data-bs-parent="#categories-list">
-                        <div class="accordion-body px-0 pb-0 pt-3">
+                        <div class="accordion-body px-0 pb-0 pt-3 category-list">
                             <ul class="list list-inline mb-0">
+                                @foreach ($categories as $category)
                                 <li class="list-item">
-                                    <a href="#" class="menu-link py-1">Fiction</a>
+                                    <span class="menu-link py-1">
+                                        <input type="checkbox" class="chk-category" name="categories" value={{$category->id}}
+                                        @if (in_array($category->id, explode(',', $f_categories))) checked="checked" @endif/>
+                                        {{$category->name}}
+                                    </span>
+                                    <span class="text-right float-end">{{$category->products->count()}}</span>
                                 </li>
-                                <li class="list-item">
-                                    <a href="#" class="menu-link py-1">Non-Fiction</a>
-                                </li>
-                                <li class="list-item">
-                                    <a href="#" class="menu-link py-1">Self-Help & Personal Development</a>
-                                </li>
-                                <li class="list-item">
-                                    <a href="#" class="menu-link py-1">Children’s Books</a>
-                                </li>
-                                <li class="list-item">
-                                    <a href="#" class="menu-link py-1">Young Adult (YA)</a>
-                                </li>
-                                <li class="list-item">
-                                    <a href="#" class="menu-link py-1">Business & Economics</a>
-                                </li>
-                                <li class="list-item">
-                                    <a href="#" class="menu-link py-1">Education & Textbooks</a>
-                                </li>
-                                <li class="list-item">
-                                    <a href="#" class="menu-link py-1">Comics & Graphic Novels</a>
-                                </li>
-                                <li class="list-item">
-                                    <a href="#" class="menu-link py-1">Religion & Spirituality</a>
-                                </li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
@@ -64,7 +47,7 @@
             </div>
 
 
-            <div class="accordion" id="brand-filters">
+            {{-- <div class="accordion" id="brand-filters">
                 <div class="accordion-item mb-4 pb-3">
                     <h5 class="accordion-header" id="accordion-heading-brand">
                         <button class="accordion-button p-0 border-0 fs-5 text-uppercase" type="button"
@@ -96,14 +79,14 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
-            <div class="accordion" id="brand-filters">
+            <div class="accordion" id="author-filters">
                 <div class="accordion-item mb-4 pb-3">
-                    <h5 class="accordion-header" id="accordion-heading-brand">
+                    <h5 class="accordion-header" id="accordion-heading-author">
                         <button class="accordion-button p-0 border-0 fs-5 text-uppercase" type="button"
-                            data-bs-toggle="collapse" data-bs-target="#accordion-filter-brand" aria-expanded="true"
-                            aria-controls="accordion-filter-brand">
+                            data-bs-toggle="collapse" data-bs-target="#accordion-filter-author" aria-expanded="true"
+                            aria-controls="accordion-filter-author">
                             Authors
                             <svg class="accordion-button__icon type2" viewBox="0 0 10 6"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -114,14 +97,15 @@
                             </svg>
                         </button>
                     </h5>
-                    <div id="accordion-filter-brand" class="accordion-collapse collapse show border-0"
-                        aria-labelledby="accordion-heading-brand" data-bs-parent="#brand-filters">
+                    <div id="accordion-filter-author" class="accordion-collapse collapse show border-0"
+                        aria-labelledby="accordion-heading-author" data-bs-parent="#author-filters">
                         <div class="search-field multi-select accordion-body px-0 pb-0">
                             <ul class="list list-inline mb-0 author-list">
                                 @foreach ($authors as $author)
                                 <li class="list-item">
                                     <span class="menu-link py-1">
-                                        <input type="checkbox" name="authors" value="{{$author->id}}" class="chk-author">
+                                        <input type="checkbox" name="authors" value="{{$author->id}}" class="chk-author"
+                                        @if (in_array($author->id, explode(',', $f_authors))) checked="checked" @endif>
                                         {{$author->name}}
                                     </span>
                                     <span class="text-right float-end">
@@ -155,12 +139,12 @@
                     <div id="accordion-filter-price" class="accordion-collapse collapse show border-0"
                         aria-labelledby="accordion-heading-price" data-bs-parent="#price-filters">
                         <input class="price-range-slider" type="text" name="price_range" value=""
-                            data-slider-min="50000" data-slider-max="1000000" data-slider-step="1000"
-                            data-slider-value="[200000,500000]" data-currency="đ" />
+                            data-slider-min="0" data-slider-max="1000000" data-slider-step="1000"
+                            data-slider-value="[{{$min_price}},{{$max_price}}]" data-currency="đ" />
                         <div class="price-range__info d-flex align-items-center mt-2">
                             <div class="me-auto">
                                 <span class="text-secondary">Min Price: </span>
-                                <span class="price-range__min">50.000đ</span>
+                                <span class="price-range__min">0đ</span>
                             </div>
                             <div>
                                 <span class="text-secondary">Max Price: </span>
@@ -332,10 +316,7 @@
                                         xmlns="http://www.w3.org/2000/svg">
                                         <use href="#icon_next_sm" />
                                     </svg></span>
-                            </div>
-                            @guest
-                            <a href = "{{route('login')}}" class = "pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium">Add to cart </a>
-                            @else                     
+                            </div>             
                             @if (Cart::instance('cart')->content()->where('id', $product->id)->count()>0)
                             <a href = "{{route('cart.index')}}" class = "pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium btn-warning mb-3">Go to cart </a>
                             @else
@@ -350,7 +331,6 @@
                                 data-aside="cartDrawer" title="Add To Cart">Add To Cart</button>
                             </form>
                             @endif
-                            @endguest
                         </div>
 
                         <div class="pc__info position-relative">
@@ -387,14 +367,37 @@
                                 <span class="reviews-note text-lowercase text-secondary ms-1">8k+ reviews</span>
                             </div>
 
-                            <button
-                                class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist"
-                                title="Add To Wishlist">
-                                <svg width="16" height="16" viewBox="0 0 20 20" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <use href="#icon_heart" />
-                                </svg>
-                            </button>
+                            @if (Cart::instance('wishlist')->content()->where('id', $product->id)->count()>0)
+                            <form method="post" action="{{route('wishlist.item.remove', ['rowId'=>Cart::instance('wishlist')->content()->where('id', $product->id)->first()->rowId])}}">
+                                @csrf
+                                @method('delete')
+                                <button
+                                    class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist"
+                                    title="Remove from Wishlist" style="color: red">
+                                    <svg width="16" height="16" viewBox="0 0 20 20" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <use href="#icon_heart" />
+                                    </svg>
+                                </button>
+                            </form>
+                            @else
+                            <form method="post" action="{{route('wishlist.add')}}">
+                                @csrf
+                                <input type="hidden" name="id" value="{{$product->id}}"/>
+                                <input type="hidden" name="name" value="{{$product->name}}"/>
+                                <input type="hidden" name="quantity" value="1"/>
+                                <input type="hidden" name="price" value="{{$product->sale_price==''?$product->regular_price:$product->sale_price}}"/>
+                                
+                                <button
+                                    class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist"
+                                    title="Add To Wishlist">
+                                    <svg width="16" height="16" viewBox="0 0 20 20" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <use href="#icon_heart" />
+                                    </svg>
+                                </button>
+                            </form>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -413,6 +416,10 @@
 <form id="frmfilter" method="GET" action="{{route('shop.index')}}">
     <input type="hidden" name="page" value="{{$products->currentPage()}}"/>
     <input type="hidden" name="order" id="order" value="{{$order}}"/>
+    <input type="hidden" name="authors" id="hdnAuthors" />
+    <input type="hidden" name="categories" id="hdnCategories" />
+    <input type="hidden" name="min" id="hdnMinPrice" value="{{$min_price}}"/>
+    <input type="hidden" name="max" id="hdnMaxPrice" value="{{$max_price}}"/>
 </form>
 
 @endsection
@@ -424,6 +431,51 @@
         $("#orderby").on("change", function()
         {
             $("#order").val($("#orderby option:selected").val());
+            $("#frmfilter").submit();
+        });
+
+        $("input[name='authors']").on("change", function()
+        {
+            var authors = "";
+            $("input[name='authors']:checked").each(function()
+            {
+                if (authors == "")
+                {
+                    authors+=$(this).val();
+                }
+                else
+                {
+                    authors+=","+$(this).val();
+                }
+            });
+            $("#hdnAuthors").val(authors);
+            $("#frmfilter").submit();
+        });
+
+        $("input[name='categories']").on("change", function()
+        {
+            var categories = "";
+            $("input[name='categories']:checked").each(function()
+            {
+                if (categories == "")
+                {
+                    categories+=$(this).val();
+                }
+                else
+                {
+                    categories+=","+$(this).val();
+                }
+            });
+            $("#hdnCtegories").val(categories);
+            $("#frmfilter").submit();
+        });
+
+        $("[name='price_range'  ").on("slideStop", function()
+        {
+            var min = $(this).val().split(',')[0];
+            var max = $(this).val().split(',')[1];
+            $("#hdnMinPrice").val(min);
+            $("#hdnMaxPrice").val(max);
             $("#frmfilter").submit();
         });
     });
