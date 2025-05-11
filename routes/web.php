@@ -75,6 +75,8 @@ Route::middleware(['auth', AuthAdmin::class])->group(function()
     Route::get('/admin/settings', [AdminController::class, 'settings'])->name('admin.settings');
     Route::put('/admin/settings/update', [AdminController::class, 'account_update'])->name('admin.account.update');
 
+    Route::get('/admin/orders', [AdminController::class, 'orders'])->name('admin.orders');
+
 });
 
 // Route::get('/{product_slug}', [ShopController::class, 'product_details'])->name('product.details');
