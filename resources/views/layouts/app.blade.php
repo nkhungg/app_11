@@ -528,7 +528,7 @@
                         </a>
                     </div>
                     <p class="footer-address">
-                        123 Beach Avenue, Surfside City, CA 00000
+                        268 Ly Thuong Kiet St., District 10, Ho Chi Minh City, Vietnam
                     </p>
                     <p class="m-0">
                         <strong class="fw-medium">contact@gmail.com</strong>
@@ -637,25 +637,28 @@
                 <div class="footer-column footer-menu mb-4 mb-lg-0">
                     <h6 class="sub-menu__title text-uppercase">Categories</h6>
                     <ul class="sub-menu__list list-unstyled">
-                        @foreach ($categories as $category)
+                        {{-- @foreach ($categories as $category)
                             <li class="sub-menu__item">
                                 <a href="{{ url('/shop?categories=' . $category->id) }}"
                                     class="menu-link menu-link_us-s">{{ $category->name }}</a>
                             </li>
-                        @endforeach
+                        @endforeach --}}
 
-                        {{-- <li class="sub-menu__item">
+                        <li class="sub-menu__item">
                             <a href="#" class="menu-link menu-link_us-s">Non-Fiction</a>
                         </li>
                         <li class="sub-menu__item">
                             <a href="#" class="menu-link menu-link_us-s">Self-help & Personal Development</a>
                         </li>
                         <li class="sub-menu__item">
-                            <a href="#" class="menu-link menu-link_us-s">Children's Books</a>
+                            <a href="#" class="menu-link menu-link_us-s">Mystery/Detective</a>
                         </li>
                         <li class="sub-menu__item">
-                            <a href="#" class="menu-link menu-link_us-s">Shop All</a>
-                        </li> --}}
+                            <a href="#" class="menu-link menu-link_us-s">Romance</a>
+                        </li>
+                        <li class="sub-menu__item">
+                            <a href="#" class="menu-link menu-link_us-s">Fantasy</a>
+                        </li>
                     </ul>
                 </div>
             </div>
