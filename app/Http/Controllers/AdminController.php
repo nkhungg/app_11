@@ -494,4 +494,9 @@ class AdminController extends Controller {
         $coupon->delete();
         return redirect()->route('admin.coupons')->with('status', 'Coupon has been deleted successfully!');
     }
+
+    public function orders()
+    {
+        return view('admin.orders');
+    }
 }

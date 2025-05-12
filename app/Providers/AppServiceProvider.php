@@ -28,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
                             ->orderByDesc('products_count')
                             ->take(5)
                             ->get();
-        $view->with('categories', $categories);
+        $view->with('footerCategories', $categories);
 
     });
     }

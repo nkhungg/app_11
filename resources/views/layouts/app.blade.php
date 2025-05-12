@@ -637,12 +637,12 @@
                 <div class="footer-column footer-menu mb-4 mb-lg-0">
                     <h6 class="sub-menu__title text-uppercase">Categories</h6>
                     <ul class="sub-menu__list list-unstyled">
-                        {{-- @foreach ($categories as $category)
+                        @foreach ($footerCategories as $category)
                             <li class="sub-menu__item">
                                 <a href="{{ url('/shop?categories=' . $category->id) }}"
                                     class="menu-link menu-link_us-s">{{ $category->name }}</a>
                             </li>
-                        @endforeach --}}
+                        @endforeach
 
                         <li class="sub-menu__item">
                             <a href="#" class="menu-link menu-link_us-s">Non-Fiction</a>
