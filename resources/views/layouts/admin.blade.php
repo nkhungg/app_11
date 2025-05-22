@@ -93,12 +93,12 @@
                                     </a>
                                     <ul class="sub-menu">
                                         <li class="sub-menu-item">
-                                            <a href="{{route('admin.author.add')}}" class="">
+                                            <a href="{{ route('admin.author.add') }}" class="">
                                                 <div class="text">New Author</div>
                                             </a>
                                         </li>
                                         <li class="sub-menu-item">
-                                            <a href="{{route('admin.authors')}}" class="">
+                                            <a href="{{ route('admin.authors') }}" class="">
                                                 <div class="text">Authors</div>
                                             </a>
                                         </li>
@@ -130,7 +130,7 @@
                                     </a>
                                     <ul class="sub-menu">
                                         <li class="sub-menu-item">
-                                            <a href="orders.html" class="">
+                                            <a href="{{ route('admin.orders') }}" class="">
                                                 <div class="text">Orders</div>
                                             </a>
                                         </li>
@@ -148,7 +148,7 @@
                                     </a>
                                 </li>
                                 <li class="menu-item">
-                                    <a href="{{route('admin.coupons')}}" class="">
+                                    <a href="{{ route('admin.coupons') }}" class="">
                                         <div class="icon"><i class="icon-grid"></i></div>
                                         <div class="text">Coupons</div>
                                     </a>
