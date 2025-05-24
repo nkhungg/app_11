@@ -7,7 +7,7 @@
 
 <ul class="account-nav">
     <li><a href="{{ route('user.index') }}" class="menu-link menu-link_us-s {{ active('user.index') }}">Dashboard</a></li>
-    <li><a href="account-orders.html"
+    <li><a href="{{ route('user.orders') }}"
             class="menu-link menu-link_us-s {{ request()->is('account-orders*') ? 'menu-link_active' : '' }}">Orders</a>
     </li>
     <li><a href="account-address.html"
