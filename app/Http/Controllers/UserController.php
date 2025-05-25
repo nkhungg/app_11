@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Carbon\Carbon;
 
 class UserController extends Controller {
     public function index() {
@@ -69,5 +70,13 @@ class UserController extends Controller {
         } else {
             return redirect()->route( 'login' );
         }
+    }
+
+    public function order_cancel( Request $request ) {
+        $order = Order::find( $request->order_id );
+        $order->status = 'canceled';
+        $order->canceled_date = Carbon::now();
+        $order->save();
+        return back()->with( 'status', 'Order has been canceled successfully.' );
     }
 }
