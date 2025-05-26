@@ -117,11 +117,10 @@ Route::get('/shop/{product_slug}', [ShopController::class, 'product_details'])->
 Route::get('/account', [HomeController::class, 'account'])->name('home.account');
 Route::get('/account-wishlist', [HomeController::class, 'accountWishlist'])->name('home.accountWishlist');
 Route::get('/account-order', [HomeController::class, 'accountOrder'])->name('home.accountOrder');
+Route::get('/search', [HomeController::class, 'search'])->name('home.search');
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
