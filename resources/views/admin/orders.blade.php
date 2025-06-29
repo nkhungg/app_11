@@ -53,80 +53,45 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td class="text-center">User 1</td>
-                                    <td class="text-center">1234567891</td>
-                                    <td class="text-center">$172.00</td>
-                                    <td class="text-center">$36.12</td>
-                                    <td class="text-center">$208.12</td>
+                                @foreach ($orders as $order)
+                                    <tr>
+                                        <td class="text-center">{{ $order->id }}</td>
+                                        <td class="text-center">{{ $order->name }}</td>
+                                        <td class="text-center">{{ $order->phone }}</td>
+                                        <td class="text-center">{{ $order->subtotal }}</td>
+                                        <td class="text-center">{{ $order->tax }}</td>
+                                        <td class="text-center">${{ $order->total }}</td>
 
-                                    <td class="text-center">ordered</td>
-                                    <td class="text-center">2024-07-11 00:54:14</td>
-                                    <td class="text-center">2</td>
-                                    <td></td>
-                                    <td class="text-center">
-                                        <a href="order-details.html">
-                                            <div class="list-icon-function view-icon">
-                                                <div class="item eye">
-                                                    <i class="icon-eye"></i>
+                                        <td class="text-center">
+                                            @if ($order->status == 'delivered')
+                                                <span class="badge bg-success">Delivered</span>
+                                            @elseif($order->status == 'canceled')
+                                                <span class="badge bg-danger">Canceled</span>
+                                            @else
+                                                <span class="badge bg-warning">Ordered</span>
+                                            @endif
+                                        </td>
+                                        <td class="text-center">{{ $order->created_at }}</td>
+                                        <td class="text-center">{{ $order->orderItems->count() }}</td>
+                                        <td class="text-center">{{ $order->delivered_date }}</td>
+                                        <td class="text-center">
+                                            <a href="{{ route('admin.order.details', ['order_id' => $order->id]) }}">
+                                                <div class="list-icon-function view-icon">
+                                                    <div class="item eye">
+                                                        <i class="icon-eye"></i>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td class="text-center">User 2</td>
-                                    <td class="text-center">1234567892</td>
-                                    <td class="text-center">$172.00</td>
-                                    <td class="text-center">$36.12</td>
-                                    <td class="text-center">$208.12</td>
-
-                                    <td class="text-center">delivered</td>
-                                    <td class="text-center">2024-07-11 00:54:14</td>
-                                    <td class="text-center">2</td>
-                                    <td></td>
-                                    <td class="text-center">
-                                        <a href="order-details.html">
-                                            <div class="list-icon-function view-icon">
-                                                <div class="item eye">
-                                                    <i class="icon-eye"></i>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td class="text-center">User 2</td>
-                                    <td class="text-center">1234567893</td>
-                                    <td class="text-center">$172.00</td>
-                                    <td class="text-center">$36.12</td>
-                                    <td class="text-center">$208.12</td>
-
-                                    <td class="text-center">canceled</td>
-                                    <td class="text-center">2024-07-11 00:54:14</td>
-                                    <td class="text-center">2</td>
-                                    <td></td>
-                                    <td class="text-center">
-                                        <a href="order-details.html">
-                                            <div class="list-icon-function view-icon">
-                                                <div class="item eye">
-                                                    <i class="icon-eye"></i>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </td>
-                                </tr>
-
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
                 </div>
                 <div class="divider"></div>
                 <div class="flex items-center justify-between flex-wrap gap10 wgp-pagination">
-
+                    {{ $orders->links('pagination::bootstrap-5') }}
                 </div>
             </div>
         </div>

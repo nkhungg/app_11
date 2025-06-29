@@ -32,6 +32,9 @@ Route::middleware(['auth'])->group(function()
     Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');
     Route::get('/account-detail', [UserController::class, 'account_detail'])->name('user.account.detail');
     Route::put('/account/update', [UserController::class, 'account_update'])->name('user.account.update');
+    Route::get('/account-orders', [UserController::class, 'orders'])->name('user.orders');
+    Route::get('/account-order/{order_id}/details', [UserController::class, 'order_details'])->name('user.order.details');
+    Route::put('/account-order/cancel-order', [UserController::class, 'order_cancel'])->name('user.order.cancel');
 });
 
 Route::middleware(['auth', AuthAdmin::class])->group(function()
@@ -76,7 +79,10 @@ Route::middleware(['auth', AuthAdmin::class])->group(function()
     Route::put('/admin/settings/update', [AdminController::class, 'account_update'])->name('admin.account.update');
 
     Route::get('/admin/orders', [AdminController::class, 'orders'])->name('admin.orders');
+    Route::get('/admin/order/{order_id}/details', [AdminController::class, 'order_details'])->name('admin.order.details');
+    Route::put('/admin/order/update-status', [AdminController::class, 'update_order_status'])->name('admin.order.status.update');
 
+    Route::get('/admin/search', [AdminController::class, 'search'])->name('admin.search');
 });
 
 // Route::get('/{product_slug}', [ShopController::class, 'product_details'])->name('product.details');
@@ -112,11 +118,10 @@ Route::get('/shop/{product_slug}', [ShopController::class, 'product_details'])->
 Route::get('/account', [HomeController::class, 'account'])->name('home.account');
 Route::get('/account-wishlist', [HomeController::class, 'accountWishlist'])->name('home.accountWishlist');
 Route::get('/account-order', [HomeController::class, 'accountOrder'])->name('home.accountOrder');
+Route::get('/search', [HomeController::class, 'search'])->name('home.search');
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
