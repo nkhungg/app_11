@@ -16,11 +16,57 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Intervention\Image\Laravel\Facades\Image;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller {
     public function index() {
-        return view( 'admin.index' );
+        $orders = Order::orderBy( 'created_at', 'DESC' )->get()->take( 10 );
+        $dashboardDatas = DB::select( "Select sum(total) AS TotalAmount,
+                                    sum(if(status='ordered', total, 0)) as TotalOrderedAmount,
+                                    sum(if(status='delivered', total, 0)) as TotalDeliveredAmount,
+                                    sum(if(status='canceled', total, 0)) as TotalCanceledAmount,
+                                    Count(*) as Total,
+                                    sum(if(status='ordered', 1, 0)) as TotalOrdered,
+                                    sum(if(status='delivered', 1, 0)) as TotalDelivered,
+                                    sum(if(status='canceled', 1, 0)) as TotalCanceled
+                                    From Orders
+        " );
+
+$monthlyDatas = DB::select("
+    SELECT
+        M.id AS MonthNo,
+        M.name AS MonthName,
+        IFNULL(D.TotalAmount, 0) AS TotalAmount,
+        IFNULL(D.TotalOrderedAmount, 0) AS TotalOrderedAmount,
+        IFNULL(D.TotalDeliveredAmount, 0) AS TotalDeliveredAmount,
+        IFNULL(D.TotalCanceledAmount, 0) AS TotalCanceledAmount
+    FROM month_names M
+    LEFT JOIN (
+        SELECT
+            MONTH(created_at) AS MonthNo,
+            SUM(total) AS TotalAmount,
+            SUM(IF(status = 'ordered', total, 0)) AS TotalOrderedAmount,
+            SUM(IF(status = 'delivered', total, 0)) AS TotalDeliveredAmount,
+            SUM(IF(status = 'canceled', total, 0)) AS TotalCanceledAmount
+        FROM Orders
+        WHERE YEAR(created_at) = YEAR(NOW())
+        GROUP BY MONTH(created_at)
+        ORDER BY MONTH(created_at)
+    ) D ON D.MonthNo = M.id
+");
+
+
+        $AmountM = implode(', ', collect($monthlyDatas)->pluck('TotalAmount')->toArray());
+        $OrderedAmountM = implode(', ', collect($monthlyDatas)->pluck('TotalOrderedAmount')->toArray());
+        $DeliveredAmountM = implode(', ', collect($monthlyDatas)->pluck('TotalDeliveredAmount')->toArray());
+        $CanceledAmountM = implode(', ', collect($monthlyDatas)->pluck('TotalCanceledAmount')->toArray());
+
+        $TotalAmount = collect($monthlyDatas)->sum('TotalAmount');
+        $TotalOrderedAmount = collect($monthlyDatas)->sum('TotalOrderedAmount');
+        $TotalDeliveredAmount = collect($monthlyDatas)->sum('TotalDeliveredAmount');
+        $TotalCanceledAmount = collect($monthlyDatas)->sum('TotalCanceledAmount');
+        return view( 'admin.index', compact('orders', 'dashboardDatas', 'AmountM', 'OrderedAmountM', 'DeliveredAmountM', 'CanceledAmountM', 'TotalAmount', 'TotalOrderedAmount', 'TotalDeliveredAmount', 'TotalCanceledAmount') );
     }
 
     public function categories() {
@@ -35,8 +81,8 @@ class AdminController extends Controller {
     public function category_store( Request $request ) {
         $request->validate( [
             'name'=> 'required',
-            'slug'=> 'required|unique:categories,slug',
-            'image'=> 'mimes:png,jpg,jpeg|max:2048'
+            'slug'=> 'required|unique:categories, slug',
+            'image'=> 'mimes:png, jpg, jpeg|max:2048'
         ] );
 
         $category = new Category();
@@ -71,8 +117,8 @@ class AdminController extends Controller {
     {
         $request->validate( [
             'name'=> 'required',
-            'slug'=> 'required|unique:categories,slug,'.$request->id,
-            'image'=> 'mimes:png,jpg,jpeg|max:2048'
+            'slug'=> 'required|unique:categories, slug, '.$request->id,
+            'image'=> 'mimes:png, jpg, jpeg|max:2048'
         ] );
         $category = Category::find($request->id);
         $category->name = $request->name;
@@ -118,7 +164,7 @@ class AdminController extends Controller {
     {
         $request->validate([
             'name' => 'required',
-            'slug' => 'required|unique:products,slug',
+            'slug' => 'required|unique:products, slug',
             'short_description' => 'required',
             'regular_price' => 'required',
             'sale_price',
@@ -126,7 +172,7 @@ class AdminController extends Controller {
             'stock_status' => 'required',
             'featured' => 'required',
             'quantity' => 'required',
-            'image' => 'required|mimes:png,jpg,jpeg|max:2048',
+            'image' => 'required|mimes:png, jpg, jpeg|max:2048',
             'category_id' => 'required',
             'author_id' => 'required'
         ]);
@@ -172,7 +218,7 @@ class AdminController extends Controller {
                     $counter = $counter + 1;
                 }
             }
-            $gallery_images = implode(',', $gallery_arr);
+            $gallery_images = implode(', ', $gallery_arr);
         }
         $product->images = $gallery_images;
         $product->save();
@@ -206,7 +252,7 @@ class AdminController extends Controller {
     {
         $request->validate([
             'name' => 'required',
-            'slug' => 'required|unique:products,slug,'.$request->id,
+            'slug' => 'required|unique:products, slug, '.$request->id,
             'short_description' => 'required',
             'regular_price' => 'required',
             'sale_price' => 'nullable',
@@ -214,7 +260,7 @@ class AdminController extends Controller {
             'stock_status' => 'required',
             'featured' => 'required',
             'quantity' => 'required',
-            'image' => 'mimes:png,jpg,jpeg|max:2048',
+            'image' => 'mimes:png, jpg, jpeg|max:2048',
             'category_id' => 'required',
             'author_id' => 'required'
         ]);
@@ -249,7 +295,7 @@ class AdminController extends Controller {
         $gallery_images = "";
         $counter = 1;
         if($request->hasFile('images')){
-            foreach (explode(',', $product->images) as $ofile) {
+            foreach (explode(', ', $product->images) as $ofile) {
                 if(File::exists(public_path('uploads/products').'/'.$ofile)){
                     File::delete(public_path('uploads/products').'/'.$ofile);
                 }
@@ -271,7 +317,7 @@ class AdminController extends Controller {
                     $counter = $counter + 1;
                 }
             }
-            $gallery_images = implode(',', $gallery_arr);
+            $gallery_images = implode(', ', $gallery_arr);
             $product->images = $gallery_images;
         }
         $product->save();
@@ -288,7 +334,7 @@ class AdminController extends Controller {
             File::delete(public_path('uploads/products/thumbnails').'/'.$product->image);
         }
 
-        foreach (explode(',', $product->images) as $ofile) {
+        foreach (explode(', ', $product->images) as $ofile) {
             if(File::exists(public_path('uploads/products').'/'.$ofile)){
                 File::delete(public_path('uploads/products').'/'.$ofile);
             }
@@ -316,10 +362,10 @@ class AdminController extends Controller {
     {
         $request->validate([
             'name'=>'required',
-            'slug'=>'required|unique:authors,slug',
+            'slug'=>'required|unique:authors, slug',
             'nationality',
             'biography',
-            'image'=>'mimes:png,jpg,jpeg|max:2048'
+            'image'=>'mimes:png, jpg, jpeg|max:2048'
         ]);
         $author = new Author();
         $author->name=$request->name;
@@ -345,10 +391,10 @@ class AdminController extends Controller {
     {
         $request->validate([
             'name'=>'required',
-            'slug'=>'required|unique:authors,slug,'.$request->id,
+            'slug'=>'required|unique:authors, slug, '.$request->id,
             'nationality',
             'biography',
-            'image'=>'mimes:png,jpg,jpeg|max:2048'
+            'image'=>'mimes:png, jpg, jpeg|max:2048'
         ]);
         $author=Author::find($request->id);
         $author->name=$request->name;
@@ -409,7 +455,7 @@ class AdminController extends Controller {
         $request->validate( [
             'name' => 'required|string|max:255',
             'mobile' => 'nullable|string|max:20',
-            'email' => 'required|email|unique:users,email,' . $user->id,
+            'email' => 'required|email|unique:users, email, ' . $user->id,
         ] );
 
         // Update general info
@@ -537,7 +583,9 @@ class AdminController extends Controller {
     public function search(Request $request)
     {
         $query = $request->input('query');
-        $result = Product::where('name', 'LIKE', "%{$query}%")->get()->take(8);
-        return response()->json($result);
+        $result = Product::where('name', 'LIKE', "% {
+            $query}
+            %" )->get()->take( 8 );
+            return response()->json( $result );
+        }
     }
-}
