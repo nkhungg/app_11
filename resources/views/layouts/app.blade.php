@@ -781,6 +781,12 @@
             })
         })
     </script>
+
+    {{-- Chatbot script --}}
+    <script src="https://cdn.botpress.cloud/webchat/v3.0/inject.js" defer></script>
+    <script src="https://files.bpcontent.cloud/2025/07/06/07/20250706075525-UCOIAEJK.js" defer></script>
+    
+
     <script src={{ asset('js/sweetalert.min.js') }}></script>
     @stack('scripts')
 </body>
