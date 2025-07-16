@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -27,7 +27,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware(['auth'])->group(function()
+Route::middleware(['auth', 'verified'])->group(function()
 {
     Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');
     Route::get('/account-detail', [UserController::class, 'account_detail'])->name('user.account.detail');
@@ -35,6 +35,26 @@ Route::middleware(['auth'])->group(function()
     Route::get('/account-orders', [UserController::class, 'orders'])->name('user.orders');
     Route::get('/account-order/{order_id}/details', [UserController::class, 'order_details'])->name('user.order.details');
     Route::put('/account-order/cancel-order', [UserController::class, 'order_cancel'])->name('user.order.cancel');
+    
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/add', [CartController::class, 'add_to_cart'])->name('cart.add');
+    Route::put('/cart/increase-quantity/{rowId}', [CartController::class, 'increase_cart_quantity'])->name('cart.quantity.increase');
+    Route::put('/cart/decrease-quantity/{rowId}', [CartController::class, 'decrease_cart_quantity'])->name('cart.quantity.decrease');
+    Route::delete('/cart/remove/{rowId}', [CartController::class, 'remove_item'])->name('cart.item.remove');
+    Route::delete('/cart/clear', [CartController::class, 'clear_cart'])->name('cart.clear');
+    Route::post('/cart/apply-coupon', [CartController::class, 'apply_coupon'])->name('cart.coupon.apply');
+    Route::delete('/cart/remove-coupon', [CartController::class, 'remove_coupon'])->name('cart.coupon.remove');
+
+    Route::post('/wishlist/add', [WishlistController::class, 'add_to_wishlist'])->name('wishlist.add');
+    Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
+    Route::delete('/wishlist/item/remove/{rowId}', [WishlistController::class, 'remove_item'])->name('wishlist.item.remove');
+    Route::delete('/wishlist/clear', [WishlistController::class, 'clear_wishlist'])->name('wishlist.clear');
+    Route::post('/wishlist/add-to-cart/{rowId}', [WishlistController::class, 'add_to_cart'])->name('wishlist.addtocart');
+
+    Route::get('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+    Route::post('/place-order', [CartController::class, 'place_order'])->name('cart.place.order');
+    Route::get('/order-confirm',[CartController::class,'order_confirm'])->name('cart.order.confirm');
+    Route::get('/momo-payment',[CartController::class,'momo_payment'])->name('cart.order.momopayment');
 });
 
 Route::middleware(['auth', AuthAdmin::class])->group(function()
@@ -86,29 +106,8 @@ Route::middleware(['auth', AuthAdmin::class])->group(function()
 });
 
 // Route::get('/{product_slug}', [ShopController::class, 'product_details'])->name('product.details');
-Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-Route::post('/cart/add', [CartController::class, 'add_to_cart'])->name('cart.add');
-Route::put('/cart/increase-quantity/{rowId}', [CartController::class, 'increase_cart_quantity'])->name('cart.quantity.increase');
-Route::put('/cart/decrease-quantity/{rowId}', [CartController::class, 'decrease_cart_quantity'])->name('cart.quantity.decrease');
-Route::delete('/cart/remove/{rowId}', [CartController::class, 'remove_item'])->name('cart.item.remove');
-Route::delete('/cart/clear', [CartController::class, 'clear_cart'])->name('cart.clear');
-Route::post('/cart/apply-coupon', [CartController::class, 'apply_coupon'])->name('cart.coupon.apply');
-Route::delete('/cart/remove-coupon', [CartController::class, 'remove_coupon'])->name('cart.coupon.remove');
-
-Route::post('/wishlist/add', [WishlistController::class, 'add_to_wishlist'])->name('wishlist.add');
-Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
-Route::delete('/wishlist/item/remove/{rowId}', [WishlistController::class, 'remove_item'])->name('wishlist.item.remove');
-Route::delete('/wishlist/clear', [WishlistController::class, 'clear_wishlist'])->name('wishlist.clear');
-Route::post('/wishlist/add-to-cart/{rowId}', [WishlistController::class, 'add_to_cart'])->name('wishlist.addtocart');
-
-Route::get('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
-Route::post('/place-order', [CartController::class, 'place_order'])->name('cart.place.order');
-Route::get('/order-confirm',[CartController::class,'order_confirm'])->name('cart.order.confirm');
-Route::get('/momo-payment',[CartController::class,'momo_payment'])->name('cart.order.momopayment');
 
 require __DIR__.'/auth.php';
-
-Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
