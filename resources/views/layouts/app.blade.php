@@ -256,7 +256,7 @@
             max-width: 220px;
         }
 
-        .product-item{
+        .product-item {
             display: flex;
             align-items: center;
             justify-content: flex-start;
@@ -265,7 +265,7 @@
             padding-right: 5px;
         }
 
-        .product-item .image{
+        .product-item .image {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -278,11 +278,11 @@
             background: #EFF4F8;
         }
 
-        #box-content-search li{
+        #box-content-search li {
             list-style: none;
         }
 
-        #box-content-search .product-item{
+        #box-content-search .product-item {
             margin-bottom: 10px;
         }
     </style>
@@ -351,6 +351,9 @@
                         </li>
                         <li class="navigation__item">
                             <a href="{{ route('home.contact') }}" class="navigation__link">Contact</a>
+                        </li>
+                        <li class="navigation__item">
+                            <a href="{{ route('free.products') }}" class="navigation__link">Free Products</a>
                         </li>
                     </ul>
                 </div>
@@ -441,6 +444,9 @@
                         </li>
                         <li class="navigation__item">
                             <a href="{{ route('home.contact') }}" class="navigation__link">Contact</a>
+                        </li>
+                        <li class="navigation__item">
+                            <a href="{{ route('free.products') }}" class="navigation__link">Free Products</a>
                         </li>
                     </ul>
                 </nav>
@@ -781,6 +787,21 @@
         })
     </script>
     <script src={{ asset('js/sweetalert.min.js') }}></script>
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {},
+            Tawk_LoadStart = new Date();
+        (function() {
+            var s1 = document.createElement("script"),
+                s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/68567fd273ba95190b1b867b/1iu8u6kia';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
     @stack('scripts')
 </body>
 

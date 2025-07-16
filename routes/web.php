@@ -10,6 +10,8 @@ use App\Http\Controllers\WishlistController;
 use App\Http\Middleware\AuthAdmin;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\FreeProductController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -119,9 +121,13 @@ Route::get('/account', [HomeController::class, 'account'])->name('home.account')
 Route::get('/account-wishlist', [HomeController::class, 'accountWishlist'])->name('home.accountWishlist');
 Route::get('/account-order', [HomeController::class, 'accountOrder'])->name('home.accountOrder');
 Route::get('/search', [HomeController::class, 'search'])->name('home.search');
+Route::get('/free-products', [FreeProductController::class, 'index'])->name('free.products');
+
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
+Route::get('/read/sherlock-holmes', function () {
+    return view('epub-reader');
+})->name('epub.read.sherlock');

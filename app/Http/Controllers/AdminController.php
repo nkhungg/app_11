@@ -580,12 +580,9 @@ $monthlyDatas = DB::select("
        return back()->with('status', 'Status changed successfully.');
     }
 
-    public function search(Request $request)
-    {
-        $query = $request->input('query');
-        $result = Product::where('name', 'LIKE', "% {
-            $query}
-            %" )->get()->take( 8 );
-            return response()->json( $result );
-        }
+    public function search( Request $request ) {
+        $query = $request->input( 'query' );
+        $result = Product::where( 'name', 'LIKE', "%{$query}%" )->get()->take( 8 );
+        return response()->json( $result );
     }
+}
