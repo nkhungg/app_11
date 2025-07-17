@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <h2 class="mb-4">🎧 Free eBook & Audiobook Samples</h2>
+        <h2 class="page-title mb-4">🎧 Free eBook & Audiobook Samples</h2>
 
         <h4>📚 eBook Samples</h4>
         <div class="row mb-5">

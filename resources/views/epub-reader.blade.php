@@ -13,15 +13,6 @@
     <!-- Include EPUB.js -->
     <script src="https://unpkg.com/epubjs/dist/epub.min.js"></script>
 
-    <style>
-        #viewer {
-            width: 100%;
-            height: 100%;
-            border: 1px solid #ccc;
-            margin-top: auto;
-            /* margin-top: 1rem; */
-        }
-    </style>
 </head>
 
 <body>
