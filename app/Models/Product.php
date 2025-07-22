@@ -13,11 +13,4 @@ class Product extends Model {
         return $this->belongsTo( Author::class, 'author_id', 'id' );
     }
 
-    public function ebook() {
-        return $this->hasOne( Ebook::class );
-    }
-
-    public function audiobook() {
-        return $this->hasOne( Audiobook::class );
-    }
 }

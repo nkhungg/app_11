@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ asset('css/epub-reader.css') }}" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
     <script src="https://unpkg.com/epubjs/dist/epub.min.js"></script>
-    <title>Moby Dick Reader</title>
+    <title>{{ $ebook->title }} Reader</title>
 
     <!-- Include EPUB.js -->
     <script src="https://unpkg.com/epubjs/dist/epub.min.js"></script>
@@ -24,7 +24,7 @@
 
         <header>
             <a href="#home">Home</a>
-            <h1><a href="#">Moby Dick</a></h1>
+            <h1><a href="#">{{ $ebook->title }}</a></h1>
         </header>
 
         <nav>
@@ -46,7 +46,8 @@
 
     <script>
         // Initialize the book
-        const book = ePub("/uploads/ebooks/mobydick.epub");
+        // const book = ePub("/uploads/ebooks/mobydick.epub");
+        const book = ePub("{{ asset($ebook->file_path) }}");
         const rendition = book.renderTo("viewer", {
             width: "100%",
             height: "100%",
@@ -58,8 +59,12 @@
 
             toc.toc.forEach((item) => {
                 const option = document.createElement("option");
+                const label = item.label.length > 50 ?
+                    item.label.slice(0, 47).trim() + "..." :
+                    item.label;
+
                 option.value = item.href;
-                option.textContent = item.label;
+                option.textContent = label;
                 tocSelect.appendChild(option);
             });
 

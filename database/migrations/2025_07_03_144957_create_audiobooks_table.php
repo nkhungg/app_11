@@ -13,8 +13,12 @@ public function up()
 {
     Schema::create('audiobooks', function (Blueprint $table) {
         $table->id();
-        $table->foreignId('product_id')->constrained()->onDelete('cascade');
+        $table->string('title');
+        $table->string('author');
+        $table->string('category');
+        $table->string('description');
         $table->string('file_path'); // path to the audio file
+        $table->string('cover_path')->nullable();
         $table->string('duration')->nullable(); // optional: total play time
         $table->timestamps();
     });

@@ -13,9 +13,13 @@ public function up()
 {
     Schema::create('ebooks', function (Blueprint $table) {
         $table->id();
-        $table->foreignId('product_id')->constrained()->onDelete('cascade');
+        $table->string('title');
+        $table->string('author');
+        $table->string('category')->nullable();
+        $table->string('description')->nullable();
         $table->string('file_path'); // path to the eBook file
-        $table->enum('format', ['pdf', 'epub'])->default('pdf');
+        $table->string('cover_path')->nullable();
+        $table->enum('format', ['pdf', 'epub']);
         $table->timestamps();
     });
 }
