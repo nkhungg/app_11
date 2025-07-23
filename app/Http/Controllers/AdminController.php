@@ -81,7 +81,7 @@ $monthlyDatas = DB::select("
     public function category_store( Request $request ) {
         $request->validate( [
             'name'=> 'required',
-            'slug'=> 'required|unique:categories, slug',
+            'slug'=> 'required|unique:categories,slug',
             'image'=> 'mimes:png, jpg, jpeg|max:2048'
         ] );
 
@@ -362,10 +362,10 @@ $monthlyDatas = DB::select("
     {
         $request->validate([
             'name'=>'required',
-            'slug'=>'required|unique:authors, slug',
+            'slug'=>'required|unique:authors,slug',
             'nationality',
             'biography',
-            'image'=>'mimes:png, jpg, jpeg|max:2048'
+            'image'=>'mimes:png,jpg,jpeg|max:2048'
         ]);
         $author = new Author();
         $author->name=$request->name;
@@ -544,6 +544,7 @@ $monthlyDatas = DB::select("
         return redirect()->route('admin.coupons')->with('status', 'Coupon has been deleted successfully!');
     }
 
+
     public function orders()
     {
         $orders = Order::orderBy('created_at', 'DESC')->paginate(12);
@@ -580,12 +581,9 @@ $monthlyDatas = DB::select("
        return back()->with('status', 'Status changed successfully.');
     }
 
-    public function search(Request $request)
-    {
-        $query = $request->input('query');
-        $result = Product::where('name', 'LIKE', "% {
-            $query}
-            %" )->get()->take( 8 );
-            return response()->json( $result );
-        }
+    public function search( Request $request ) {
+        $query = $request->input( 'query' );
+        $result = Product::where( 'name', 'LIKE', "%{$query}%" )->get()->take( 8 );
+        return response()->json( $result );
     }
+}

@@ -84,6 +84,16 @@
                                                 <div class="text">Products</div>
                                             </a>
                                         </li>
+                                        <li class="sub-menu-item">
+                                            <a href="{{ route('admin.ebook.add') }}" class="">
+                                                <div class="text">Add Ebook</div>
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="{{ route('admin.ebooks') }}" class="">
+                                                <div class="text">Ebooks</div>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </li>
                                 <li class="menu-item has-children">
@@ -366,6 +376,8 @@
     <script src={{ asset('js/sweetalert.min.js') }}></script>
     <script src={{ asset('js/apexcharts/apexcharts.js') }}></script>
     <script src={{ asset('js/main.js') }}></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
+    <script src="https://unpkg.com/epubjs/dist/epub.min.js"></script>
     <script>
         $(function() {
             $("#search-input").on('keyup', function() {
