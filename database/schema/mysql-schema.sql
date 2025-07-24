@@ -119,14 +119,16 @@ CREATE TABLE `ebooks` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `author` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `category` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `category_id` bigint unsigned DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci,
   `file_path` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `cover_path` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `format` enum('pdf','epub') COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `ebooks_category_id_foreign` (`category_id`),
+  CONSTRAINT `ebooks_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `failed_jobs`;
@@ -423,19 +425,19 @@ CREATE TABLE `users` (
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (18,'2025_07_21_032210_add_cover_path_to_ebooks_table',6);
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (119,'2025_07_03_144748_add_type_to_products_table',7);
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (122,'2025_07_21_032827_add_cover_path_to_ebooks_table',7);
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (139,'0001_01_01_000000_create_users_table',8);
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (140,'0001_01_01_000001_create_cache_table',8);
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (141,'0001_01_01_000002_create_jobs_table',8);
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (142,'2025_03_29_100255_create_permission_tables',8);
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (143,'2025_04_29_074255_create_publishers_table',8);
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (144,'2025_05_01_082542_create_categories_table',8);
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (145,'2025_05_07_204247_create_authors_table',8);
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (146,'2025_05_08_082813_create_products_table',8);
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (147,'2025_05_10_033500_create_coupons_table',8);
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (148,'2025_05_10_122745_create_orders_table',8);
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (149,'2025_05_10_122757_create_order_items_table',8);
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (150,'2025_05_10_122818_create_addresses_table',8);
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (151,'2025_05_10_122844_create_transactions_table',8);
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (152,'2025_06_15_133947_create_month_names_table',8);
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (153,'2025_07_03_144934_create_ebooks_table',8);
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (154,'2025_07_03_144957_create_audiobooks_table',8);
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (219,'0001_01_01_000000_create_users_table',8);
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (220,'0001_01_01_000001_create_cache_table',8);
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (221,'0001_01_01_000002_create_jobs_table',8);
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (222,'2025_03_29_100255_create_permission_tables',8);
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (223,'2025_04_29_074255_create_publishers_table',8);
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (224,'2025_05_01_082542_create_categories_table',8);
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (225,'2025_05_07_204247_create_authors_table',8);
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (226,'2025_05_08_082813_create_products_table',8);
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (227,'2025_05_10_033500_create_coupons_table',8);
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (228,'2025_05_10_122745_create_orders_table',8);
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (229,'2025_05_10_122757_create_order_items_table',8);
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (230,'2025_05_10_122818_create_addresses_table',8);
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (231,'2025_05_10_122844_create_transactions_table',8);
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (232,'2025_06_15_133947_create_month_names_table',8);
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (233,'2025_07_03_144934_create_ebooks_table',8);
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (234,'2025_07_03_144957_create_audiobooks_table',8);

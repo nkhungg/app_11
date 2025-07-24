@@ -74,28 +74,37 @@ $monthlyDatas = DB::select("
         return view( 'admin.categories', compact( 'categories' ) );
     }
 
-    public function category_add() {
-        return view( 'admin.category-add' );
+    public function category_add(Request $request) {
+        $suggestedName = $request->query('name', '');
+        return view( 'admin.category-add', compact('suggestedName') );
     }
 
-    public function category_store( Request $request ) {
-        $request->validate( [
-            'name'=> 'required',
-            'slug'=> 'required|unique:categories,slug',
-            'image'=> 'mimes:png, jpg, jpeg|max:2048'
-        ] );
+    public function category_store(Request $request) {
+        $request->validate([
+            'name'  => 'required',
+            'slug'  => 'required|unique:categories,slug',
+            'image' => 'nullable|mimes:png,jpg,jpeg|max:2048',
+        ]);
 
         $category = new Category();
         $category->name = $request->name;
-        $category->slug = Str::slug( $request->name );
-        $image = $request->file( 'image' );
-        $file_extension = $request->file( 'image' )->extension();
-        $file_name = Carbon::now()->timestamp.'.'.$file_extension;
-        $this->GenerateCategoryThumbailsImage( $image, $file_name );
-        $category->image = $file_name;
+        $category->slug = Str::slug($request->slug);
+
+        $image = $request->file('image');
+
+        if ($image) {
+            $file_extension = $image->extension();
+            $file_name = Carbon::now()->timestamp . '.' . $file_extension;
+
+            $this->GenerateCategoryThumbailsImage($image, $file_name);
+            $category->image = $file_name;
+        }
+
         $category->save();
-        return redirect()->route( 'admin.categories' )->with( 'status', 'Category has been added successfully.' );
+
+        return redirect()->route('admin.categories')->with('status', 'Category has been added successfully.');
     }
+
 
     public function GenerateCategoryThumbailsImage($image, $imageName)
     {
@@ -117,7 +126,7 @@ $monthlyDatas = DB::select("
     {
         $request->validate( [
             'name'=> 'required',
-            'slug'=> 'required|unique:categories, slug, '.$request->id,
+            'slug'=> 'required|unique:categories,slug, '.$request->id,
             'image'=> 'mimes:png, jpg, jpeg|max:2048'
         ] );
         $category = Category::find($request->id);
@@ -164,7 +173,7 @@ $monthlyDatas = DB::select("
     {
         $request->validate([
             'name' => 'required',
-            'slug' => 'required|unique:products, slug',
+            'slug' => 'required|unique:products,slug',
             'short_description' => 'required',
             'regular_price' => 'required',
             'sale_price',
@@ -172,7 +181,7 @@ $monthlyDatas = DB::select("
             'stock_status' => 'required',
             'featured' => 'required',
             'quantity' => 'required',
-            'image' => 'required|mimes:png, jpg, jpeg|max:2048',
+            'image' => 'required|mimes:png,jpg,jpeg|max:2048',
             'category_id' => 'required',
             'author_id' => 'required'
         ]);
@@ -252,7 +261,7 @@ $monthlyDatas = DB::select("
     {
         $request->validate([
             'name' => 'required',
-            'slug' => 'required|unique:products, slug, '.$request->id,
+            'slug' => 'required|unique:products,slug,' .$request->id,
             'short_description' => 'required',
             'regular_price' => 'required',
             'sale_price' => 'nullable',
@@ -260,7 +269,7 @@ $monthlyDatas = DB::select("
             'stock_status' => 'required',
             'featured' => 'required',
             'quantity' => 'required',
-            'image' => 'mimes:png, jpg, jpeg|max:2048',
+            'image' => 'mimes:png,jpg,jpeg|max:2048',
             'category_id' => 'required',
             'author_id' => 'required'
         ]);
@@ -391,10 +400,10 @@ $monthlyDatas = DB::select("
     {
         $request->validate([
             'name'=>'required',
-            'slug'=>'required|unique:authors, slug, '.$request->id,
+            'slug'=>'required|unique:authors,slug,'.$request->id,
             'nationality',
             'biography',
-            'image'=>'mimes:png, jpg, jpeg|max:2048'
+            'image'=>'mimes:png,jpg,jpeg|max:2048'
         ]);
         $author=Author::find($request->id);
         $author->name=$request->name;
@@ -455,7 +464,7 @@ $monthlyDatas = DB::select("
         $request->validate( [
             'name' => 'required|string|max:255',
             'mobile' => 'nullable|string|max:20',
-            'email' => 'required|email|unique:users, email, ' . $user->id,
+            'email' => 'required|email|unique:users,email,' . $user->id,
         ] );
 
         // Update general info

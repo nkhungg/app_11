@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Author;
+use App\Models\Category;
 use App\Models\Ebook;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -23,14 +24,15 @@ class FreeProductController extends Controller {
 
     public function ebook_add() {
         $authors = Author::all();
-        return view( 'admin.ebook-add', compact( 'authors' ) );
+        $categories = Category::select( 'id', 'name' )->orderBy( 'name' )->get();
+        return view( 'admin.ebook-add', compact( 'authors', 'categories' ) );
     }
 
     public function ebook_store( Request $request ) {
         $validatedData = $request->validate( [
             'title' => 'required|string|max:255',
             'author_name' => 'required|string|max:255',
-            'category' => 'required|string|max:255',
+            'category_id' => 'required|exists:categories,id',
             'description' => 'nullable|string',
             'file' => 'required|file|mimes:epub,pdf',
             'cover_image_data' => 'nullable|string' // base64 cover
@@ -67,7 +69,7 @@ class FreeProductController extends Controller {
         $ebook = Ebook::create( [
             'title' => $validatedData[ 'title' ],
             'author' => $validatedData[ 'author_name' ],
-            'category' => $validatedData[ 'category' ] ?? '',
+            'category_id' => $validatedData[ 'category_id' ],
             'description' => $validatedData[ 'description' ] ?? '',
             'file_path' => $filePath,
             'cover_path' => $coverPath,
@@ -158,19 +160,19 @@ class FreeProductController extends Controller {
     //     return redirect()->route( 'admin.ebooks' )->with( 'status', 'Ebook updated successfully!' );
     // }
 
-    // public function ebook_delete( $id ) {
-    //     $ebook = Ebook::findOrFail( $id );
+    public function ebook_delete( $id ) {
+        $ebook = Ebook::findOrFail( $id );
 
-    //     if ( $ebook->file_path && file_exists( public_path( $ebook->file_path ) ) ) {
-    //         unlink( public_path( $ebook->file_path ) );
-    //     }
+        if ( $ebook->file_path && file_exists( public_path( $ebook->file_path ) ) ) {
+            unlink( public_path( $ebook->file_path ) );
+        }
 
-    //     if ( $ebook->cover_path && file_exists( public_path( $ebook->cover_path ) ) ) {
-    //         unlink( public_path( $ebook->cover_path ) );
-    //     }
+        if ( $ebook->cover_path && file_exists( public_path( $ebook->cover_path ) ) ) {
+            unlink( public_path( $ebook->cover_path ) );
+        }
 
-    //     $ebook->delete();
-    //     return back()->with( 'status', 'Ebook deleted!' );
+        $ebook->delete();
+        return back()->with( 'status', 'Ebook deleted!' );
 
-    // }
+    }
 }

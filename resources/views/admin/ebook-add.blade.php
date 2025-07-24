@@ -61,20 +61,29 @@
                         @enderror
                     </fieldset>
 
-                    <fieldset>
-                        <div class="flex items-center gap10 mb-5">
-                            <label for="category" class="body-title">Category<span class="tf-color-1">*</span></label>
+                    <fieldset class="category">
+                        <div class="body-title mb-10">Category <span class="tf-color-1">*</span>
                             <button type="button" id="ai-category-btn" class="tf-button-small tf-button-outline"
-                                style="padding: 4px 8px;">
+                                style="padding: 4px 8px; margin-left: 10px;">
                                 <i class="icon-magic"></i> Suggest Category
                             </button>
                         </div>
-                        <input id="category" name="category" type="text" value="{{ old('category') }}"
-                            placeholder="e.g., Fantasy, Romance" required>
-                        @error('category')
+                        <div class="select">
+                            <select name="category_id" id="category_id" required>
+                                <option value="">Choose category</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}"
+                                        {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                                        {{ $category->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        @error('category_id')
                             <span class="alert alert-danger">{{ $message }}</span>
                         @enderror
                     </fieldset>
+
 
                     <fieldset>
                         <div class="flex items-center gap10 mb-5">
@@ -122,22 +131,18 @@
                     const book = await ePub(file);
                     const metadata = await book.loaded.metadata;
 
-                    // Auto-fill fields
                     titleInput.value = metadata.title || '';
                     authorInput.value = metadata.creator || '';
 
-                    // Auto-suggest category if we have title/author
                     if (titleInput.value && authorInput.value) {
                         await suggestCategory();
                     }
 
-                    // Handle cover image
                     const coverUrl = await book.coverUrl();
                     if (coverUrl) {
                         coverImg.src = coverUrl;
                         coverImg.style.display = 'block';
 
-                        // Convert cover to base64 for form submission
                         const response = await fetch(coverUrl);
                         const blob = await response.blob();
                         const reader = new FileReader();
@@ -155,13 +160,9 @@
                 }
             });
 
-            // AI Category Suggestion
             aiCategoryBtn.addEventListener('click', suggestCategory);
-
-            // AI Description Generation
             aiDescBtn.addEventListener('click', generateDescription);
 
-            // Helper Functions
             async function suggestCategory() {
                 if (!titleInput.value || !authorInput.value) {
                     alert("Please fill in title and author first!");
@@ -184,12 +185,18 @@
                         })
                     });
 
-                    if (!response.ok) {
-                        throw new Error(`API error: ${response.status}`);
-                    }
-
                     const data = await response.json();
-                    categoryInput.value = data.category || 'Unknown';
+
+                    if (data.matched && data.category) {
+                        document.getElementById('category_id').value = data.category;
+                    } else {
+                        if (confirm(
+                                `AI suggested category "${data.category_name}", but it doesn't match any existing ones.\n\nDo you want to create this category now?`
+                            )) {
+                            window.location.href = '{{ route('admin.category.add') }}?name=' +
+                                encodeURIComponent(data.category_name);
+                        }
+                    }
                 } catch (error) {
                     console.error("Category suggestion failed:", error);
                     alert("Failed to suggest category. Please try again.");
@@ -197,6 +204,7 @@
                     aiCategoryBtn.innerHTML = '<i class="icon-magic"></i> Suggest Category';
                 }
             }
+
 
             async function generateDescription() {
                 if (!titleInput.value || !authorInput.value) {
@@ -225,7 +233,10 @@
                     }
 
                     const data = await response.json();
-                    descInput.value = data.description || 'No description generated.';
+                    const descriptionText = data.description || 'No description generated.';
+
+                    // Typewriter effect
+                    typeText(descInput, descriptionText, 30);
                 } catch (error) {
                     console.error("Description generation failed:", error);
                     alert("Failed to generate description. Please try again.");
@@ -233,8 +244,24 @@
                     aiDescBtn.innerHTML = '<i class="icon-star"></i> AI Assist';
                 }
             }
+
+            function typeText(element, text, speed = 10) {
+                element.value = '';
+                let index = 0;
+
+                function typeChar() {
+                    if (index < text.length) {
+                        element.value += text.charAt(index);
+                        index++;
+                        setTimeout(typeChar, speed);
+                    }
+                }
+
+                typeChar();
+            }
         });
     </script>
+
     <style>
         .spinner {
             animation: spin 1s linear infinite;

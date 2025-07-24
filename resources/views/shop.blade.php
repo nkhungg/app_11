@@ -121,22 +121,21 @@
                     </div>
                 </div>
             </div>
-
             <div class="shop-list flex-grow-1">
                 <div class="swiper-container js-swiper-slider slideshow slideshow_small slideshow_split"
                     data-settings='{
-            "autoplay": {
-              "delay": 5000
-            },
-            "slidesPerView": 1,
-            "effect": "fade",
-            "loop": true,
-            "pagination": {
-              "el": ".slideshow-pagination",
-              "type": "bullets",
-              "clickable": true
-            }
-          }'>
+                                        "autoplay": {
+                                            "delay": 5000
+                                        },
+                                        "slidesPerView": 1,
+                                        "effect": "fade",
+                                        "loop": true,
+                                        "pagination": {
+                                            "el": ".slideshow-pagination",
+                                            "type": "bullets",
+                                            "clickable": true
+                                        }
+                                    }'>
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
                             <div class="slide-split h-100 d-block d-md-flex overflow-hidden">

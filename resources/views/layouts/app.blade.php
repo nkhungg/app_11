@@ -16,9 +16,13 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" type="text/css" />
     <link rel="stylesheet" type="text/css" href={{ asset('css/sweetalert.min.css') }}>
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}" type="text/css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-        integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/audio-player.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    @stack('styles')
+    @livewireStyles
+
+
 </head>
 
 <body class="gradient-bg">
@@ -788,7 +792,7 @@
     </script>
     <script src={{ asset('js/sweetalert.min.js') }}></script>
     <!--Start of Tawk.to Script-->
-    <script type="text/javascript">
+    {{-- <script type="text/javascript">
         var Tawk_API = Tawk_API || {},
             Tawk_LoadStart = new Date();
         (function() {
@@ -800,8 +804,10 @@
             s1.setAttribute('crossorigin', '*');
             s0.parentNode.insertBefore(s1, s0);
         })();
-    </script>
+    </script> --}}
     <!--End of Tawk.to Script-->
+    {{-- @livewire('audio-player') --}}
+    @livewireScripts
     @stack('scripts')
 </body>
 
