@@ -158,19 +158,19 @@ class FreeProductController extends Controller {
     //     return redirect()->route( 'admin.ebooks' )->with( 'status', 'Ebook updated successfully!' );
     // }
 
-    // public function ebook_delete( $id ) {
-    //     $ebook = Ebook::findOrFail( $id );
+    public function ebook_delete( $id ) {
+        $ebook = Ebook::findOrFail( $id );
 
-    //     if ( $ebook->file_path && file_exists( public_path( $ebook->file_path ) ) ) {
-    //         unlink( public_path( $ebook->file_path ) );
-    //     }
+        if ( $ebook->file_path && file_exists( public_path( $ebook->file_path ) ) ) {
+            unlink( public_path( $ebook->file_path ) );
+        }
 
-    //     if ( $ebook->cover_path && file_exists( public_path( $ebook->cover_path ) ) ) {
-    //         unlink( public_path( $ebook->cover_path ) );
-    //     }
+        if ( $ebook->cover_path && file_exists( public_path( $ebook->cover_path ) ) ) {
+            unlink( public_path( $ebook->cover_path ) );
+        }
 
-    //     $ebook->delete();
-    //     return back()->with( 'status', 'Ebook deleted!' );
+        $ebook->delete();
+        return back()->with( 'status', 'Ebook deleted!' );
 
-    // }
+    }
 }

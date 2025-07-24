@@ -16,7 +16,7 @@ public function up()
         $table->string('title');
         $table->string('author');
         $table->string('category')->nullable();
-        $table->string('description')->nullable();
+        $table->text('description')->nullable();
         $table->string('file_path'); // path to the eBook file
         $table->string('cover_path')->nullable();
         $table->enum('format', ['pdf', 'epub']);
