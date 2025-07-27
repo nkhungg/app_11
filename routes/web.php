@@ -143,7 +143,5 @@ Route::get('/read/sherlock-holmes', function () {
 })->name('epub.read.sherlock');
 Route::get('/read/ebook/{id}', [FreeProductController::class, 'ebook_read'])->name('epub.reader');
 
-Route::middleware('api')->group(function () {
-    Route::post('/ai/suggest-category', [AIController::class, 'suggestCategory']);
-    Route::post('/ai/generate-description', [AIController::class, 'generateDescription']);
-});
+Route::post('/ai/suggest-category', [AIController::class, 'suggestCategory']);
+Route::post('/ai/generate-description', [AIController::class, 'generateDescription']);
