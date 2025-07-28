@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\DeliveryConfirmationMail;
 use App\Models\Author;
 use App\Models\Category;
 use App\Models\Coupon;
@@ -18,6 +19,7 @@ use Intervention\Image\Laravel\Facades\Image;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class AdminController extends Controller {
     public function index() {
@@ -566,6 +568,8 @@ $monthlyDatas = DB::select("
        $order->status = $request->order_status;
        if($request->order_status == 'delivered'){
         $order->delivered_date = Carbon::now();
+        // Send delivery confirmation email
+        Mail::to($order->user->email)->send(new DeliveryConfirmationMail($order));
        }
        else if($request->order_status == 'canceled'){
         $order->canceled_date = Carbon::now();
