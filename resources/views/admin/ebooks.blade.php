@@ -42,21 +42,22 @@
                     <table class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Cover</th>
-                                <th>Title</th>
-                                <th>Author</th>
-                                <th>Category</th>
-                                <th>Format</th>
-                                <th>Description</th>
-                                <th>Action</th>
+                                <th style="width: 50px; text-align: center">#</th>
+                                <th style="width: 100px; text-align: center">Cover</th>
+                                <th style="width: 150px; text-align: center">Title</th>
+                                <th style="width: 120px; text-align: center">Author</th>
+                                <th style="width: 120px; text-align: center">Category</th>
+                                <th style="width: 80px; text-align: center">Format</th>
+                                <th class="text-center">Description</th>
+                                <th style="width: 120px; text-align: center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
+
                             @foreach ($ebooks as $ebook)
                                 <tr>
-                                    <td>{{ $ebook->id }}</td>
-                                    <td>
+                                    <td class="text-center">{{ $ebook->id }}</td>
+                                    <td class="text-center">
                                         @if ($ebook->cover_path)
                                             <img src="{{ asset($ebook->cover_path) }}" alt="cover" width="60">
                                         @else
@@ -65,14 +66,14 @@
                                     </td>
                                     <td>{{ $ebook->title }}</td>
                                     <td>{{ $ebook->author }}</td>
-                                    <td>{{ $ebook->category }}</td>
-                                    <td>{{ strtoupper($ebook->format) }}</td>
-                                    <td>{{ \Illuminate\Support\Str::limit($ebook->description, 50) }}</td>
+                                    <td class="text-center">{{ $ebook->category->name }}</td>
+                                    <td class="text-center">{{ strtoupper($ebook->format) }}</td>
+                                    <td>{{ \Illuminate\Support\Str::limit($ebook->description, 150) }}</td>
                                     <td>
                                         <div class="list-icon-function">
                                             <a href="{{ asset($ebook->file_path) }}" target="_blank">
                                                 <div class="item eye" title="Download/View">
-                                                    <i class="icon-eye"></i>
+                                                    <i class="icon-download"></i>
                                                 </div>
                                             </a>
                                             <a href="{{ route('admin.ebook.edit', ['id' => $ebook->id]) }}">
@@ -84,7 +85,7 @@
                                                 method="POST" style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="item text-danger delete"
+                                                <button type="submit" class="p-0 item text-danger delete"
                                                     style="border:none; background:none;">
                                                     <i class="icon-trash-2"></i>
                                                 </button>

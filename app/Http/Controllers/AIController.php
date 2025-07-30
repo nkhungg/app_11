@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -13,11 +14,37 @@ class AIController extends Controller {
 
         $prompt = "Suggest the most fitting book category (like Fantasy, Romance, Biography, etc.) for the book titled '{$request->title}' by {$request->author}. Respond with only the category name.";
 
-        $response = $this->callOpenAI( $prompt );
+        $aiCategory = trim( $this->callOpenAI( $prompt ) );
 
-        return response()->json( [
-            'category' => trim( $response )
-        ] );
+        // Get all categories from the database
+        $categories = Category::all();
+
+        $bestMatch = null;
+        $highestScore = 0;
+
+        foreach ( $categories as $category ) {
+            similar_text( strtolower( $aiCategory ), strtolower( $category->name ), $percent );
+            if ( $percent > $highestScore ) {
+                $highestScore = $percent;
+                $bestMatch = $category;
+            }
+        }
+
+        if ( $bestMatch && $highestScore >= 65 ) {
+            // You can tweak this threshold
+            return response()->json( [
+                'category' => $bestMatch->id,
+                'category_name' => $bestMatch->name,
+                'matched' => true
+            ] );
+        } else {
+            return response()->json( [
+                'category' => null,
+                'category_name' => $aiCategory,
+                'matched' => false,
+                'message' => 'No suitable category match found.'
+            ] );
+        }
     }
 
     public function generateDescription( Request $request ) {
@@ -26,7 +53,9 @@ class AIController extends Controller {
             'author' => 'required|string',
         ] );
 
-        $prompt = "Write a short and engaging description for a book titled '{$request->title}' by {$request->author}. Make it appealing for potential readers.";
+        $prompt = "Write a short and engaging description for a book titled ' {
+                    $request->title}
+                    ' by {$request->author}. Make it appealing for potential readers.";
 
         $response = $this->callOpenAI( $prompt );
 

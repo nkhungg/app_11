@@ -145,3 +145,7 @@ Route::get('/read/ebook/{id}', [FreeProductController::class, 'ebook_read'])->na
 
 Route::post('/ai/suggest-category', [AIController::class, 'suggestCategory']);
 Route::post('/ai/generate-description', [AIController::class, 'generateDescription']);
+
+Route::get('/test-audio', function () {
+    return view('test-audio');
+});
