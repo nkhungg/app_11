@@ -48,7 +48,7 @@
                             </div>
 
                             <div class="pc__info position-relative">
-                                <p class="pc__category">{{ $ebook->category->name }}</p>
+                                <p class="pc__category">{{ $ebook->category }}</p>
                                 <h6 class="pc__title"><a href="#">{{ $ebook->title }}</a>
                                 </h6>
                                 <span class="text-secondary">by {{ $ebook->author }}</span>

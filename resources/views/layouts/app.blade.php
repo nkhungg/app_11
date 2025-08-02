@@ -635,22 +635,6 @@
                     </ul>
                 </div>
 
-                {{-- <div class="footer-column footer-menu mb-4 mb-lg-0">
-                    <h6 class="sub-menu__title text-uppercase">Nhà xuất bản</h6>
-                    <ul class="sub-menu__list list-unstyled">
-                        <li class="sub-menu__item"><a href="shop2.html" class="menu-link menu-link_us-s">Nhà Xuât Bản
-                                Trẻ</a></li>
-                        <li class="sub-menu__item"><a href="shop3.html" class="menu-link menu-link_us-s">Nhà Xuất Bản
-                                Kim Đồng</a></li>
-                        <li class="sub-menu__item"><a href="shop4.html" class="menu-link menu-link_us-s">Nhã Nam</a>
-                        </li>
-                        <li class="sub-menu__item"><a href="shop5.html" class="menu-link menu-link_us-s">Nhà Xuất Bản
-                                Giáo dục Việt Nam</a></li>
-                        <li class="sub-menu__item"><a href="shop1.html" class="menu-link menu-link_us-s">Shop All</a>
-                        </li>
-                    </ul>
-                </div> --}}
-
                 <div class="footer-column footer-menu mb-4 mb-lg-0">
                     <h6 class="sub-menu__title text-uppercase">Help</h6>
                     <ul class="sub-menu__list list-unstyled">
@@ -680,19 +664,19 @@
                         @endforeach
 
                         <li class="sub-menu__item">
-                            <a href="#" class="menu-link menu-link_us-s">Non-Fiction</a>
+                            <a href="{{ url('/shop?categories=7') }}" class="menu-link menu-link_us-s">Non-Fiction</a>
                         </li>
                         <li class="sub-menu__item">
-                            <a href="#" class="menu-link menu-link_us-s">Self-help & Personal Development</a>
+                            <a href="{{ url('/shop?categories=14') }}" class="menu-link menu-link_us-s">Self-help & Personal Development</a>
                         </li>
                         <li class="sub-menu__item">
-                            <a href="#" class="menu-link menu-link_us-s">Mystery/Detective</a>
+                            <a href="{{ url('/shop?categories=11') }}" class="menu-link menu-link_us-s">Mystery/Detective</a>
                         </li>
                         <li class="sub-menu__item">
-                            <a href="#" class="menu-link menu-link_us-s">Romance</a>
+                            <a href="{{ url('/shop?categories=12') }}" class="menu-link menu-link_us-s">Romance</a>
                         </li>
                         <li class="sub-menu__item">
-                            <a href="#" class="menu-link menu-link_us-s">Fantasy</a>
+                            <a href="{{ url('/shop?categories=8') }}" class="menu-link menu-link_us-s">Fantasy</a>
                         </li>
                     </ul>
                 </div>
