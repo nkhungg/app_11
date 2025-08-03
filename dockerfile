@@ -10,12 +10,18 @@ RUN docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd zip
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+# Copy composer files first and install dependencies
+COPY composer.json composer.lock ./
+RUN COMPOSER_MEMORY_LIMIT=-1 composer install --no-dev --no-interaction --prefer-dist
+
+# Copy rest of the app
 COPY . /var/www
 COPY --chown=www-data:www-data . /var/www
 
 RUN chmod -R 755 /var/www
-RUN COMPOSER_MEMORY_LIMIT=-1 composer install --no-dev --no-interaction --prefer-dist
 
+# Ensure .env exists before generating key
+RUN cp .env.example .env || true
 RUN php artisan key:generate
 
 EXPOSE 8000
