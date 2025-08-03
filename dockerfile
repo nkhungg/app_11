@@ -14,7 +14,7 @@ COPY . /var/www
 COPY --chown=www-data:www-data . /var/www
 
 RUN chmod -R 755 /var/www
-RUN composer install
+RUN COMPOSER_MEMORY_LIMIT=-1 composer install --no-dev --no-interaction --prefer-dist
 
 RUN php artisan key:generate
 
