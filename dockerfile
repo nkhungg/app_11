@@ -4,7 +4,7 @@ WORKDIR /var/www
 
 RUN apt-get update && apt-get install -y \
     zip unzip curl git libxml2-dev libzip-dev libpng-dev libjpeg-dev libonig-dev \
-    sqlite3 libsqlite3-dev
+    sqlite3 libsqlite3-dev libicu-dev g++
 
 RUN docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd zip
 
@@ -12,7 +12,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Copy composer files first and install dependencies
 COPY composer.json composer.lock ./
-RUN COMPOSER_MEMORY_LIMIT=-1 composer install --no-dev --no-interaction --prefer-dist --verbose
+RUN COMPOSER_MEMORY_LIMIT=-1 composer install --no-dev --prefer-dist --verbose
 
 # Copy rest of the app
 COPY --chown=www-data:www-data . /var/www
