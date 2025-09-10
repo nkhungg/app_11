@@ -18,7 +18,7 @@ COPY --chown=www-data:www-data . /var/www
 RUN chmod -R 755 /var/www
 
 # Install dependency (production)
-RUN composer install --no-dev --optimize-autoloader
+RUN COMPOSER_MEMORY_LIMIT=-1 composer install --no-dev --optimize-autoloader
 
 # Copy env template (Render sẽ override bằng biến môi trường thật)
 COPY .env.example .env
